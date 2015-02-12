@@ -1,22 +1,28 @@
 (function main($react) {
 
+    /**
+     * @class ReactShadow
+     * @author Adam Timberlake
+     * @link https://github.com/Wildhoney/ReactShadow
+     */
     var ReactShadow = $react.createClass({
 
-        componentDidMount: function() {
+        /**
+         * @property mixins
+         * @type {Array}
+         */
+        mixins: [ReactShadow],
 
-            var shadow = this.getDOMNode().createShadowRoot();
-            var html = $react.renderToString(this.render());
+        /**
+         * @property cssDocuments
+         * @type {Array}
+         */
+        cssDocuments: ['../css/Default.css'],
 
-            var template = document.createElement('template');
-            template.innerHTML = '<style> @import "../css/Default.css"; </style>' + html;
-
-            var clone = document.importNode(template.content, true);
-            shadow.appendChild(clone);
-
-            //root.innerHTML = html;
-
-        },
-
+        /**
+         * @method render
+         * @return {XML}
+         */
         render: function() {
             return <div><section className="ok">Okay</section></div>
         }
