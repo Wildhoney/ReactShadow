@@ -16,11 +16,17 @@
         return gulp.src(mainModule)
             .pipe(rename(devDist))
             .pipe(gulp.dest('dist'))
-            .pipe(rename('react-shadow.jsx'))
-            .pipe(gulp.dest(vendorDest))
             .pipe(rename(minDist))
             .pipe(uglify())
             .pipe(gulp.dest('dist'));
+
+    });
+
+    gulp.task('vendor', function gulpVendor() {
+
+        return gulp.src(mainModule)
+                   .pipe(rename(devDist + 'x'))
+                   .pipe(gulp.dest(vendorDest));
 
     });
 
@@ -46,7 +52,7 @@
     });
 
     gulp.task('test', ['hint', 'karma']);
-    gulp.task('build', ['compile']);
+    gulp.task('build', ['compile', 'vendor']);
     gulp.task('default', ['test', 'build']);
 
 })();
