@@ -1,4 +1,4 @@
-(function main($window) {
+(function main($window, $document, $react) {
 
     /**
      * @module ReactShadow
@@ -13,19 +13,47 @@
          */
         componentDidMount: function componentDidMount() {
 
-            var shadow = this.getDOMNode().createShadowRoot();
-            var html = $react.renderToString(this.render());
+            var shadowRoot      = this.getDOMNode().createShadowRoot(),
+                templateElement = $document.createElement('template');
 
-            var template = document.createElement('template');
-            template.innerHTML = '<style> @import "../css/Default.css"; </style>' + html;
+            if (this.cssDocuments) {
 
-            var clone = document.importNode(template.content, true);
-            shadow.appendChild(clone);
+                this.cssDocuments.forEach(function forEach(cssDocument) {
 
-            //root.innerHTML = html;
+                    // Construct the HTML for the external stylesheets.
+                    var styleElement = $document.createElement('style');
+                    styleElement.innerHTML = '@import "' + cssDocument + '"';
+                    templateElement.content.appendChild(styleElement);
+
+                });
+
+            }
+
+            // Obtain the HTML from the component's `render` method.
+            templateElement.innerHTML += $react.renderToString(this.render());
+
+            // Append the template node's content to our component.
+            var clone = $document.importNode(templateElement.content, true);
+            shadowRoot.appendChild(clone);
+            this.cleanElements();
 
         },
 
+        /**
+         * @method cleanElements
+         * @return {void}
+         */
+        cleanElements: function cleanElements() {
+
+            var children = this.getDOMNode().children,
+                count    = children.length;
+
+            while (count--) {
+                children[count].remove();
+            }
+
+        }
+
     };
 
-})(window);
+})(window, window.document, window.React);

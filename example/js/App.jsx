@@ -5,7 +5,7 @@
      * @author Adam Timberlake
      * @link https://github.com/Wildhoney/ReactShadow
      */
-    var ReactShadow = $react.createClass({
+    var AppExample = $react.createClass({
 
         /**
          * @property mixins
@@ -23,14 +23,14 @@
          * @method render
          * @return {XML}
          */
-        render: function() {
-            return <div><section className="ok">Okay</section></div>
+        render: function render() {
+            return <div><h1 className="title">ReactShadow Example</h1></div>
         }
 
     });
 
     // Mount the node into the DOM!
     var mountNode = document.querySelector('*[data-react-shadow]');
-    $react.render(<ReactShadow></ReactShadow>, mountNode);
+    $react.render(<AppExample></AppExample>, mountNode);
 
 })(window.React);
