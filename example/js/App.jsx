@@ -1,6 +1,6 @@
 (function main($react) {
 
-    var Test = $react.createClass({
+    var ReactShadow = $react.createClass({
 
         componentDidMount: function() {
 
@@ -8,7 +8,7 @@
             var html = $react.renderToString(this.render());
 
             var template = document.createElement('template');
-            template.innerHTML = '<style> @import "css/default.css"; </style>' + html;
+            template.innerHTML = '<style> @import "../css/Default.css"; </style>' + html;
 
             var clone = document.importNode(template.content, true);
             shadow.appendChild(clone);
@@ -23,6 +23,8 @@
 
     });
 
-    $react.render(<Test></Test>, document.querySelector('.app-root'));
+    // Mount the node into the DOM!
+    var mountNode = document.querySelector('*[data-react-shadow]');
+    $react.render(<ReactShadow></ReactShadow>, mountNode);
 
 })(window.React);
