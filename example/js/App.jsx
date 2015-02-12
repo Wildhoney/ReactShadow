@@ -20,11 +20,31 @@
         cssDocuments: ['../css/Default.css'],
 
         /**
+         * @method getInitialState
+         * @return {{refreshed: number}}
+         */
+        getInitialState: function getInitialState() {
+            return { refreshed: 0 };
+        },
+
+        /**
+         * @method componentDidMount
+         * @return {void}
+         */
+        componentDidMount: function componentDidMount() {
+
+            setTimeout(function() {
+                this.setState({ refreshed: this.state.refreshed + 1 });
+            }.bind(this), 1000);
+
+        },
+
+        /**
          * @method render
          * @return {XML}
          */
         render: function render() {
-            return <div><h1 className="title">ReactShadow Example</h1></div>
+            return <div><h1 className="title">ReactShadow Example: {this.state.refreshed}</h1></div>
         }
 
     });
