@@ -1,0 +1,27 @@
+{
+  "name": "react-shadow",
+  "version": "0.1.0",
+  "description": "Use Shadow DOM with React.js and CSS imports; write your component styles in CSS!",
+  "main": "dist/react-shadow.min.js",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Wildhoney/ReactShadow.git"
+  },
+  "keywords": [
+    "shadow",
+    "dom"
+  ],
+  "author": "Adam Timberlake <adam.timberlake@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Wildhoney/ReactShadow/issues"
+  },
+  "homepage": "https://github.com/Wildhoney/ReactShadow",
+  "devDependencies": {
+    "express": "^4.11.2",
+    "gulp": "^3.8.11"
+  }
+}
