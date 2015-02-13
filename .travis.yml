@@ -16,6 +16,9 @@ script:
 
 deploy:
   provider: heroku
+  strategy: api
+  all_branches: true
+  skip_cleanup: true
   api_key:
     secure: IIUWScgB3/BM7NiBw/p7KtElnvIH6KDh9zXyF2Gmy+ZWVihkmzTwDz4G/YDlqb+o3RSJkcgHHThaaoS9kGASHENgLHc9O3eiiX9m+QADoovf2cBCDHy4P3Mpe+SUghEqMLtGfl6afOTNqKtNew3xp3e6ooCzWOy9djMFMH7d1cw=
   app: react-shadow
