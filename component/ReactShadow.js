@@ -41,16 +41,31 @@
          */
         interceptEvents: function interceptEvents() {
 
-            this.shadowRoot.addEventListener('click', function onClick(event) {
+            /**
+             * @method redirectEvent
+             * @param event {Object}
+             * @return {Function}
+             */
+            var redirectEvent = function redirectEvent(event) {
 
                 event.stopPropagation();
                 event.preventDefault();
 
                 var targetId = event.target.getAttribute('data-reactid'),
-                    element  = $document.querySelector('*[data-reactid="' + targetId + '"]');
+                    element = $document.querySelector('*[data-reactid="' + targetId + '"]');
 
-                element.click();
+                var customEvent = $document.createEvent('Events');
+                customEvent.initEvent(event.type, true, false );
+                element.dispatchEvent(customEvent);
 
+            };
+
+            // List of all events that should be intercepted and re-routed.
+            var eventsList = ['click', 'dblclick', 'mouseup', 'mouseout', 'mouseover', 'mousedown', 'mouseenter',
+                'mouseleave', 'contextmenu'];
+
+            eventsList.forEach(function forEach(eventName) {
+                this.shadowRoot.addEventListener(eventName, redirectEvent);
             }.bind(this));
 
         },
