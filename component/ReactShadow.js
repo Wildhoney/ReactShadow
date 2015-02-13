@@ -33,7 +33,6 @@
             // Obtain the HTML from the component's `render` method.
             templateElement.content.appendChild(this.getDOMNode().cloneNode(true));
             this.attachCSSDocuments(templateElement);
-            console.log(templateElement);
 
             // Append the template node's content to our component.
             var clone = $document.importNode(templateElement.content, true);
