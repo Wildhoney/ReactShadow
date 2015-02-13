@@ -1,4 +1,4 @@
-(function main($window, $document, $react) {
+(function main($window, $document) {
 
     /**
      * @module ReactShadow
@@ -24,7 +24,6 @@
                 rendered        = this.render();
 
             // Obtain the HTML from the component's `render` method.
-            //$react.render(rendered, templateElement);
             templateElement.content.appendChild(this.getDOMNode().cloneNode(true));
             this.attachCSSDocuments(templateElement);
 
@@ -118,4 +117,4 @@
 
     };
 
-})(window, window.document, window.React);
+})(window, window.document);
