@@ -114,21 +114,6 @@
 
             return element;
 
-        },
-
-        /**
-         * @method cleanElements
-         * @return {void}
-         */
-        cleanElements: function cleanElements() {
-
-            var children = this.getDOMNode().children,
-                count    = children.length;
-
-            while (count--) {
-                children[count].remove();
-            }
-
         }
 
     };
