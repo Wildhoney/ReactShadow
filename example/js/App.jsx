@@ -86,7 +86,7 @@
         thirdMountNode  = document.querySelector('*[data-react-shadow="third"]');
 
     $react.render(<AppExample cssDocument="component/First.css"></AppExample>, firstMountNode);
-    //$react.render(<AppExample cssDocument="component/Second.css"></AppExample>, secondMountNode);
-    //$react.render(<AppExample cssDocument="component/Third.css"></AppExample>, thirdMountNode);
+    $react.render(<AppExample cssDocument="component/Second.css"></AppExample>, secondMountNode);
+    $react.render(<AppExample cssDocument="component/Third.css"></AppExample>, thirdMountNode);
 
 })(window.React);
