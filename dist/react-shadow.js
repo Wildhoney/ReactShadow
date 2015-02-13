@@ -21,12 +21,19 @@
          */
         componentDidMount: function componentDidMount() {
 
-            var shadowRoot      = this.shadowRoot = this.getDOMNode().parentNode.createShadowRoot(),
+            // Wrap the current DOM node in a script element.
+            var scriptElement = $document.createElement('script');
+            this.getDOMNode().parentNode.appendChild(scriptElement);
+            scriptElement.appendChild(this.getDOMNode());
+
+            // Create shadow root for the visible component.
+            var shadowRoot      = this.shadowRoot = this.getDOMNode().parentNode.parentNode.createShadowRoot(),
                 templateElement = $document.createElement('template');
 
             // Obtain the HTML from the component's `render` method.
             templateElement.content.appendChild(this.getDOMNode().cloneNode(true));
             this.attachCSSDocuments(templateElement);
+            console.log(templateElement);
 
             // Append the template node's content to our component.
             var clone = $document.importNode(templateElement.content, true);
