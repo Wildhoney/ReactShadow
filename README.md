@@ -47,3 +47,15 @@ var ReadmeApp = $react.createClass({
 # Event Retargeting
 
 As Shadow DOM has the concept of [Event Retargeting](http://www.w3.org/TR/shadow-dom/#event-retargeting) for encapsulation purposes, event delegation will not function correctly because all events will appear to be coming from the Shadow DOM &ndash; therefore `ReactShadow` uses the React ID for each element to dispatch the event from the original element, therefore maintaining React's event delegation implementation.
+
+Events are therefore written in exactly the same way:
+
+```javascript
+var ReadmeApp = $react.createClass({
+    render: function render() {
+        return <a onClick={this.reset} title="Reset Counter">
+                   Reset, Comrade!
+               </a>
+    }
+});
+```
