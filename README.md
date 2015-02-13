@@ -8,7 +8,7 @@
 
 * **Heroku**: [http://react-shadow.herokuapp.com/](http://react-shadow.herokuapp.com/)
 
-![Screenshot](http://i.imgur.com/vxA6fPl.png)
+![Screenshot](http://i.imgur.com/1txgnOL.png)
 
 ---
 
