@@ -72,9 +72,8 @@
          * @return {XML}
          */
         render: function render() {
-            return <section>
-                       <h1 className="title">ReactShadow Example: {this.state.refreshed}</h1>
-                       <a title="Reset Counter" className="reset" onClick={this.reset}>Reset Counter</a>
+            return <section onClick={this.reset} title="Reset Counter">
+                       <h1 className="title">{this.state.refreshed}</h1>
                    </section>
         }
 
