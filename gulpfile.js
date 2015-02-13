@@ -51,7 +51,8 @@
 
     });
 
-    gulp.task('test', ['hint', 'karma']);
+    //gulp.task('test', ['hint', 'karma']);
+    gulp.task('test', ['hint']);
     gulp.task('build', ['compile', 'vendor']);
     gulp.task('default', ['test', 'build']);
 

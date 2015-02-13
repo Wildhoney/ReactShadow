@@ -1,5 +1,7 @@
 (function main($window, $document) {
 
+    "use strict";
+
     /**
      * @module ReactShadow
      * @author Adam Timberlake
@@ -20,8 +22,7 @@
         componentDidMount: function componentDidMount() {
 
             var shadowRoot      = this.shadowRoot = this.getDOMNode().parentNode.createShadowRoot(),
-                templateElement = $document.createElement('template'),
-                rendered        = this.render();
+                templateElement = $document.createElement('template');
 
             // Obtain the HTML from the component's `render` method.
             templateElement.content.appendChild(this.getDOMNode().cloneNode(true));
