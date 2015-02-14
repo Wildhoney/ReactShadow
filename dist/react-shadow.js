@@ -10,10 +10,11 @@
     $window.ReactShadow = {
 
         /**
-         * @property shadowRoot
+         * @property _shadowRoot
          * @type {Object}
+         * @private
          */
-        shadowRoot: {},
+        _shadowRoot: {},
 
         /**
          * @method componentDidMount
@@ -21,31 +22,53 @@
          */
         componentDidMount: function componentDidMount() {
 
+            // Prevent the constant invocation of `getDOMNode()`.
+            var componentElement = this.getDOMNode();
+
             // Wrap the current DOM node in a script element.
             var scriptElement = $document.createElement('script');
-            this.getDOMNode().parentNode.appendChild(scriptElement);
-            scriptElement.appendChild(this.getDOMNode());
+            componentElement.parentNode.appendChild(scriptElement);
+            scriptElement.appendChild(componentElement);
 
             // Create shadow root for the visible component.
-            var shadowRoot      = this.shadowRoot = this.getDOMNode().parentNode.parentNode.createShadowRoot(),
+            var shadowRoot      = this._shadowRoot = componentElement.parentNode.parentNode.createShadowRoot(),
                 templateElement = $document.createElement('template');
 
-            // Obtain the HTML from the component's `render` method.
-            templateElement.content.appendChild(this.getDOMNode().cloneNode(true));
-            this.attachCSSDocuments(templateElement);
+            // Obtain the HTML from the component's rendered elements.
+            templateElement.content.appendChild(componentElement.cloneNode(true));
+            this._attachCSSDocuments(templateElement);
 
             // Append the template node's content to our component.
             var clone = $document.importNode(templateElement.content, true);
             shadowRoot.appendChild(clone);
-            this.interceptEvents();
+            this._interceptEvents();
 
         },
 
         /**
-         * @method interceptEvents
+         * @method componentDidUpdate
          * @return {void}
          */
-        interceptEvents: function interceptEvents() {
+        componentDidUpdate: function componentDidUpdate() {
+
+            var containerElement = this._shadowRoot.querySelector(':not(style)');
+            containerElement.innerHTML = '';
+
+            var domNode    = this.getDOMNode(),
+                children   = domNode.children,
+                childCount = children.length;
+
+            for (var index = 0; index < childCount; index++) {
+                containerElement.appendChild(domNode.children[index].cloneNode(true));
+            }
+
+        },
+
+        /**
+         * @method _interceptEvents
+         * @return {void}
+         */
+        _interceptEvents: function _interceptEvents() {
 
             /**
              * @method redirectEvent
@@ -71,36 +94,18 @@
                 'mouseleave', 'contextmenu'];
 
             eventsList.forEach(function forEach(eventName) {
-                this.shadowRoot.addEventListener(eventName, redirectEvent);
+                this._shadowRoot.addEventListener(eventName, redirectEvent);
             }.bind(this));
 
         },
 
         /**
-         * @method componentDidUpdate
-         * @return {void}
-         */
-        componentDidUpdate: function componentDidUpdate() {
-
-            var containerElement = this.shadowRoot.querySelector(':not(style)');
-            containerElement.innerHTML = '';
-
-            var domNode    = this.getDOMNode(),
-                children   = domNode.children,
-                childCount = children.length;
-
-            for (var index = 0; index < childCount; index++) {
-                containerElement.appendChild(domNode.children[index].cloneNode(true));
-            }
-
-        },
-
-        /**
-         * @method attachCSSDocuments
+         * @method _attachCSSDocuments
          * @param element {HTMLElement}
          * @return {HTMLElement}
+         * @private
          */
-        attachCSSDocuments: function attachCSSDocuments(element) {
+        _attachCSSDocuments: function _attachCSSDocuments(element) {
 
             if (this.cssDocuments) {
 
