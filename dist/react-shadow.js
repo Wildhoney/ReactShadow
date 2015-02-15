@@ -1,6 +1,4 @@
-(function main($window, $document) {
-
-    "use strict";
+(function main($window, $document, $react) {
 
     /**
      * @module ReactShadow
@@ -22,25 +20,18 @@
          */
         componentDidMount: function componentDidMount() {
 
-            // Prevent the constant invocation of `getDOMNode()`.
-            var componentElement = this.getDOMNode();
-
-            // Wrap the current DOM node in a script element.
-            var scriptElement = $document.createElement('script');
-            componentElement.parentNode.appendChild(scriptElement);
-            scriptElement.appendChild(componentElement);
-
-            // Create shadow root for the visible component.
-            var shadowRoot      = this._shadowRoot = componentElement.parentNode.parentNode.createShadowRoot(),
-                templateElement = $document.createElement('template');
-
-            // Obtain the HTML from the component's rendered elements.
-            templateElement.content.appendChild(componentElement.cloneNode(true));
-            this._attachCSSDocuments(templateElement);
+            var shadowRoot      = this._shadowRoot = this.getDOMNode().parentNode.createShadowRoot(),
+                templateElement = $document.createElement('template'),
+                mainElement     = $document.createElement('main');
 
             // Append the template node's content to our component.
+            this._attachCSSDocuments(templateElement);
             var clone = $document.importNode(templateElement.content, true);
             shadowRoot.appendChild(clone);
+
+            shadowRoot.appendChild(mainElement);
+            $react.render(this.render(), mainElement);
+
             this._interceptEvents();
 
         },
@@ -50,18 +41,8 @@
          * @return {void}
          */
         componentDidUpdate: function componentDidUpdate() {
-
-            var containerElement = this._shadowRoot.querySelector(':not(style)');
-            containerElement.innerHTML = '';
-
-            var domNode    = this.getDOMNode(),
-                children   = domNode.children,
-                childCount = children.length;
-
-            for (var index = 0; index < childCount; index++) {
-                containerElement.appendChild(domNode.children[index].cloneNode(true));
-            }
-
+            var containerElement = this._shadowRoot.querySelector('main');
+            $react.render(this.render(), containerElement);
         },
 
         /**
@@ -69,6 +50,9 @@
          * @return {void}
          */
         _interceptEvents: function _interceptEvents() {
+
+            // Memorise the React ID's root ID for intercepting events.
+            var rootReactId = this.getDOMNode().getAttribute('data-reactid');
 
             /**
              * @method redirectEvent
@@ -78,20 +62,27 @@
             var redirectEvent = function redirectEvent(event) {
 
                 event.stopPropagation();
-                event.preventDefault();
 
-                var targetId = event.target.getAttribute('data-reactid'),
-                    element = $document.querySelector('*[data-reactid="' + targetId + '"]');
+                var targetId = event.target.getAttribute('data-reactid');
 
-                var customEvent = $document.createEvent('Events');
-                customEvent.initEvent(event.type, true, false );
-                element.dispatchEvent(customEvent);
+                if (targetId) {
 
-            };
+                    // Translate current target ID into the React.js element we're shadowing.
+                    var translatedId = targetId.replace(/\.[0-9]+/, rootReactId),
+                        element      = $document.querySelector('*[data-reactid="' + translatedId + '"]');
+
+                    // Dispatch the event on the original component's element.
+                    var customEvent = $document.createEvent('Events');
+                    customEvent.initEvent(event.type, true, false);
+                    element.dispatchEvent(customEvent);
+
+                }
+
+            }.bind(this);
 
             // List of all events that should be intercepted and re-routed.
             var eventsList = ['click', 'dblclick', 'mouseup', 'mouseout', 'mouseover', 'mousedown', 'mouseenter',
-                'mouseleave', 'contextmenu'];
+                              'mouseleave', 'contextmenu'];
 
             eventsList.forEach(function forEach(eventName) {
                 this._shadowRoot.addEventListener(eventName, redirectEvent);
@@ -129,4 +120,4 @@
 
     };
 
-})(window, window.document);
+})(window, window.document, window.React);
