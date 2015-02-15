@@ -58,13 +58,21 @@
         },
 
         /**
-         * @method reset
+         * @method resetCounter
          * @return {void}
          */
-        reset: function reset() {
+        resetCounter: function resetCounter() {
             clearInterval(this.state.interval);
             this.setState({ refreshed: 0 });
             this.startInterval();
+        },
+
+        /**
+         * @method updateName
+         * @return {void}
+         */
+        updateName: function updateName() {
+
         },
 
         /**
@@ -72,8 +80,10 @@
          * @return {XML}
          */
         render: function render() {
-            return <section onClick={this.reset} title="Reset Counter">
-                       <h1 className="title">{this.state.refreshed}</h1>
+            return <section onClick={this.resetCounter} title="Reset Counter">
+                       <h1 className="title">
+                           {this.state.refreshed}
+                       </h1>
                    </section>
         }
 
