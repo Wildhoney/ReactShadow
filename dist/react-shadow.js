@@ -46,6 +46,14 @@
             React.render(this.render(), mainElement);
             this._interceptEvents();
 
+            // Wrap current DOM node in `script` tag.
+            var scriptElement = $document.createElement('script');
+            this.getDOMNode().parentNode.appendChild(scriptElement);
+            scriptElement.appendChild(this.getDOMNode());
+
+            // Shadow insertion point for nesting shadow roots.
+            //shadowRoot.appendChild($document.createElement('shadow'));
+
         },
 
         /**
@@ -71,7 +79,7 @@
             /**
              * @method redirectEvent
              * @param event {Object}
-             * @return {Function}
+             * @return {void}
              */
             var redirectEvent = function redirectEvent(event) {
 

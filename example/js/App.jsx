@@ -68,21 +68,10 @@
         },
 
         /**
-         * @method updateName
-         * @param event {Object}
-         * @return {void}
-         */
-        updateName: function updateName(event) {
-            this.setState({ value: event.target.value });
-        },
-
-        /**
          * @method render
          * @return {XML}
          */
         render: function render() {
-
-            var value = this.state.value;
 
             return <section onClick={this.resetCounter} title="Reset Counter">
                        <h1 className="title" onClick={this.updateName}>
