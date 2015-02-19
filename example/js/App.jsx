@@ -32,7 +32,7 @@
          * @return {{refreshed: number}}
          */
         getInitialState: function getInitialState() {
-            return { refreshed: 0 };
+            return { refreshed: 0, value: '' };
         },
 
         /**
@@ -63,16 +63,17 @@
          */
         resetCounter: function resetCounter() {
             clearInterval(this.state.interval);
-            this.setState({ refreshed: 0 });
+            this.setState({ refreshed: 0, value: this.state.value });
             this.startInterval();
         },
 
         /**
          * @method updateName
+         * @param event {Object}
          * @return {void}
          */
-        updateName: function updateName() {
-
+        updateName: function updateName(event) {
+            this.setState({ value: event.target.value });
         },
 
         /**
@@ -80,11 +81,15 @@
          * @return {XML}
          */
         render: function render() {
+
+            var value = this.state.value;
+
             return <section onClick={this.resetCounter} title="Reset Counter">
-                       <h1 className="title">
+                       <h1 className="title" onClick={this.updateName}>
                            {this.state.refreshed}
                        </h1>
                    </section>
+
         }
 
     });
