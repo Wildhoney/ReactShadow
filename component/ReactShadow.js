@@ -46,6 +46,11 @@
             React.render(this.render(), mainElement);
             this._interceptEvents();
 
+            // Wrap current DOM node in `script` tag.
+            var scriptElement = $document.createElement('script');
+            this.getDOMNode().parentNode.appendChild(scriptElement);
+            scriptElement.appendChild(this.getDOMNode());
+
         },
 
         /**
