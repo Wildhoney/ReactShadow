@@ -35,13 +35,11 @@
         componentDidMount: function componentDidMount() {
 
             var shadowRoot      = this._shadowRoot = this.getDOMNode().parentNode.createShadowRoot(),
-                templateElement = $document.createElement('template'),
                 mainElement     = $document.createElement(REACT_SHADOW_ROOT);
 
             // Append the template node's content to our component.
-            this._attachCSSDocuments(templateElement);
-            var clone = $document.importNode(templateElement.content, true);
-            shadowRoot.appendChild(clone);
+            this._attachCSSDocuments(shadowRoot);
+            shadowRoot.appendChild(mainElement);
 
             // Render component and intercept the DOM events.
             shadowRoot.appendChild(mainElement);
@@ -97,7 +95,7 @@
 
             // List of all events that should be intercepted and re-routed.
             var eventsList = ['click', 'dblclick', 'mouseup', 'mouseout', 'mouseover', 'mousedown', 'mouseenter',
-                              'mouseleave', 'contextmenu', 'keyup'];
+                'mouseleave', 'contextmenu', 'keyup'];
 
             eventsList.forEach(function forEach(eventName) {
                 this._shadowRoot.addEventListener(eventName, redirectEvent);
@@ -123,7 +121,7 @@
                     // Construct the HTML for the external stylesheets.
                     var styleElement = $document.createElement('style');
                     styleElement.innerHTML = '@import "' + cssDocument + '"';
-                    element.content.appendChild(styleElement);
+                    element.appendChild(styleElement);
 
                 });
 
