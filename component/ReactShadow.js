@@ -34,8 +34,8 @@
          */
         componentDidMount: function componentDidMount() {
 
-            var shadowRoot      = this._shadowRoot = this.getDOMNode().parentNode.createShadowRoot(),
-                mainElement     = $document.createElement(REACT_SHADOW_ROOT);
+            var shadowRoot  = this._shadowRoot = this.getDOMNode().parentNode.createShadowRoot(),
+                mainElement = $document.createElement(REACT_SHADOW_ROOT);
 
             // Append the template node's content to our component.
             this._attachCSSDocuments(shadowRoot);
@@ -65,7 +65,8 @@
         _interceptEvents: function _interceptEvents() {
 
             // Memorise the React ID's root ID for intercepting events.
-            var rootReactId = this.getDOMNode().getAttribute(REACT_ID_ATTRIBUTE);
+            var rootReactId = this.getDOMNode().getAttribute(REACT_ID_ATTRIBUTE),
+                domNode     = this.getDOMNode().parentNode;
 
             /**
              * @method redirectEvent
@@ -82,7 +83,7 @@
 
                     // Translate current target ID into the React.js element we're shadowing.
                     var translatedId = targetId.replace(/\.[0-9]+/, rootReactId),
-                        element      = $document.querySelector('*[' + REACT_ID_ATTRIBUTE + '="' + translatedId + '"]');
+                        element      = domNode.querySelector('*[' + REACT_ID_ATTRIBUTE + '="' + translatedId + '"]');
 
                     // Dispatch the event on the original component's element.
                     var customEvent = $document.createEvent('Events');
@@ -95,7 +96,7 @@
 
             // List of all events that should be intercepted and re-routed.
             var eventsList = ['click', 'dblclick', 'mouseup', 'mouseout', 'mouseover', 'mousedown', 'mouseenter',
-                'mouseleave', 'contextmenu', 'keyup'];
+                              'mouseleave', 'contextmenu', 'keyup'];
 
             eventsList.forEach(function forEach(eventName) {
                 this._shadowRoot.addEventListener(eventName, redirectEvent);
