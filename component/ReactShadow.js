@@ -85,6 +85,13 @@
                     var translatedId = targetId.replace(/\.[0-9]+/, rootReactId),
                         element      = domNode.querySelector('*[' + REACT_ID_ATTRIBUTE + '="' + translatedId + '"]');
 
+                    if (event.target.value) {
+
+                        // Update the original element's value.
+                        element.setAttribute('value', event.target.value);
+
+                    }
+
                     // Dispatch the event on the original component's element.
                     var customEvent = $document.createEvent('Events');
                     customEvent.initEvent(event.type, true, false);
@@ -96,7 +103,7 @@
 
             // List of all events that should be intercepted and re-routed.
             var eventsList = ['click', 'dblclick', 'mouseup', 'mouseout', 'mouseover', 'mousedown', 'mouseenter',
-                              'mouseleave', 'contextmenu', 'keyup'];
+                              'mouseleave', 'contextmenu', 'keyup', 'keydown', 'change'];
 
             eventsList.forEach(function forEach(eventName) {
                 this._shadowRoot.addEventListener(eventName, redirectEvent);
