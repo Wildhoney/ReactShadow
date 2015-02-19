@@ -1,4 +1,4 @@
-(function main($window, $document, $react) {
+(function main($window, $document) {
 
     "use strict";
 
@@ -43,7 +43,7 @@
 
             // Render component and intercept the DOM events.
             shadowRoot.appendChild(mainElement);
-            $react.render(this.render(), mainElement);
+            React.render(this.render(), mainElement);
             this._interceptEvents();
 
         },
@@ -54,7 +54,7 @@
          */
         componentDidUpdate: function componentDidUpdate() {
             var containerElement = this._shadowRoot.querySelector(REACT_SHADOW_ROOT);
-            $react.render(this.render(), containerElement);
+            React.render(this.render(), containerElement);
         },
 
         /**
@@ -134,4 +134,4 @@
 
     };
 
-})(window, window.document, window.React);
+})(window, window.document);
