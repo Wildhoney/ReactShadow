@@ -55,5 +55,8 @@
     gulp.task('test', ['hint']);
     gulp.task('build', ['compile', 'vendor']);
     gulp.task('default', ['test', 'build']);
+    gulp.task('watch', function watch() {
+        gulp.watch('component/*.js', ['build']);
+    });
 
 })();
