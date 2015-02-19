@@ -34,14 +34,12 @@
          */
         componentDidMount: function componentDidMount() {
 
-            var shadowRoot      = this._shadowRoot = this.getDOMNode().parentNode.createShadowRoot(),
-                templateElement = $document.createElement('template'),
-                mainElement     = $document.createElement(REACT_SHADOW_ROOT);
+            var shadowRoot  = this._shadowRoot = this.getDOMNode().parentNode.createShadowRoot(),
+                mainElement = $document.createElement(REACT_SHADOW_ROOT);
 
             // Append the template node's content to our component.
-            this._attachCSSDocuments(templateElement);
-            var clone = $document.importNode(templateElement.content, true);
-            shadowRoot.appendChild(clone);
+            this._attachCSSDocuments(shadowRoot);
+            shadowRoot.appendChild(mainElement);
 
             // Render component and intercept the DOM events.
             shadowRoot.appendChild(mainElement);
@@ -67,7 +65,8 @@
         _interceptEvents: function _interceptEvents() {
 
             // Memorise the React ID's root ID for intercepting events.
-            var rootReactId = this.getDOMNode().getAttribute(REACT_ID_ATTRIBUTE);
+            var rootReactId = this.getDOMNode().getAttribute(REACT_ID_ATTRIBUTE),
+                domNode     = this.getDOMNode().parentNode;
 
             /**
              * @method redirectEvent
@@ -84,7 +83,7 @@
 
                     // Translate current target ID into the React.js element we're shadowing.
                     var translatedId = targetId.replace(/\.[0-9]+/, rootReactId),
-                        element      = $document.querySelector('*[' + REACT_ID_ATTRIBUTE + '="' + translatedId + '"]');
+                        element      = domNode.querySelector('*[' + REACT_ID_ATTRIBUTE + '="' + translatedId + '"]');
 
                     // Dispatch the event on the original component's element.
                     var customEvent = $document.createEvent('Events');
@@ -123,7 +122,7 @@
                     // Construct the HTML for the external stylesheets.
                     var styleElement = $document.createElement('style');
                     styleElement.innerHTML = '@import "' + cssDocument + '"';
-                    element.content.appendChild(styleElement);
+                    element.appendChild(styleElement);
 
                 });
 
