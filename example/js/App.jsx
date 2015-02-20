@@ -28,6 +28,11 @@
         },
 
         /**
+         * @property cssSource
+         */
+        cssSource: "section { box-shadow: 2px 2px black }",
+
+        /**
          * @method getInitialState
          * @return {{refreshed: number}}
          */
