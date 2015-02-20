@@ -2,6 +2,14 @@
 
     "use strict";
 
+    var React;
+
+    if (typeof require === 'function') {
+        React = require('react');
+    } else {
+        React = $window.React;
+    }
+
     /**
      * @constant REACT_ID_ATTRIBUTE
      * @type {String}
