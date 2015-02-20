@@ -127,6 +127,22 @@
 
         },
 
+
+        /**
+         * @method createStyle
+         * @param  {HTMLElement} element
+         * @param  {string} styleContent Content style for given element
+         * @return {HTMLElement}              
+         */
+        createStyle: function(element, styleContent) {
+            // Construct the HTML for the external stylesheets.
+            var styleElement = $document.createElement('style');
+            styleElement.innerHTML = styleContent;
+            element.appendChild(styleElement);
+            return element;
+        },
+
+
         /**
          * @method _attachCSSDocuments
          * @param element {HTMLElement}
@@ -134,6 +150,7 @@
          * @private
          */
         _attachCSSDocuments: function _attachCSSDocuments(element) {
+            var that = this;
 
             if (this.cssDocuments) {
 
@@ -141,12 +158,7 @@
                     cssDocuments = isFunction ? this.cssDocuments() : this.cssDocuments;
 
                 cssDocuments.forEach(function forEach(cssDocument) {
-
-                    // Construct the HTML for the external stylesheets.
-                    var styleElement = $document.createElement('style');
-                    styleElement.innerHTML = '@import "' + cssDocument + '"';
-                    element.appendChild(styleElement);
-
+                    that.createStyle(element, '@import "' + cssDocument + '"');
                 });
 
             }
