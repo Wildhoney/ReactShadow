@@ -45,8 +45,14 @@
             var shadowRoot  = this._shadowRoot = this.getDOMNode().parentNode.createShadowRoot(),
                 mainElement = $document.createElement(REACT_SHADOW_ROOT);
 
+            // Attach CSS
+            if (this.cssDocuments) {
+                this._attachCSSDocuments(shadowRoot);
+            }
+            if (this.cssSource) {
+                this._attachCSSSource(shadowRoot);
+            }
             // Append the template node's content to our component.
-            this._attachCSSDocuments(shadowRoot);
             shadowRoot.appendChild(mainElement);
 
             // Render component and intercept the DOM events.
@@ -134,12 +140,22 @@
          * @param  {string} styleContent Content style for given element
          * @return {HTMLElement}              
          */
-        createStyle: function(element, styleContent) {
+        _createStyle: function(element, styleContent) {
             // Construct the HTML for the external stylesheets.
             var styleElement = $document.createElement('style');
             styleElement.innerHTML = styleContent;
             element.appendChild(styleElement);
             return element;
+        },
+
+
+        /**
+         * @method _attachCSSSource
+         * @param  {HTMLElement} element
+         * @return {HTMLElement}      
+         */
+        _attachCSSSource: function(element) {
+            this._createStyle(element, this.cssSource);
         },
 
 
@@ -158,7 +174,7 @@
                     cssDocuments = isFunction ? this.cssDocuments() : this.cssDocuments;
 
                 cssDocuments.forEach(function forEach(cssDocument) {
-                    that.createStyle(element, '@import "' + cssDocument + '"');
+                    that._createStyle(element, '@import "' + cssDocument + '"');
                 });
 
             }

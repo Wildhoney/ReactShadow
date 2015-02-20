@@ -44,6 +44,17 @@ var ReadmeApp = $react.createClass({
 });
 ```
 
+You can inline css with `cssSource` property.
+
+```javascript
+var ReadmeApp = $react.createClass({
+    mixins: [ReactShadow],
+    cssSource: "body { color: black; }"
+});
+```
+
+When `cssDocuments` and `cssSource` are both defined, style defined in `cssSource` is appended after `cssDocuments`.
+
 # Event Retargeting
 
 As Shadow DOM has the concept of [Event Retargeting](http://www.w3.org/TR/shadow-dom/#event-retargeting) for encapsulation purposes, event delegation will not function correctly because all events will appear to be coming from the Shadow DOM &ndash; therefore `ReactShadow` uses the React ID for each element to dispatch the event from the original element, therefore maintaining React's event delegation implementation.
