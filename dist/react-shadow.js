@@ -27,7 +27,7 @@
      * @author Adam Timberlake
      * @link https://github.com/Wildhoney/ReactShadow
      */
-    $window.ReactShadow = {
+    var ReactShadow = {
 
         /**
          * @property _shadowRoot
@@ -45,13 +45,9 @@
             var shadowRoot  = this._shadowRoot = this.getDOMNode().parentNode.createShadowRoot(),
                 mainElement = $document.createElement(REACT_SHADOW_ROOT);
 
-            // Attach CSS
-            if (this.cssDocuments) {
-                this._attachCSSDocuments(shadowRoot);
-            }
-            if (this.cssSource) {
-                this._attachCSSSource(shadowRoot);
-            }
+            // Attach CSS.
+            this._attachCSS(shadowRoot);
+
             // Append the template node's content to our component.
             shadowRoot.appendChild(mainElement);
 
@@ -76,6 +72,24 @@
         componentDidUpdate: function componentDidUpdate() {
             var containerElement = this._shadowRoot.querySelector(REACT_SHADOW_ROOT);
             React.render(this.render(), containerElement);
+        },
+
+        /**
+         * @method _attachCSS
+         * @param {HTMLElement} shadowRoot
+         * @return {void}
+         * @private
+         */
+        _attachCSS: function _attachCSS(shadowRoot) {
+
+            if (this.cssDocuments) {
+                this._attachCSSDocuments(shadowRoot);
+            }
+
+            if (this.cssSource) {
+                this._attachCSSSource(shadowRoot);
+            }
+
         },
 
         /**
@@ -132,26 +146,29 @@
 
         },
 
-
         /**
+         * Construct the HTML for the external stylesheets
+         *
          * @method createStyle
-         * @param  {HTMLElement} element
-         * @param  {string} styleContent Content style for given element
-         * @return {HTMLElement}              
+         * @param {HTMLElement} element
+         * @param {String} styleContent Content style for given element.
+         * @return {HTMLElement}
+         * @private
          */
         _createStyle: function(element, styleContent) {
-            // Construct the HTML for the external stylesheets.
-            var styleElement = $document.createElement('style');
+
+            var styleElement       = $document.createElement('style');
             styleElement.innerHTML = styleContent;
             element.appendChild(styleElement);
             return element;
-        },
 
+        },
 
         /**
          * @method _attachCSSSource
          * @param  {HTMLElement} element
-         * @return {HTMLElement}      
+         * @return {HTMLElement}
+         * @private
          */
         _attachCSSSource: function(element) {
             this._createStyle(element, this.cssSource);
@@ -183,5 +200,10 @@
         }
 
     };
+
+
+    // Export the module attached to the `$window` element or as a CommonJS module.
+    var root = typeof exports !== 'undefined' && exports !== null ? exports : $window;
+    root.ReactShadow = ReactShadow;
 
 })(window, window.document);
