@@ -56,7 +56,6 @@
             shadowRoot.appendChild(mainElement);
 
             // Render component and intercept the DOM events.
-            shadowRoot.appendChild(mainElement);
             React.render(this.render(), mainElement);
             this._interceptEvents();
 
