@@ -203,11 +203,11 @@
 
 
     // Export the module as a CommonJS module if possible
-	if (typeof module !== 'undefined' && module != null) {
-		module.exports = ReactShadow;
-		return;
-	}
+    if (typeof module !== 'undefined' && module != null) {
+        module.exports = ReactShadow;
+        return;
+    }
 
-	$window.ReactShadow = ReactShadow;
+    $window.ReactShadow = ReactShadow;
 
 })(window, window.document);
