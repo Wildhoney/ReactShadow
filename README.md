@@ -14,6 +14,8 @@
 
 With `ReactShadow` you can apply a [Shadow DOM](http://www.html5rocks.com/en/tutorials/webcomponents/shadowdom/) root inside of your component. Under normal React.js conditions, your styles are written inline for style encapsulation &ndash; with `ReactShadow` your styles can now be moved into their rightful place &ndash; within CSS documents!
 
+**Note:** Take a [look at the Maple.js framework](https://github.com/Wildhoney/Maple.js), which is a React.js framework with Shadow DOM, HTML Imports, and Custom Elements. It has a lot of functionality that I was unable to integrate into a simple React.js mixin.
+
 # Getting Started
 
 `ReactShadow` is implemented as a mixin that you can import into your component:
