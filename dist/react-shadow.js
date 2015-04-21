@@ -4,17 +4,20 @@
 
     var React;
 
-    if (typeof require === 'function') {
-        React = require('react');
-    } else {
-        React = $window.React;
-    }
 
     /**
      * @constant REACT_ID_ATTRIBUTE
      * @type {String}
      */
+
     var REACT_ID_ATTRIBUTE = 'data-reactid';
+
+    if (typeof require === 'function') {
+        React = require('react');
+		REACT_ID_ATTRIBUTE = require('react/lib/DOMProperty').ID_ATTRIBUTE_NAME;
+    } else {
+        React = $window.React;
+    }
 
     /**
      * @constant REACT_SHADOW_ROOT
