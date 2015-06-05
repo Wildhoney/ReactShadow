@@ -14,7 +14,7 @@
 
     if (typeof require === 'function') {
         React = require('react');
-		REACT_ID_ATTRIBUTE = require('react/lib/DOMProperty').ID_ATTRIBUTE_NAME;
+        REACT_ID_ATTRIBUTE = require('react/lib/DOMProperty').ID_ATTRIBUTE_NAME;
     } else {
         React = $window.React;
     }
@@ -58,6 +58,9 @@
             React.render(this.render(), mainElement);
             this._interceptEvents();
 
+            // Strip inline <style> elements
+            this._stripInlineStyles();
+
             // Wrap current DOM node in `script` tag.
             var scriptElement = $document.createElement('script');
             this.getDOMNode().parentNode.appendChild(scriptElement);
@@ -75,6 +78,20 @@
         componentDidUpdate: function componentDidUpdate() {
             var containerElement = this._shadowRoot.querySelector(REACT_SHADOW_ROOT);
             React.render(this.render(), containerElement);
+            this._stripInlineStyles();
+        },
+
+
+       /**
+        * @method _stripInlineStyles
+        * @return {void}
+        * @private
+        */
+        _stripInlineStyles: function _stripInlineStyles() {
+            var src = this.getDOMNode();
+            var s = src.querySelectorAll('style');
+            var i = s.length;
+            while (i--) { s[i].remove(); }
         },
 
         /**
