@@ -60,7 +60,7 @@
             React.render(this.render(), mainElement);
             this._interceptEvents();
 
-            // strip inline <style> elements
+            // Strip inline <style> elements
             this._stripInlineStyles();
 
             // Wrap current DOM node in `script` tag.
