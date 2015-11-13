@@ -3,6 +3,7 @@
     "use strict";
 
     var React;
+    var ReactDOM;
 
 
     /**
@@ -14,6 +15,7 @@
 
     if (typeof require === 'function') {
         React = require('react');
+        ReactDOM = require('react-dom');
         REACT_ID_ATTRIBUTE = require('react/lib/DOMProperty').ID_ATTRIBUTE_NAME;
     } else {
         React = $window.React;
@@ -45,7 +47,7 @@
          */
         componentDidMount: function componentDidMount() {
 
-            var shadowRoot  = this._shadowRoot = this.getDOMNode().parentNode.createShadowRoot(),
+            var shadowRoot  = this._shadowRoot = ReactDOM.findDOMNode(this.parentNode).createShadowRoot(),
                 mainElement = $document.createElement(REACT_SHADOW_ROOT);
 
             // Attach CSS.
@@ -63,8 +65,8 @@
 
             // Wrap current DOM node in `script` tag.
             var scriptElement = $document.createElement('script');
-            this.getDOMNode().parentNode.appendChild(scriptElement);
-            scriptElement.appendChild(this.getDOMNode());
+            ReactDOM.findDOMNode(this).parentNode.appendChild(scriptElement);
+            scriptElement.appendChild(ReactDOM.findDOMNode(this));
 
             // Shadow insertion point for nesting shadow roots.
             //shadowRoot.appendChild($document.createElement('shadow'));
@@ -88,7 +90,7 @@
         * @private
         */
         _stripInlineStyles: function _stripInlineStyles() {
-            var src = this.getDOMNode();
+            var src = ReactDOM.findDOMNode(this);
             var s = src.querySelectorAll('style');
             var i = s.length;
             while (i--) { s[i].remove(); }
@@ -120,8 +122,8 @@
         _interceptEvents: function _interceptEvents() {
 
             // Memorise the React ID's root ID for intercepting events.
-            var rootReactId = this.getDOMNode().getAttribute(REACT_ID_ATTRIBUTE),
-                domNode     = this.getDOMNode().parentNode;
+            var rootReactId = ReactDOM.findDOMNode(this).getAttribute(REACT_ID_ATTRIBUTE),
+                domNode     = ReactDOM.findDOMNode(this).parentNode;
 
             /**
              * @method redirectEvent
