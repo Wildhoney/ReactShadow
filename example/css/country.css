@@ -13,32 +13,32 @@ span {
     align-items: center;
     display: flex;
     flex-direction: column;
-    width: 35vw;
-    height: 35vw;
+    width: 35vmax;
+    height: 35vmax;
 }
 
 img {
-    width: 15vw;
+    width: 15vmax;
 }
 
 h1 {
     font-family: Times, "Times New Roman", serif;
     font-weight: normal;
-    font-size: 1vw;
-    margin-top: 1vw;
+    font-size: 1vmax;
+    margin-top: 1vmax;
     font-style: italic;
 }
 
 h2 {
     font-family: Lato, Arial, Tahoma, Helvetica, sans-serif;
-    font-size: 5vw;
-    margin-top: 1vw;
+    font-size: 5vmax;
+    margin-top: 1vmax;
 }
 
 ul {
     font-family: Lato, Arial, Tahoma, Helvetica, sans-serif;
-    font-size: .75vw;
-    margin-top: 1vw;
+    font-size: .75vmax;
+    margin-top: 1vmax;
 }
 
 ul li {
@@ -47,10 +47,14 @@ ul li {
 
 ul li a {
     display: inline-block;
-    padding: 0 .25vw;
+    padding: 0 .25vmax;
     color: black;
     transition: color .5s;
     cursor: pointer;
+}
+
+ul li.title {
+    color: rgba(0, 0, 0, .35);
 }
 
 ul li a:hover {

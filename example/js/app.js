@@ -60,8 +60,7 @@ export class Weather extends Component {
     render() {
 
         const { weather, country } = this.state;
-        const label = weather ? `${weather.main.temp}${String.fromCharCode(8451)}`
-                              : `Loading${String.fromCharCode(8230)}`;
+        const label = weather ? `${weather.main.temp}${String.fromCharCode(8451)}` : String.fromCharCode(8212);
 
         return (
             <ShadowDOM cssDocuments="css/country.css">
