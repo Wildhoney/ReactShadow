@@ -12,3 +12,7 @@ section.container {
     align-items: center;
     justify-content: center;
 }
+
+section.container section {
+    margin: 0 5px;
+}

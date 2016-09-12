@@ -1,6 +1,6 @@
-section {
+:host {
     background-color: rgba(0, 0, 0, .05);
-    padding: 0px;
+    padding: 0;
     display: inline-block;
     cursor: pointer;
     transition: all .1s;
