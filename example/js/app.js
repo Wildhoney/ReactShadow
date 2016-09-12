@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { render } from 'react-dom';
 import ready from 'document-ready-promise';
+import nlp from 'nlp_compromise';
+import capitalise from 'capitalize';
 import ShadowDOM from '../../src/react-shadow';
 
 /**
@@ -28,7 +30,7 @@ export class Weather extends Component {
      */
     constructor() {
         super();
-        this.state = { country: 'London', weather: null };
+        const countries = Weather.defaultProps.countries;
     }
 
     /**
@@ -36,7 +38,13 @@ export class Weather extends Component {
      * @return {void}
      */
     componentWillMount() {
-        this.weatherFor(this.state.country);
+
+        const countries = this.props.countries;
+        const country = countries[Math.floor(Math.random() * countries.length)];
+
+        this.state = { country, weather: null };
+        this.weatherFor(country);
+
     }
 
     /**
@@ -60,6 +68,9 @@ export class Weather extends Component {
     render() {
 
         const { weather, country } = this.state;
+        const description = () => capitalise.words(nlp.noun(weather.weather[0].description).pluralize());
+
+        const title = weather ? `${description()} in ${country}` : `Weather in ${country}`;
         const label = weather ? `${weather.main.temp}${String.fromCharCode(8451)}` : String.fromCharCode(8212);
 
         return (
@@ -69,7 +80,7 @@ export class Weather extends Component {
 
                     <img src={`/images/${country.replace(/ /ig, '-').toLowerCase()}.png`} alt={country} />
 
-                    <h1>Weather in {country}</h1>
+                    <h1>{title}</h1>
 
                     <h2 className={weather ? 'loading' : ''}>
                         {label}

@@ -13,32 +13,33 @@ span {
     align-items: center;
     display: flex;
     flex-direction: column;
-    width: 35vmax;
-    height: 35vmax;
+    width: 75vmin;
+    height: 75vmin;
 }
 
 img {
-    width: 15vmax;
+    width: 35vmin;
 }
 
 h1 {
     font-family: Times, "Times New Roman", serif;
     font-weight: normal;
-    font-size: 1vmax;
-    margin-top: 1vmax;
+    font-size: 2vmin;
+    margin-top: 2vmin;
     font-style: italic;
 }
 
 h2 {
     font-family: Lato, Arial, Tahoma, Helvetica, sans-serif;
-    font-size: 5vmax;
-    margin-top: 1vmax;
+    font-size: 10vmin;
+    margin-top: 2vmin;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, .15);
 }
 
 ul {
     font-family: Lato, Arial, Tahoma, Helvetica, sans-serif;
-    font-size: .75vmax;
-    margin-top: 1vmax;
+    font-size: 1.25vmin;
+    margin-top: 2vmin;
 }
 
 ul li {
@@ -47,7 +48,7 @@ ul li {
 
 ul li a {
     display: inline-block;
-    padding: 0 .25vmax;
+    padding: 0 .25vmin;
     color: black;
     transition: color .5s;
     cursor: pointer;
