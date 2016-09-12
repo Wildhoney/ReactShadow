@@ -82,7 +82,15 @@
       "react/jsx-space-before-closing": "off",
       "react/no-danger": "off",
       "react/jsx-no-bind": "off",
-      "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+      "react/jsx-filename-extension": [
+        1,
+        {
+          "extensions": [
+            ".js",
+            ".jsx"
+          ]
+        }
+      ]
     }
   }
 }

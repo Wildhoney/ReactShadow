@@ -1,0 +1,62 @@
+:host {
+    background-color: rgba(0, 0, 0, .05);
+    border-radius: 5px;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+span {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    width: 35vw;
+    height: 35vw;
+}
+
+img {
+    width: 15vw;
+}
+
+h1 {
+    font-family: Times, "Times New Roman", serif;
+    font-weight: normal;
+    font-size: 1vw;
+    margin-top: 1vw;
+    font-style: italic;
+}
+
+h2 {
+    font-family: Lato, Arial, Tahoma, Helvetica, sans-serif;
+    font-size: 5vw;
+    margin-top: 1vw;
+}
+
+ul {
+    font-family: Lato, Arial, Tahoma, Helvetica, sans-serif;
+    font-size: .75vw;
+    margin-top: 1vw;
+}
+
+ul li {
+    display: inline-block;
+}
+
+ul li a {
+    display: inline-block;
+    padding: 0 .25vw;
+    color: black;
+    transition: color .5s;
+    cursor: pointer;
+}
+
+ul li a:hover {
+    color: black;
+}
+
+ul li a.active {
+    color: deeppink;
+}

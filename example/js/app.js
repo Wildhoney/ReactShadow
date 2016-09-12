@@ -4,19 +4,23 @@ import ready from 'document-ready-promise';
 import ShadowDOM from '../../src/react-shadow';
 
 /**
- * @class ReactShadow
+ * @constant API_KEY
+ * @type {String}
+ */
+const API_KEY = '07b72c930f0d226f7c6866cc753a678c';
+
+/**
+ * @class Weather
  * @author Adam Timberlake
  * @link https://github.com/Wildhoney/ReactShadow
  */
-export class Counter extends Component {
+export class Weather extends Component {
 
     /**
-     * @constant propTypes
+     * @constant defaultProps
      * @type {Object}
      */
-    static propTypes = {
-        name: PropTypes.string.isRequired
-    };
+    static defaultProps = { countries: ['Amsterdam', 'Cairo', 'London', 'Moscow', 'Paris', 'Rio de Janeiro', 'Rome', 'Sydney'] };
 
     /**
      * @method constructor
@@ -24,34 +28,29 @@ export class Counter extends Component {
      */
     constructor() {
         super();
-        this.state = { refreshed: 0, value: '' };
+        this.state = { country: 'London', weather: null };
     }
 
     /**
-     * @method componentDidMount
+     * @method componentWillMount
      * @return {void}
      */
-    componentDidMount() {
-        this.startInterval();
+    componentWillMount() {
+        this.weatherFor(this.state.country);
     }
 
     /**
-     * @method startInterval
+     * @method weatherFor
+     * @param {String} country
      * @return {void}
      */
-    startInterval() {
-        const interval = setInterval(() => this.setState({ refreshed: this.state.refreshed + 1 }), 1000);
-        this.setState({ interval: interval });
-    }
+    weatherFor(country) {
 
-    /**
-     * @method resetCounter
-     * @return {void}
-     */
-    resetCounter() {
-        clearInterval(this.state.interval);
-        this.setState({ refreshed: 0, value: this.state.value });
-        this.startInterval();
+        this.setState({ country, weather: null });
+
+        const url = `http://api.openweathermap.org/data/2.5/weather?q=${country}&appid=${API_KEY}&units=metric`;
+        fetch(url).then(response => response.json()).then(weather => this.setState({ weather }));
+
     }
 
     /**
@@ -60,13 +59,46 @@ export class Counter extends Component {
      */
     render() {
 
+        const { weather, country } = this.state;
+        const label = weather ? `${weather.main.temp}${String.fromCharCode(8451)}`
+                              : `Loading${String.fromCharCode(8230)}`;
+
         return (
-            <ShadowDOM cssDocuments={['css/core.css', `css/component/${this.props.name}.css`]}>
-                <section onClick={this.resetCounter.bind(this)} title="Reset Counter">
-                    <h1 className="title">
-                        {this.state.refreshed}
-                    </h1>
-                </section>
+            <ShadowDOM cssDocuments="css/country.css">
+
+                <div>
+
+                    <img src={`/images/${country.replace(/ /ig, '-').toLowerCase()}.png`} alt={country} />
+
+                    <h1>Weather in {country}</h1>
+
+                    <h2 className={weather ? 'loading' : ''}>
+                        {label}
+                    </h2>
+
+                    <ul>
+
+                        <li className="title">Weather for:</li>
+
+                        {this.props.countries.map(name => {
+
+                            return (
+                                <li key={name}>
+                                    <a
+                                       onClick={() => this.weatherFor(name)}
+                                       className={name === country ? 'active' : ''}
+                                        >
+                                        {name}
+                                    </a>
+                                </li>
+                            );
+
+                        })}
+
+                    </ul>
+
+                </div>
+
             </ShadowDOM>
         );
 
@@ -74,11 +106,4 @@ export class Counter extends Component {
 
 }
 
-ready().then(() => {
-
-    ['first', 'second', 'third'].forEach(name => {
-        const node = document.querySelector(`*[data-react-shadow="${name}"]`) || document.body;
-        render(<Counter name={name} />, node);
-    });
-
-});
+ready().then(() => render(<Weather />, document.querySelector('section.container')));
