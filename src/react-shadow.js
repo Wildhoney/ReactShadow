@@ -1,7 +1,7 @@
 import { get as fetch } from 'axios';
-import React, { Component, PropTypes, createElement, DOM } from 'react';
+import React, { Component, PropTypes, DOM } from 'react';
 import { render, findDOMNode } from 'react-dom';
-import { dissoc } from 'ramda';
+import dissoc from 'ramda/src/dissoc';
 
 /**
  * @class ShadowDOM
@@ -47,7 +47,7 @@ export default class ShadowDOM extends Component {
 
         // Create the shadow root and take the CSS documents from props.
         const node = findDOMNode(this);
-        const root = node.attachShadow ? node.attachShadow({ mode: open }) : node.createShadowRoot();
+        const root = node.attachShadow ? node.attachShadow({ mode: 'open' }) : node.createShadowRoot();
         const cssDocuments = this.props.cssDocuments || [];
         const container = this.getContainer();
 

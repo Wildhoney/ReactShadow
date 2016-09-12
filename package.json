@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack -p",
     "example": "webpack --config webpack.dev-config.js",
-    "test": "ava"
+    "test": "xo src/*"
   },
   "repository": {
     "type": "git",
@@ -43,6 +43,9 @@
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-0": "^6.5.0",
     "document-ready-promise": "^3.0.1",
+    "eslint-config-xo-react": "^0.9.0",
+    "eslint-plugin-react": "^6.2.0",
+    "eslint-plugin-xo": "^0.5.1",
     "express": "^4.11.2",
     "jasmine-core": "^2.2.0",
     "jsdom": "^9.5.0",
@@ -50,6 +53,44 @@
     "react": "^15.3.1",
     "react-dom": "^15.3.1",
     "sinon": "^1.17.5",
-    "webpack": "^2.1.0-beta.22"
+    "webpack": "^2.1.0-beta.22",
+    "xo": "^0.16.0"
+  },
+  "xo": {
+    "space": 4,
+    "esnext": true,
+    "globals": [
+      "window",
+      "document"
+    ],
+    "extends": "xo-react",
+    "rules": {
+      "padded-blocks": "off",
+      "max-lines": [
+        2,
+        500
+      ],
+      "babel/object-curly-spacing": [
+        2,
+        "always"
+      ],
+      "babel/array-bracket-spacing": "off",
+      "no-unused-vars": [
+        1
+      ],
+      "max-nested-callbacks": [
+        1,
+        5
+      ],
+      "default-case": "off",
+      "no-unused-expressions": "off",
+      "no-case-declarations": "off",
+      "import/no-named-as-default": "off",
+      "react/jsx-indent": "off",
+      "react/jsx-space-before-closing": "off",
+      "react/no-danger": "off",
+      "react/jsx-no-bind": "off",
+      "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+    }
   }
 }
