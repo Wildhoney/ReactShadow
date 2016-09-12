@@ -1,6 +1,6 @@
 {
   "name": "react-shadow",
-  "version": "1.0.0",
+  "version": "1.0.0-beta",
   "description": "Use Shadow DOM with React.js and CSS imports; write your component styles in CSS!",
   "main": "dist/react-shadow.js",
   "scripts": {
