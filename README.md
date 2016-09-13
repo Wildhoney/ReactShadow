@@ -18,12 +18,18 @@ By using `ReactShadow` you can have all the benefits of [Shadow DOM](https://www
 import ShadowDOM from 'react-shadow';
 
 export default props => {
-    
     <ShadowDOM cssDocuments={['css/core/calendar.css', props.theme]}>
         <h1>Calendar</h1>
     </ShadowDOM>
-    
 }
 ```
 
-In the above example the `h1` element will become the host element with a shadow boundary &mdash; and the two defined CSS documents will be fetched and appended. Whilst the CSS documents are being fetched, the `h1` element will have a `className` of <kbd>resolving</kbd> for you to avoid the dreaded [FOIC](https://en.wikipedia.org/wiki/Flash_of_unstyled_content).
+In the above example the `h1` element will become the host element with a shadow boundary &mdash; and the two defined CSS documents will be fetched and appended.
+
+### Avoiding FOIC
+
+As the CSS documents are being fetched over the network the host element will have a `className` of `resolving` for you to avoid the dreaded [FOIC](https://en.wikipedia.org/wiki/Flash_of_unstyled_content). Once **all** of the documents have been attached the `className` will change to `resolved`.
+
+### Cached Documents
+
+Where components share CSS documents, only one instance of the CSS document will be fetched due to [`memoize` of the `fetchStylesheets`](https://github.com/Wildhoney/ReactShadow/blob/react-15.0/src/react-shadow.js#L22) function.
