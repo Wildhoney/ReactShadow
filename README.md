@@ -12,7 +12,7 @@
 
 ## Getting Started
 
-By using `ReactShadow` you can have all the benefits of [Shadow DOM](https://www.w3.org/TR/shadow-dom/) whilst still using the declarative style of React.
+By using `ReactShadow` you have all the benefits of [Shadow DOM](https://www.w3.org/TR/shadow-dom/) in React.
 
 ```javascript
 import ShadowDOM from 'react-shadow';

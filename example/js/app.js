@@ -3,6 +3,7 @@ import { render } from 'react-dom';
 import ready from 'document-ready-promise';
 import nlp from 'nlp_compromise';
 import capitalise from 'capitalize';
+import memoize from 'ramda/src/memoize';
 import ShadowDOM from '../../src/react-shadow';
 
 /**
@@ -10,6 +11,13 @@ import ShadowDOM from '../../src/react-shadow';
  * @type {String}
  */
 const API_KEY = '07b72c930f0d226f7c6866cc753a678c';
+
+/**
+ * @method fetchWeather
+ * @param {String} url
+ * @return {Promise}
+ */
+const fetchWeather = memoize(url => fetch(url).then(response => response.json()));
 
 /**
  * @class Weather
@@ -57,7 +65,7 @@ export class Weather extends Component {
         this.setState({ country, weather: null });
 
         const url = `http://api.openweathermap.org/data/2.5/weather?q=${country}&appid=${API_KEY}&units=metric`;
-        fetch(url).then(response => response.json()).then(weather => this.setState({ weather }));
+        fetchWeather(url).then(weather => this.setState({ weather }));
 
     }
 
