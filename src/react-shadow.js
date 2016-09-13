@@ -5,6 +5,16 @@ import dissoc from 'ramda/src/dissoc';
 import memoize from 'ramda/src/memoize';
 
 /**
+ * @method raise
+ * @param {String} message
+ * @throws {Error}
+ * @return {void}
+ */
+const raise = message => {
+    throw new Error(`ReactShadow: ${message}.`);
+};
+
+/**
  * @method fetchStylesheet
  * @param {String} document
  * @return {Promise}
@@ -122,10 +132,31 @@ export default class ShadowDOM extends Component {
     }
 
     /**
+     * @method performSanityCheck
+     * @return {void}
+     */
+    performSanityCheck() {
+
+        // Ensure that the passed child isn't an array of children.
+        Array.isArray(this.props.children) && raise('You must pass a single child rather than multiple children');
+
+        if (typeof this.props.children.type !== 'string') {
+
+            // Ensure that the passed child has a valid node name.
+            raise('Passed child must be a concrete HTML element rather than another React component');
+
+        }
+
+    }
+
+    /**
      * @method render
      * @return {XML}
      */
     render() {
+
+        // Process the necessary sanity checks.
+        this.performSanityCheck();
 
         // Take all of the props from the passed in component, minus the `children` props
         // as that's handled by `componentDidMount`.
