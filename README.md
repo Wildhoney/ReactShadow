@@ -1,4 +1,4 @@
-<img src="media/logo.png" alt="Logo" />
+![Screenshot](media/screenshot.png)
 
 ![Travis](http://img.shields.io/travis/Wildhoney/ReactShadow.svg?style=flat)
 &nbsp;
@@ -7,8 +7,6 @@
 ![Experimental](http://img.shields.io/badge/experimental-%E2%9C%93-blue.svg?style=flat)
 * **npm**: `npm i react-shadow --save`
 * **Heroku**: [http://react-shadow.herokuapp.com/](http://react-shadow.herokuapp.com/)
-
-![Screenshot](media/screenshot.png)
 
 ---
 
