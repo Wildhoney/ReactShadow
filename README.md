@@ -1,74 +1,35 @@
-# ReactShadow
+![Screenshot](media/screenshot.png)
 
 ![Travis](http://img.shields.io/travis/Wildhoney/ReactShadow.svg?style=flat)
 &nbsp;
-![Experimental](http://img.shields.io/badge/experimental-%E2%9C%93-blue.svg?style=flat)
-&nbsp;
 ![License MIT](http://img.shields.io/badge/license-mit-orange.svg?style=flat)
-
+&nbsp;
+![Experimental](http://img.shields.io/badge/experimental-%E2%9C%93-blue.svg?style=flat)
+* **npm**: `npm i react-shadow --save`
 * **Heroku**: [http://react-shadow.herokuapp.com/](http://react-shadow.herokuapp.com/)
-
-![Screenshot](http://i.imgur.com/1txgnOL.png)
 
 ---
 
-With `ReactShadow` you can apply a [Shadow DOM](http://www.html5rocks.com/en/tutorials/webcomponents/shadowdom/) root inside of your component. Under normal React.js conditions, your styles are written inline for style encapsulation &ndash; with `ReactShadow` your styles can now be moved into their rightful place &ndash; within CSS documents!
+## Getting Started
 
-**Note:** Take a [look at the Maple.js framework](https://github.com/Wildhoney/Maple.js), which is a React.js framework with Shadow DOM, HTML Imports, and Custom Elements. It has a lot of functionality that I was unable to integrate into a simple React.js mixin.
-
-# Getting Started
-
-`ReactShadow` is implemented as a mixin that you can import into your component:
+By using `ReactShadow` you have all the benefits of [Shadow DOM](https://www.w3.org/TR/shadow-dom/) in React.
 
 ```javascript
-var ReadmeApp = $react.createClass({
-    mixins: [ReactShadow]
-});
+import ShadowDOM from 'react-shadow';
+
+export default props => {
+    <ShadowDOM cssDocuments={['css/core/calendar.css', props.theme]}>
+        <h1>Calendar</h1>
+    </ShadowDOM>
+}
 ```
 
-From there `ReactShadow` will take over &ndash; creating a shadow root inside of your component, and importing any CSS documents defined in your `cssDocuments` property &ndash; which can be either an `array` or a `function`:
+In the above example the `h1` element will become the host element with a shadow boundary &mdash; and the two defined CSS documents will be fetched and appended.
 
-```javascript
-var ReadmeApp = $react.createClass({
-    mixins: [ReactShadow],
-    cssDocuments: ['../css/Default.css']
-});
-```
+### Avoiding FOIC
 
-If you're applying CSS documents at runtime then it may well be useful to have the `cssDocuments` property as a `function`:
+As the CSS documents are being fetched over the network the host element will have a `className` of `resolving` for you to avoid the dreaded [FOIC](https://en.wikipedia.org/wiki/Flash_of_unstyled_content). Once **all** of the documents have been attached the `className` will change to `resolved`.
 
-```javascript
-var ReadmeApp = $react.createClass({
-    mixins: [ReactShadow],
-    cssDocuments: function cssDocuments() {
-        return ['../css/Component.css', '../css/' + this.props.cssDocument];
-    }
-});
-```
+### Cached Documents
 
-You can inline css with `cssSource` property.
-
-```javascript
-var ReadmeApp = $react.createClass({
-    mixins: [ReactShadow],
-    cssSource: "body { color: black; }"
-});
-```
-
-When `cssDocuments` and `cssSource` are both defined, style defined in `cssSource` is appended after `cssDocuments`.
-
-# Event Retargeting
-
-As Shadow DOM has the concept of [Event Retargeting](http://www.w3.org/TR/shadow-dom/#event-retargeting) for encapsulation purposes, event delegation will not function correctly because all events will appear to be coming from the Shadow DOM &ndash; therefore `ReactShadow` uses the React ID for each element to dispatch the event from the original element, therefore maintaining React's event delegation implementation.
-
-Events are therefore written in exactly the same way:
-
-```javascript
-var ReadmeApp = $react.createClass({
-    render: function render() {
-        return <a onClick={this.reset} title="Reset Counter">
-                   Reset, Comrade!
-               </a>
-    }
-});
-```
+Where components share CSS documents, only one instance of the CSS document will be fetched due to [`memoize` of the `fetchStylesheets`](https://github.com/Wildhoney/ReactShadow/blob/react-15.0/src/react-shadow.js#L22) function.

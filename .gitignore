@@ -1,10 +1,9 @@
-# IDE
-/.idea
+# ide
+.idea
 
 # npm
-/node_modules
-/npm-debug.log
+node_modules
+npm-debug.log
 
-# Bower
-/example/vendor/*
-!/example/vendor/.gitkeep
+# example
+example/js/build.js
