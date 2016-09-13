@@ -1,5 +1,5 @@
 import { get as fetch } from 'axios';
-import React, { Component, PropTypes, DOM } from 'react';
+import React, { Component, PropTypes, DOM, Children } from 'react';
 import { render, findDOMNode } from 'react-dom';
 import dissoc from 'ramda/src/dissoc';
 
@@ -128,16 +128,17 @@ export default class ShadowDOM extends Component {
 
         // Take all of the props from the passed in component, minus the `children` props
         // as that's handled by `componentDidMount`.
-        const props = dissoc('children', this.props.children.props);
+        const child = Children.only(this.props.children);
+        const props = dissoc('children', child.props);
         const className = this.state.resolving ? 'resolving' : 'resolved';
 
         // Determine whether to use `class` or `className`, as custom elements do not allow
         // for `className`. See: https://github.com/facebook/react/issues/4933
         const classNames = `${props.className ? props.className : ''} ${className}`.trim();
-        const isSupportedElement = this.props.children.type in DOM;
+        const isSupportedElement = child.type in DOM;
         const propName = isSupportedElement ? 'className' : 'class';
 
-        return <this.props.children.type {...{ ...dissoc('className', props), [propName]: classNames }} />;
+        return <child.type {...{ ...dissoc('className', props), [propName]: classNames }} />;
 
     }
 
