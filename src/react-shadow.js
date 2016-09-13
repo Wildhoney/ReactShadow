@@ -2,6 +2,14 @@ import { get as fetch } from 'axios';
 import React, { Component, PropTypes, DOM, Children } from 'react';
 import { render, findDOMNode } from 'react-dom';
 import dissoc from 'ramda/src/dissoc';
+import memoize from 'ramda/src/memoize';
+
+/**
+ * @method fetchStylesheet
+ * @param {String} document
+ * @return {Promise}
+ */
+const fetchStylesheet = memoize(document => fetch(document).then(response => response.data));
 
 /**
  * @class ShadowDOM
@@ -90,13 +98,6 @@ export default class ShadowDOM extends Component {
         const styleElement = document.createElement('style');
         styleElement.setAttribute('type', 'text/css');
         const documents = Array.isArray(cssDocuments) ? cssDocuments : [cssDocuments];
-
-        /**
-         * @method fetchStylesheet
-         * @param {String} document
-         * @return {Promise}
-         */
-        const fetchStylesheet = document => fetch(document).then(response => response.data);
 
         /**
          * @method insertStyleElement
