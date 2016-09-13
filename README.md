@@ -9,7 +9,7 @@
 * **npm**: `npm i react-shadow --save`
 * **Heroku**: [http://react-shadow.herokuapp.com/](http://react-shadow.herokuapp.com/)
 
-![Screenshot](http://i.imgur.com/1txgnOL.png)
+![Screenshot](media/screenshot.png)
 
 ---
 
