@@ -1,11 +1,12 @@
-# ReactShadow
+<center>
+    <img src="media/logo.png" alt="Logo" />
+</center>
 
 ![Travis](http://img.shields.io/travis/Wildhoney/ReactShadow.svg?style=flat)
 &nbsp;
-![Experimental](http://img.shields.io/badge/experimental-%E2%9C%93-blue.svg?style=flat)
-&nbsp;
 ![License MIT](http://img.shields.io/badge/license-mit-orange.svg?style=flat)
-
+&nbsp;
+![Experimental](http://img.shields.io/badge/experimental-%E2%9C%93-blue.svg?style=flat)
 * **npm**: `npm i react-shadow --save`
 * **Heroku**: [http://react-shadow.herokuapp.com/](http://react-shadow.herokuapp.com/)
 
