@@ -32,4 +32,4 @@ As the CSS documents are being fetched over the network the host element will ha
 
 ### Cached Documents
 
-Where components share CSS documents, only one instance of the CSS document will be fetched due to [`memoize` of the `fetchStylesheets`](https://github.com/Wildhoney/ReactShadow/blob/react-15.0/src/react-shadow.js#L22) function.
+Where components share CSS documents, only one instance of the CSS document will be fetched due to `memoize` of the [`fetchStylesheet`](https://github.com/Wildhoney/ReactShadow/blob/react-15.0/src/react-shadow.js#L22) function.
