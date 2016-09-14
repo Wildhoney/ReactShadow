@@ -18,9 +18,11 @@ By using `ReactShadow` you have all the benefits of [Shadow DOM](https://www.w3.
 import ShadowDOM from 'react-shadow';
 
 export default props => {
-    <ShadowDOM cssDocuments={['css/core/calendar.css', props.theme]}>
-        <h1>Calendar</h1>
-    </ShadowDOM>
+    return (
+        <ShadowDOM cssDocuments={['css/core/calendar.css', props.theme]}>
+            <h1>Calendar</h1>
+        </ShadowDOM>
+    );
 }
 ```
 
