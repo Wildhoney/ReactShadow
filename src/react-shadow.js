@@ -144,10 +144,10 @@ export default class ShadowDOM extends Component {
     }
 
     /**
-     * @method performSanityCheck
+     * @method performSanityChecks
      * @return {void}
      */
-    performSanityCheck() {
+    performSanityChecks() {
 
         // Ensure that the passed child isn't an array of children.
         Array.isArray(this.props.children) && raise('You must pass a single child rather than multiple children');
@@ -168,7 +168,7 @@ export default class ShadowDOM extends Component {
     render() {
 
         // Process the necessary sanity checks.
-        this.performSanityCheck();
+        this.performSanityChecks();
 
         // Take all of the props from the passed in component, minus the `children` props
         // as that's handled by `componentDidMount`.

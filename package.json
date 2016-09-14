@@ -7,7 +7,9 @@
     "start": "node example/server/default.js",
     "build": "webpack -p && npm run example",
     "example": "webpack --config webpack.dev-config.js",
-    "test": "xo src/*"
+    "test": "npm run spec && npm run lint",
+    "spec": "ava",
+    "lint": "xo src/*"
   },
   "repository": {
     "type": "git",
@@ -28,14 +30,18 @@
   },
   "homepage": "https://github.com/Wildhoney/ReactShadow",
   "devDependencies": {
+    "ava": "^0.16.0",
     "axios": "^0.14.0",
+    "axios-mock-adapter": "^1.6.1",
     "babel-core": "^6.14.0",
     "babel-loader": "^6.2.5",
     "babel-preset-es2015": "^6.14.0",
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-0": "^6.5.0",
+    "babel-register": "^6.14.0",
     "capitalize": "^1.0.0",
     "document-ready-promise": "^3.0.1",
+    "enzyme": "^2.4.1",
     "eslint-config-xo-react": "^0.9.0",
     "eslint-plugin-react": "^6.2.0",
     "eslint-plugin-xo": "^0.5.1",
@@ -45,10 +51,20 @@
     "nlp_compromise": "^6.5.0",
     "ramda": "^0.22.1",
     "react": "^15.3.1",
+    "react-addons-test-utils": "^15.3.1",
     "react-dom": "^15.3.1",
     "sinon": "^1.17.5",
     "webpack": "^2.1.0-beta.22",
     "xo": "^0.16.0"
+  },
+  "ava": {
+    "files": [
+      "tests/*.test.js"
+    ],
+    "babel": "inherit",
+    "require": [
+      "babel-register"
+    ]
   },
   "xo": {
     "space": 4,
