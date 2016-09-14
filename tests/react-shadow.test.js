@@ -128,6 +128,7 @@ test('Should be able to include CSS documents', t => {
 
 test('Should be able to raise exceptions from sanity checks;', t => {
 
+    // Prevent React from throwing errors it would otherwise throw with the below assertions.
     console.error = () => {};
 
     t.throws(() => {
