@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import { render } from 'react-dom';
+import ShadowDOM from '../../src/react-shadow';
 import ready from 'document-ready-promise';
 import nlp from 'nlp_compromise';
 import capitalise from 'capitalize';
 import memoize from 'ramda/src/memoize';
-import ShadowDOM from '../../src/react-shadow';
 
 /**
  * @constant API_KEY
@@ -20,6 +20,13 @@ const API_KEY = '07b72c930f0d226f7c6866cc753a678c';
 const fetchWeather = memoize(url => fetch(url).then(response => response.json()));
 
 /**
+ * @method filenameFor
+ * @param {String} name
+ * @return {String}
+ */
+const filenameFor = memoize(name => `/images/${name.replace(/ /ig, '-').toLowerCase()}.png`);
+
+/**
  * @class Weather
  * @author Adam Timberlake
  * @link https://github.com/Wildhoney/ReactShadow
@@ -30,16 +37,9 @@ export class Weather extends Component {
      * @constant defaultProps
      * @type {Object}
      */
-    static defaultProps = { countries: ['Amsterdam', 'Cairo', 'London', 'Moscow', 'Paris', 'Rio de Janeiro', 'Rome', 'Sydney'] };
-
-    /**
-     * @method constructor
-     * @return {Object}
-     */
-    constructor() {
-        super();
-        const countries = Weather.defaultProps.countries;
-    }
+    static defaultProps = {
+        countries: ['Amsterdam', 'Cairo', 'London', 'Moscow', 'Paris', 'Rio de Janeiro', 'Rome', 'Sydney']
+    };
 
     /**
      * @method componentWillMount
@@ -84,15 +84,12 @@ export class Weather extends Component {
         return (
             <ShadowDOM cssDocuments="css/country.css">
 
-                <div>
+                <div className="my-weather">
 
-                    <img src={`/images/${country.replace(/ /ig, '-').toLowerCase()}.png`} alt={country} />
+                    <img src={filenameFor(country)} alt={country} />
 
                     <h1>{title}</h1>
-
-                    <h2 className={weather ? 'loading' : ''}>
-                        {label}
-                    </h2>
+                    <h2>{label}</h2>
 
                     <ul>
 
@@ -100,12 +97,11 @@ export class Weather extends Component {
 
                         {this.props.countries.map(name => {
 
+                            const className = name === country ? 'active' : '';
+
                             return (
                                 <li key={name}>
-                                    <a
-                                       onClick={() => this.weatherFor(name)}
-                                       className={name === country ? 'active' : ''}
-                                       >
+                                    <a onClick={() => this.weatherFor(name)} className={className}>
                                         {name}
                                     </a>
                                 </li>

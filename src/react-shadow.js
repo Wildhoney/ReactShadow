@@ -33,7 +33,9 @@ export default class ShadowDOM extends Component {
      */
     static propTypes = {
         children: PropTypes.node.isRequired,
-        cssDocuments: PropTypes.oneOfType([PropTypes.string, PropTypes.array])
+        cssDocuments: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+        nodeName: PropTypes.string,
+        boundaryMode: PropTypes.oneOf(['open', 'closed']),
     };
 
     /**
@@ -41,7 +43,9 @@ export default class ShadowDOM extends Component {
      * @type {Object}
      */
     static defaultProps = {
-        cssDocuments: []
+        cssDocuments: [],
+        nodeName: 'span',
+        boundaryMode: 'open'
     };
 
     /**
@@ -61,7 +65,7 @@ export default class ShadowDOM extends Component {
         // Wrap children in a container if it's an array of children, otherwise
         // simply render the single child which is a valid `ReactElement` instance.
         const children = this.props.children.props.children;
-        return children.length ? <span>{children}</span> : children;
+        return children.length ? <this.props.nodeName>{children}</this.props.nodeName> : children;
 
     }
 
@@ -73,14 +77,14 @@ export default class ShadowDOM extends Component {
 
         // Create the shadow root and take the CSS documents from props.
         const node = findDOMNode(this);
-        const root = node.attachShadow ? node.attachShadow({ mode: 'open' }) : node.createShadowRoot();
+        const root = node.attachShadow ? node.attachShadow({ mode: this.props.boundaryMode }) : node.createShadowRoot();
         const cssDocuments = this.props.cssDocuments;
         const container = this.getContainer();
 
         // Render the passed in component to the shadow root, and then `setState` if there
         // are no CSS documents to be resolved.
         render(container, root);
-        cssDocuments.length === 0 && this.setState({ root });
+        !cssDocuments.length && this.setState({ root });
 
         if (cssDocuments.length) {
 
