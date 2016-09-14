@@ -1,6 +1,6 @@
 {
   "name": "react-shadow",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Utilise Shadow DOM in React with all the benefits of style encapsulation.",
   "main": "dist/react-shadow.js",
   "scripts": {
@@ -50,9 +50,7 @@
     "jsdom": "^9.5.0",
     "nlp_compromise": "^6.5.0",
     "ramda": "^0.22.1",
-    "react": "^15.3.1",
     "react-addons-test-utils": "^15.3.1",
-    "react-dom": "^15.3.1",
     "sinon": "^1.17.5",
     "webpack": "^2.1.0-beta.22",
     "xo": "^0.16.0"
@@ -110,5 +108,9 @@
         }
       ]
     }
+  },
+  "dependencies": {
+    "react": "^15.3.1",
+    "react-dom": "^15.3.1"
   }
 }
