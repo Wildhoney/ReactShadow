@@ -37,6 +37,14 @@ export default class ShadowDOM extends Component {
     };
 
     /**
+     * @constant defaultProps
+     * @type {Object}
+     */
+    static defaultProps = {
+        cssDocuments: []
+    };
+
+    /**
      * @constructor
      */
     constructor() {
@@ -66,13 +74,13 @@ export default class ShadowDOM extends Component {
         // Create the shadow root and take the CSS documents from props.
         const node = findDOMNode(this);
         const root = node.attachShadow ? node.attachShadow({ mode: 'open' }) : node.createShadowRoot();
-        const cssDocuments = this.props.cssDocuments || [];
+        const cssDocuments = this.props.cssDocuments;
         const container = this.getContainer();
 
         // Render the passed in component to the shadow root, and then `setState` if there
         // are no CSS documents to be resolved.
         render(container, root);
-        !cssDocuments && this.setState({ root });
+        cssDocuments.length === 0 && this.setState({ root });
 
         if (cssDocuments.length) {
 

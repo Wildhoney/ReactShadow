@@ -30,7 +30,7 @@ In the above example the `h1` element will become the host element with a shadow
 
 ### Avoiding FOIC
 
-As the CSS documents are being fetched over the network the host element will have a `className` of `resolving` for you to avoid the dreaded [FOIC](https://en.wikipedia.org/wiki/Flash_of_unstyled_content). Once **all** of the documents have been attached the `className` will change to `resolved`.
+As the CSS documents are being fetched over the network, the host element will have a `className` of `resolving` for you to avoid the dreaded [FOIC](https://en.wikipedia.org/wiki/Flash_of_unstyled_content). Once **all** of the documents have been attached the `className` will change to `resolved`.
 
 ### Cached Documents
 

@@ -105,7 +105,7 @@ export class Weather extends Component {
                                     <a
                                        onClick={() => this.weatherFor(name)}
                                        className={name === country ? 'active' : ''}
-                                        >
+                                       >
                                         {name}
                                     </a>
                                 </li>
