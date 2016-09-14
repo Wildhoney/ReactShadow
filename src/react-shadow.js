@@ -35,7 +35,7 @@ export default class ShadowDOM extends Component {
         children: PropTypes.node.isRequired,
         cssDocuments: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
         nodeName: PropTypes.string,
-        boundaryMode: PropTypes.oneOf(['open', 'closed']),
+        boundaryMode: PropTypes.oneOf(['open', 'closed'])
     };
 
     /**
