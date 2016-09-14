@@ -5,7 +5,7 @@
   "main": "dist/react-shadow.js",
   "scripts": {
     "start": "node example/server/default.js",
-    "build": "webpack -p && npm run example",
+    "build": "webpack && npm run example",
     "example": "webpack --config webpack.dev-config.js",
     "test": "npm run spec && npm run lint",
     "spec": "ava",
