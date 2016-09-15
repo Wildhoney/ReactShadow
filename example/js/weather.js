@@ -77,16 +77,17 @@ export default class extends Component {
 
         const title = weather ? `${description()} in ${country}` : `Weather in ${country}`;
         const label = weather ? `${weather.main.temp}${String.fromCharCode(8451)}` : String.fromCharCode(8212);
+        const fheit = weather ? `${weather.main.temp * 9 / 5 + 32}${String.fromCharCode(8457)}` : '';
 
         return (
             <ShadowDOM cssDocuments="css/country.css">
 
-                <div className="my-weather">
+                <div className="weather">
 
                     <img src={filenameFor(country)} alt={country} />
 
                     <h1>{title}</h1>
-                    <h2>{label}</h2>
+                    <h2 title={fheit}>{label}</h2>
 
                     <ul>
 
