@@ -19,7 +19,13 @@ const raise = message => {
  * @param {String} document
  * @return {Promise}
  */
-const fetchStylesheet = memoize(document => fetch(document).then(response => response.data));
+const fetchStylesheet = memoize(document => {
+
+    return new Promise(resolve => {
+        fetch(document).then(response => response.data).then(response => resolve(response)).catch(() => resolve(''));
+    });
+
+});
 
 /**
  * @class ShadowDOM
