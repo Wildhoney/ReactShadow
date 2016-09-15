@@ -4,7 +4,7 @@
   "description": "Utilise Shadow DOM in React with all the benefits of style encapsulation.",
   "main": "dist/react-shadow.js",
   "scripts": {
-    "start": "node example/server/default.js",
+    "start": "babel example/server/default.js | node",
     "build": "webpack && npm run example",
     "example": "webpack --config webpack.dev-config.js",
     "test": "npm run spec && npm run lint",

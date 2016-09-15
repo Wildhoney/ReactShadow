@@ -1,12 +1,8 @@
-(function($process) {
+import http from 'http';
+import express from 'express';
 
-    "use strict";
+const app = express();
+const server = http.createServer(app);
 
-    var express     = require('express'),
-        app         = express(),
-        server      = require('http').createServer(app);
-
-    app.use(express.static(__dirname + '/..'));
-    server.listen($process.env.PORT || 5000);
-
-})(process);
+app.use(express.static(__dirname + '/example'));
+server.listen(process.env.PORT || 5000);
