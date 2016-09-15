@@ -1063,8 +1063,15 @@ var raise = function raise(message) {
  * @return {Promise}
  */
 var fetchStylesheet = (0, _memoize2.default)(function (document) {
-    return (0, _axios.get)(document).then(function (response) {
-        return response.data;
+
+    return new Promise(function (resolve) {
+        (0, _axios.get)(document).then(function (response) {
+            return response.data;
+        }).then(function (response) {
+            return resolve(response);
+        }).catch(function () {
+            return resolve('');
+        });
     });
 });
 
