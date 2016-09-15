@@ -22,7 +22,7 @@ const raise = message => {
 const fetchStylesheet = memoize(document => {
 
     return new Promise(resolve => {
-        fetch(document).then(response => response.data).then(response => resolve(response)).catch(() => resolve(''));
+        fetch(document).then(response => response.data).then(resolve).catch(() => resolve(''));
     });
 
 });
