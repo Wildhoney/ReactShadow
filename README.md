@@ -1,11 +1,10 @@
 <p align="center">
     <img src="media/logo.png" alt="ReactShadow" width="300" />
     <br />
-    <ul>
+    <ul align="center">
         <li><strong>npm</strong>: <code>npm i react-shadow --save</code></li>
         <li><strong>Heroku</strong>: <a href="http://react-shadow.herokuapp.com/">http://react-shadow.herokuapp.com/</a></li>
     </ul>
-    <br />
     <img src="http://img.shields.io/travis/Wildhoney/ReactShadow.svg?style=flat" alt="travis" />
     &nbsp;
     <img src="http://img.shields.io/badge/license-mit-orange.svg?style=flat" alt="license" />
