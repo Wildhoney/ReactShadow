@@ -1,16 +1,18 @@
 <p align="center">
     <img src="media/logo.png" alt="ReactShadow" width="300" />
     <br />
-    <ul align="center" style="list-style-type: none">
-        <li><strong>npm</strong>: <code>npm i react-shadow --save</code></li>
-        <li><strong>Heroku</strong>: <a href="http://react-shadow.herokuapp.com/">http://react-shadow.herokuapp.com/</a></li>
+    <strong>npm</strong>: <code>npm i react-shadow --save</code>
+    <br />
+    <strong>Heroku</strong>: <a href="http://react-shadow.herokuapp.com/">http://react-shadow.herokuapp.com/</a>
     </ul>
-    <img src="http://img.shields.io/travis/Wildhoney/ReactShadow.svg?style=flat" alt="travis" />
-    &nbsp;
-    <img src="http://img.shields.io/badge/license-mit-orange.svg?style=flat" alt="license" />
-    &nbsp;
-    <img src="http://img.shields.io/badge/experimental-%E2%9C%93-blue.svg?style=flat" alt="experimental" />
-    <img src="media/screenshot.png" alt="screenshot" />
+    <p align="center">
+        <img src="http://img.shields.io/travis/Wildhoney/ReactShadow.svg?style=flat" alt="travis" />
+        &nbsp;
+        <img src="http://img.shields.io/badge/license-mit-orange.svg?style=flat" alt="license" />
+        &nbsp;
+        <img src="http://img.shields.io/badge/experimental-%E2%9C%93-blue.svg?style=flat" alt="experimental" />
+        <img src="media/screenshot.png" alt="screenshot" />
+    </p>
 </p>
 
 ---
