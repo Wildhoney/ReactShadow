@@ -1294,7 +1294,7 @@ var fetchInclude = (0, _memoize2.default)(function (document) {
  * @type {Object}
  */
 var includeMap = [{
-    extensions: ['js', 'jsx'], tag: 'script', attrs: {
+    extensions: ['js'], tag: 'script', attrs: {
         type: 'text/javascript'
     }
 }, {
@@ -1427,7 +1427,7 @@ var ShadowDOM = function (_Component) {
                 });
 
                 if (!nodeData) {
-                    return raise('Files with extension of "' + extension + '" are unsupported');
+                    raise('Files with extension of "' + extension + '" are unsupported');
                 }
 
                 var containerElement = document.createElement(nodeData.tag);

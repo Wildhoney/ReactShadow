@@ -34,7 +34,7 @@ const fetchInclude = memoize(document => {
  */
 const includeMap = [
     {
-        extensions: ['js', 'jsx'], tag: 'script', attrs: {
+        extensions: ['js'], tag: 'script', attrs: {
             type: 'text/javascript'
         }
     },
@@ -150,7 +150,7 @@ export default class ShadowDOM extends Component {
             const files = groupedFiles[extension].map(model => model.path);
 
             if (!nodeData) {
-                return raise(`Files with extension of "${extension}" are unsupported`);
+                raise(`Files with extension of "${extension}" are unsupported`);
             }
 
             const containerElement = document.createElement(nodeData.tag);
