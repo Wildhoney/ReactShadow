@@ -1,13 +1,13 @@
 <p align="center">
-  ![Screenshot](media/logo.png)
+    <img src="media/logo.png" alt="ReactShadow" />
 
-  ![Travis](http://img.shields.io/travis/Wildhoney/ReactShadow.svg?style=flat)
-  &nbsp;
-  ![License MIT](http://img.shields.io/badge/license-mit-orange.svg?style=flat)
-  &nbsp;
-  ![Experimental](http://img.shields.io/badge/experimental-%E2%9C%93-blue.svg?style=flat)
+    <img src="http://img.shields.io/travis/Wildhoney/ReactShadow.svg?style=flat" alt="travis" />
+    &nbsp;
+    <img src="http://img.shields.io/badge/license-mit-orange.svg?style=flat" alt="license" />
+    &nbsp;
+    <img src="http://img.shields.io/badge/experimental-%E2%9C%93-blue.svg?style=flat" alt="experimental" />
 
-  ![Screenshot](media/screenshot.png)
+    <img src="media/screenshot.png" alt="screenshot" />
 </p>
 
 * **npm**: `npm i react-shadow --save`
