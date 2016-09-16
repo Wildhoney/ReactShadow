@@ -3,6 +3,7 @@ import React, { Component, PropTypes, DOM, Children } from 'react';
 import { render, findDOMNode } from 'react-dom';
 import dissoc from 'ramda/src/dissoc';
 import memoize from 'ramda/src/memoize';
+import groupBy from 'ramda/src/groupBy';
 
 /**
  * @method raise
@@ -15,17 +16,34 @@ const raise = message => {
 };
 
 /**
- * @method fetchStylesheet
+ * @method fetchInclude
  * @param {String} document
  * @return {Promise}
  */
-const fetchStylesheet = memoize(document => {
+const fetchInclude = memoize(document => {
 
     return new Promise(resolve => {
         fetch(document).then(response => response.data).then(resolve).catch(() => resolve(''));
     });
 
 });
+
+/**
+ * @constant includeMap
+ * @type {Object}
+ */
+const includeMap = [
+    {
+        extensions: ['js'], tag: 'script', attrs: {
+            type: 'text/javascript'
+        }
+    },
+    {
+        extensions: ['css'], tag: 'style', attrs: {
+            type: 'text/css'
+        }
+    }
+];
 
 /**
  * @class ShadowDOM
@@ -39,7 +57,7 @@ export default class ShadowDOM extends Component {
      */
     static propTypes = {
         children: PropTypes.node.isRequired,
-        cssDocuments: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+        include: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
         nodeName: PropTypes.string,
         boundaryMode: PropTypes.oneOf(['open', 'closed'])
     };
@@ -49,7 +67,7 @@ export default class ShadowDOM extends Component {
      * @type {Object}
      */
     static defaultProps = {
-        cssDocuments: [],
+        include: [],
         nodeName: 'span',
         boundaryMode: 'open'
     };
@@ -84,20 +102,20 @@ export default class ShadowDOM extends Component {
         // Create the shadow root and take the CSS documents from props.
         const node = findDOMNode(this);
         const root = node.attachShadow ? node.attachShadow({ mode: this.props.boundaryMode }) : node.createShadowRoot();
-        const cssDocuments = this.props.cssDocuments;
+        const include = Array.isArray(this.props.include) ? this.props.include : [this.props.include];
         const container = this.getContainer();
 
         // Render the passed in component to the shadow root, and then `setState` if there
         // are no CSS documents to be resolved.
         render(container, root);
-        !cssDocuments.length && this.setState({ root });
+        !include.length && this.setState({ root });
 
-        if (cssDocuments.length) {
+        if (include.length) {
 
             // Otherwise we'll fetch and attach the passed in stylesheets which need to be
             // resolved before `state.resolved` becomes `true` again.
             this.setState({ resolving: true, root });
-            this.attachStylesheets(this.props.cssDocuments);
+            this.attachIncludes(include);
 
         }
 
@@ -117,35 +135,38 @@ export default class ShadowDOM extends Component {
     }
 
     /**
-     * @method attachStylesheets
-     * @param cssDocuments {Array|String}
+     * @method attachIncludes
+     * @param include {Array|String}
      * @return {void}
      */
-    attachStylesheets(cssDocuments) {
+    attachIncludes(include) {
 
-        const styleElement = document.createElement('style');
-        styleElement.setAttribute('type', 'text/css');
-        const documents = Array.isArray(cssDocuments) ? cssDocuments : [cssDocuments];
+        // Group all of the includes by their extension.
+        const groupedFiles = groupBy(file => file.extension)(include.map(path => ({ path, extension: path.split('.').pop() })));
 
-        /**
-         * @method insertStyleElement
-         * @param {Array} cssDocuments
-         * @return {void}
-         */
-        const insertStyleElement = cssDocuments => {
+        const includeFiles = Object.keys(groupedFiles).map(extension => {
 
-            styleElement.innerHTML = cssDocuments.reduce((accumulator, document) => {
-                return `${accumulator} ${document}`;
+            const nodeData = includeMap.find(model => model.extensions.includes(extension));
+            const files = groupedFiles[extension].map(model => model.path);
+
+            if (!nodeData) {
+                raise(`Files with extension of "${extension}" are unsupported`);
+            }
+
+            const containerElement = document.createElement(nodeData.tag);
+
+            // Apply all of the attributes defined in the `includeMap` to the node.
+            Object.keys(nodeData.attrs).map(key => containerElement.setAttribute(key, nodeData.attrs[key]));
+
+            // Load each file individually and then concatenate them.
+            return Promise.all(files.map(fetchInclude)).then(fileData => {
+                containerElement.innerHTML = fileData.reduce((acc, fileDatum) => `${acc} ${fileDatum}`).trim();
+                containerElement.innerHTML.length && this.state.root.appendChild(containerElement);
             });
 
-            this.state.root.appendChild(styleElement);
-
-        };
-
-        Promise.all(documents.map(fetchStylesheet)).then(cssDocuments => {
-            insertStyleElement(cssDocuments);
-            this.setState({ resolving: false });
         });
+
+        Promise.all(includeFiles).then(() => this.setState({ resolving: false }));
 
     }
 

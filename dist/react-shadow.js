@@ -62,7 +62,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "";
 
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 64);
+/******/ 	return __webpack_require__(__webpack_require__.s = 69);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -74,7 +74,7 @@ module.exports =
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
-var bind = __webpack_require__(7);
+var bind = __webpack_require__(10);
 
 /*global toString:true*/
 
@@ -376,7 +376,7 @@ module.exports = {
 'use strict';
 
 var _curry1 = __webpack_require__(2);
-var _isPlaceholder = __webpack_require__(11);
+var _isPlaceholder = __webpack_require__(6);
 
 /**
  * Optimized internal two-arity curry function.
@@ -412,7 +412,7 @@ module.exports = function _curry2(fn) {
 "use strict";
 'use strict';
 
-var _isPlaceholder = __webpack_require__(11);
+var _isPlaceholder = __webpack_require__(6);
 
 /**
  * Optimized internal one-arity curry function.
@@ -445,6 +445,101 @@ module.exports = function _has(prop, obj) {
 
 /***/ },
 /* 4 */
+/***/ function(module, exports) {
+
+"use strict";
+'use strict';
+
+module.exports = function _arity(n, fn) {
+  /* eslint-disable no-unused-vars */
+  switch (n) {
+    case 0:
+      return function () {
+        return fn.apply(this, arguments);
+      };
+    case 1:
+      return function (a0) {
+        return fn.apply(this, arguments);
+      };
+    case 2:
+      return function (a0, a1) {
+        return fn.apply(this, arguments);
+      };
+    case 3:
+      return function (a0, a1, a2) {
+        return fn.apply(this, arguments);
+      };
+    case 4:
+      return function (a0, a1, a2, a3) {
+        return fn.apply(this, arguments);
+      };
+    case 5:
+      return function (a0, a1, a2, a3, a4) {
+        return fn.apply(this, arguments);
+      };
+    case 6:
+      return function (a0, a1, a2, a3, a4, a5) {
+        return fn.apply(this, arguments);
+      };
+    case 7:
+      return function (a0, a1, a2, a3, a4, a5, a6) {
+        return fn.apply(this, arguments);
+      };
+    case 8:
+      return function (a0, a1, a2, a3, a4, a5, a6, a7) {
+        return fn.apply(this, arguments);
+      };
+    case 9:
+      return function (a0, a1, a2, a3, a4, a5, a6, a7, a8) {
+        return fn.apply(this, arguments);
+      };
+    case 10:
+      return function (a0, a1, a2, a3, a4, a5, a6, a7, a8, a9) {
+        return fn.apply(this, arguments);
+      };
+    default:
+      throw new Error('First argument to _arity must be a non-negative integer no greater than ten');
+  }
+};
+
+/***/ },
+/* 5 */
+/***/ function(module, exports) {
+
+"use strict";
+'use strict';
+
+/**
+ * Tests whether or not an object is an array.
+ *
+ * @private
+ * @param {*} val The object to test.
+ * @return {Boolean} `true` if `val` is an array, `false` otherwise.
+ * @example
+ *
+ *      _isArray([]); //=> true
+ *      _isArray(null); //=> false
+ *      _isArray({}); //=> false
+ */
+module.exports = Array.isArray || function _isArray(val) {
+  return val != null && val.length >= 0 && Object.prototype.toString.call(val) === '[object Array]';
+};
+
+/***/ },
+/* 6 */
+/***/ function(module, exports) {
+
+"use strict";
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+module.exports = function _isPlaceholder(a) {
+       return a != null && (typeof a === 'undefined' ? 'undefined' : _typeof(a)) === 'object' && a['@@functional/placeholder'] === true;
+};
+
+/***/ },
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -452,7 +547,7 @@ module.exports = function _has(prop, obj) {
 
 var _curry1 = __webpack_require__(2);
 var _has = __webpack_require__(3);
-var _isArguments = __webpack_require__(44);
+var _isArguments = __webpack_require__(50);
 
 /**
  * Returns a list containing the names of all the enumerable own properties of
@@ -522,19 +617,19 @@ module.exports = function () {
 }();
 
 /***/ },
-/* 5 */
+/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
 var utils = __webpack_require__(0);
-var settle = __webpack_require__(19);
-var buildURL = __webpack_require__(23);
-var parseHeaders = __webpack_require__(29);
-var isURLSameOrigin = __webpack_require__(27);
-var createError = __webpack_require__(6);
-var btoa = typeof window !== 'undefined' && window.btoa || __webpack_require__(22);
+var settle = __webpack_require__(24);
+var buildURL = __webpack_require__(28);
+var parseHeaders = __webpack_require__(34);
+var isURLSameOrigin = __webpack_require__(32);
+var createError = __webpack_require__(9);
+var btoa = typeof window !== 'undefined' && window.btoa || __webpack_require__(27);
 
 module.exports = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -625,7 +720,7 @@ module.exports = function xhrAdapter(config) {
     // This is only done if running in a standard browser environment.
     // Specifically not if we're in a web worker, or react-native.
     if (utils.isStandardBrowserEnv()) {
-      var cookies = __webpack_require__(25);
+      var cookies = __webpack_require__(30);
 
       // Add xsrf header
       var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ? cookies.read(config.xsrfCookieName) : undefined;
@@ -682,16 +777,16 @@ module.exports = function xhrAdapter(config) {
     request.send(requestData);
   });
 };
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(11)))
 
 /***/ },
-/* 6 */
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 'use strict';
 
-var enhanceError = __webpack_require__(18);
+var enhanceError = __webpack_require__(23);
 
 /**
  * Create an Error with the specified message, config, error code, and response.
@@ -708,7 +803,7 @@ module.exports = function createError(message, config, code, response) {
 };
 
 /***/ },
-/* 7 */
+/* 10 */
 /***/ function(module, exports) {
 
 "use strict";
@@ -725,7 +820,7 @@ module.exports = function bind(fn, thisArg) {
 };
 
 /***/ },
-/* 8 */
+/* 11 */
 /***/ function(module, exports) {
 
 "use strict";
@@ -912,102 +1007,219 @@ process.umask = function () {
 };
 
 /***/ },
-/* 9 */
-/***/ function(module, exports) {
+/* 12 */
+/***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 'use strict';
 
-module.exports = function _arity(n, fn) {
-  /* eslint-disable no-unused-vars */
-  switch (n) {
-    case 0:
-      return function () {
-        return fn.apply(this, arguments);
-      };
+var _arity = __webpack_require__(4);
+var _isPlaceholder = __webpack_require__(6);
+
+/**
+ * Internal curryN function.
+ *
+ * @private
+ * @category Function
+ * @param {Number} length The arity of the curried function.
+ * @param {Array} received An array of arguments received thus far.
+ * @param {Function} fn The function to curry.
+ * @return {Function} The curried function.
+ */
+module.exports = function _curryN(length, received, fn) {
+  return function () {
+    var combined = [];
+    var argsIdx = 0;
+    var left = length;
+    var combinedIdx = 0;
+    while (combinedIdx < received.length || argsIdx < arguments.length) {
+      var result;
+      if (combinedIdx < received.length && (!_isPlaceholder(received[combinedIdx]) || argsIdx >= arguments.length)) {
+        result = received[combinedIdx];
+      } else {
+        result = arguments[argsIdx];
+        argsIdx += 1;
+      }
+      combined[combinedIdx] = result;
+      if (!_isPlaceholder(result)) {
+        left -= 1;
+      }
+      combinedIdx += 1;
+    }
+    return left <= 0 ? fn.apply(this, combined) : _arity(left, _curryN(length, combined, fn));
+  };
+};
+
+/***/ },
+/* 13 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+'use strict';
+
+var _isArray = __webpack_require__(5);
+var _isTransformer = __webpack_require__(53);
+var _slice = __webpack_require__(15);
+
+/**
+ * Returns a function that dispatches with different strategies based on the
+ * object in list position (last argument). If it is an array, executes [fn].
+ * Otherwise, if it has a function with [methodname], it will execute that
+ * function (functor case). Otherwise, if it is a transformer, uses transducer
+ * [xf] to return a new transformer (transducer case). Otherwise, it will
+ * default to executing [fn].
+ *
+ * @private
+ * @param {String} methodname property to check for a custom implementation
+ * @param {Function} xf transducer to initialize if object is transformer
+ * @param {Function} fn default ramda implementation
+ * @return {Function} A function that dispatches on object in list position
+ */
+module.exports = function _dispatchable(methodname, xf, fn) {
+  return function () {
+    var length = arguments.length;
+    if (length === 0) {
+      return fn();
+    }
+    var obj = arguments[length - 1];
+    if (!_isArray(obj)) {
+      var args = _slice(arguments, 0, length - 1);
+      if (typeof obj[methodname] === 'function') {
+        return obj[methodname].apply(obj, args);
+      }
+      if (_isTransformer(obj)) {
+        var transducer = xf.apply(null, args);
+        return transducer(obj);
+      }
+    }
+    return fn.apply(this, arguments);
+  };
+};
+
+/***/ },
+/* 14 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+'use strict';
+
+var _xwrap = __webpack_require__(60);
+var bind = __webpack_require__(36);
+var isArrayLike = __webpack_require__(61);
+
+module.exports = function () {
+  function _arrayReduce(xf, acc, list) {
+    var idx = 0;
+    var len = list.length;
+    while (idx < len) {
+      acc = xf['@@transducer/step'](acc, list[idx]);
+      if (acc && acc['@@transducer/reduced']) {
+        acc = acc['@@transducer/value'];
+        break;
+      }
+      idx += 1;
+    }
+    return xf['@@transducer/result'](acc);
+  }
+
+  function _iterableReduce(xf, acc, iter) {
+    var step = iter.next();
+    while (!step.done) {
+      acc = xf['@@transducer/step'](acc, step.value);
+      if (acc && acc['@@transducer/reduced']) {
+        acc = acc['@@transducer/value'];
+        break;
+      }
+      step = iter.next();
+    }
+    return xf['@@transducer/result'](acc);
+  }
+
+  function _methodReduce(xf, acc, obj) {
+    return xf['@@transducer/result'](obj.reduce(bind(xf['@@transducer/step'], xf), acc));
+  }
+
+  var symIterator = typeof Symbol !== 'undefined' ? Symbol.iterator : '@@iterator';
+  return function _reduce(fn, acc, list) {
+    if (typeof fn === 'function') {
+      fn = _xwrap(fn);
+    }
+    if (isArrayLike(list)) {
+      return _arrayReduce(fn, acc, list);
+    }
+    if (typeof list.reduce === 'function') {
+      return _methodReduce(fn, acc, list);
+    }
+    if (list[symIterator] != null) {
+      return _iterableReduce(fn, acc, list[symIterator]());
+    }
+    if (typeof list.next === 'function') {
+      return _iterableReduce(fn, acc, list);
+    }
+    throw new TypeError('reduce: list must be array or iterable');
+  };
+}();
+
+/***/ },
+/* 15 */
+/***/ function(module, exports) {
+
+"use strict";
+"use strict";
+
+/**
+ * An optimized, private array `slice` implementation.
+ *
+ * @private
+ * @param {Arguments|Array} args The array or arguments object to consider.
+ * @param {Number} [from=0] The array index to slice from, inclusive.
+ * @param {Number} [to=args.length] The array index to slice to, exclusive.
+ * @return {Array} A new, sliced array.
+ * @example
+ *
+ *      _slice([1, 2, 3, 4, 5], 1, 3); //=> [2, 3]
+ *
+ *      var firstThreeArgs = function(a, b, c, d) {
+ *        return _slice(arguments, 0, 3);
+ *      };
+ *      firstThreeArgs(1, 2, 3, 4); //=> [1, 2, 3]
+ */
+module.exports = function _slice(args, from, to) {
+  switch (arguments.length) {
     case 1:
-      return function (a0) {
-        return fn.apply(this, arguments);
-      };
+      return _slice(args, 0, args.length);
     case 2:
-      return function (a0, a1) {
-        return fn.apply(this, arguments);
-      };
-    case 3:
-      return function (a0, a1, a2) {
-        return fn.apply(this, arguments);
-      };
-    case 4:
-      return function (a0, a1, a2, a3) {
-        return fn.apply(this, arguments);
-      };
-    case 5:
-      return function (a0, a1, a2, a3, a4) {
-        return fn.apply(this, arguments);
-      };
-    case 6:
-      return function (a0, a1, a2, a3, a4, a5) {
-        return fn.apply(this, arguments);
-      };
-    case 7:
-      return function (a0, a1, a2, a3, a4, a5, a6) {
-        return fn.apply(this, arguments);
-      };
-    case 8:
-      return function (a0, a1, a2, a3, a4, a5, a6, a7) {
-        return fn.apply(this, arguments);
-      };
-    case 9:
-      return function (a0, a1, a2, a3, a4, a5, a6, a7, a8) {
-        return fn.apply(this, arguments);
-      };
-    case 10:
-      return function (a0, a1, a2, a3, a4, a5, a6, a7, a8, a9) {
-        return fn.apply(this, arguments);
-      };
+      return _slice(args, from, args.length);
     default:
-      throw new Error('First argument to _arity must be a non-negative integer no greater than ten');
+      var list = [];
+      var idx = 0;
+      var len = Math.max(0, Math.min(args.length, to) - from);
+      while (idx < len) {
+        list[idx] = args[from + idx];
+        idx += 1;
+      }
+      return list;
   }
 };
 
 /***/ },
-/* 10 */
+/* 16 */
 /***/ function(module, exports) {
 
 "use strict";
 'use strict';
 
-/**
- * Tests whether or not an object is an array.
- *
- * @private
- * @param {*} val The object to test.
- * @return {Boolean} `true` if `val` is an array, `false` otherwise.
- * @example
- *
- *      _isArray([]); //=> true
- *      _isArray(null); //=> false
- *      _isArray({}); //=> false
- */
-module.exports = Array.isArray || function _isArray(val) {
-  return val != null && val.length >= 0 && Object.prototype.toString.call(val) === '[object Array]';
+module.exports = {
+  init: function init() {
+    return this.xf['@@transducer/init']();
+  },
+  result: function result(_result) {
+    return this.xf['@@transducer/result'](_result);
+  }
 };
 
 /***/ },
-/* 11 */
-/***/ function(module, exports) {
-
-"use strict";
-'use strict';
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
-
-module.exports = function _isPlaceholder(a) {
-       return a != null && (typeof a === 'undefined' ? 'undefined' : _typeof(a)) === 'object' && a['@@functional/placeholder'] === true;
-};
-
-/***/ },
-/* 12 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1021,21 +1233,25 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _axios = __webpack_require__(13);
+var _axios = __webpack_require__(18);
 
-var _react = __webpack_require__(62);
+var _react = __webpack_require__(67);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(63);
+var _reactDom = __webpack_require__(68);
 
-var _dissoc = __webpack_require__(32);
+var _dissoc = __webpack_require__(37);
 
 var _dissoc2 = _interopRequireDefault(_dissoc);
 
-var _memoize = __webpack_require__(58);
+var _memoize = __webpack_require__(62);
 
 var _memoize2 = _interopRequireDefault(_memoize);
+
+var _groupBy = __webpack_require__(40);
+
+var _groupBy2 = _interopRequireDefault(_groupBy);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1058,22 +1274,34 @@ var raise = function raise(message) {
 };
 
 /**
- * @method fetchStylesheet
+ * @method fetchInclude
  * @param {String} document
  * @return {Promise}
  */
-var fetchStylesheet = (0, _memoize2.default)(function (document) {
+var fetchInclude = (0, _memoize2.default)(function (document) {
 
     return new Promise(function (resolve) {
         (0, _axios.get)(document).then(function (response) {
             return response.data;
-        }).then(function (response) {
-            return resolve(response);
-        }).catch(function () {
+        }).then(resolve).catch(function () {
             return resolve('');
         });
     });
 });
+
+/**
+ * @constant includeMap
+ * @type {Object}
+ */
+var includeMap = [{
+    extensions: ['js'], tag: 'script', attrs: {
+        type: 'text/javascript'
+    }
+}, {
+    extensions: ['css'], tag: 'style', attrs: {
+        type: 'text/css'
+    }
+}];
 
 /**
  * @class ShadowDOM
@@ -1139,20 +1367,20 @@ var ShadowDOM = function (_Component) {
             // Create the shadow root and take the CSS documents from props.
             var node = (0, _reactDom.findDOMNode)(this);
             var root = node.attachShadow ? node.attachShadow({ mode: this.props.boundaryMode }) : node.createShadowRoot();
-            var cssDocuments = this.props.cssDocuments;
+            var include = Array.isArray(this.props.include) ? this.props.include : [this.props.include];
             var container = this.getContainer();
 
             // Render the passed in component to the shadow root, and then `setState` if there
             // are no CSS documents to be resolved.
             (0, _reactDom.render)(container, root);
-            !cssDocuments.length && this.setState({ root: root });
+            !include.length && this.setState({ root: root });
 
-            if (cssDocuments.length) {
+            if (include.length) {
 
                 // Otherwise we'll fetch and attach the passed in stylesheets which need to be
                 // resolved before `state.resolved` becomes `true` again.
                 this.setState({ resolving: true, root: root });
-                this.attachStylesheets(this.props.cssDocuments);
+                this.attachIncludes(include);
             }
         }
 
@@ -1172,37 +1400,54 @@ var ShadowDOM = function (_Component) {
         }
 
         /**
-         * @method attachStylesheets
-         * @param cssDocuments {Array|String}
+         * @method attachIncludes
+         * @param include {Array|String}
          * @return {void}
          */
 
     }, {
-        key: 'attachStylesheets',
-        value: function attachStylesheets(cssDocuments) {
+        key: 'attachIncludes',
+        value: function attachIncludes(include) {
             var _this2 = this;
 
-            var styleElement = document.createElement('style');
-            styleElement.setAttribute('type', 'text/css');
-            var documents = Array.isArray(cssDocuments) ? cssDocuments : [cssDocuments];
+            // Group all of the includes by their extension.
+            var groupedFiles = (0, _groupBy2.default)(function (file) {
+                return file.extension;
+            })(include.map(function (path) {
+                return { path: path, extension: path.split('.').pop() };
+            }));
 
-            /**
-             * @method insertStyleElement
-             * @param {Array} cssDocuments
-             * @return {void}
-             */
-            var insertStyleElement = function insertStyleElement(cssDocuments) {
+            var includeFiles = Object.keys(groupedFiles).map(function (extension) {
 
-                styleElement.innerHTML = cssDocuments.reduce(function (accumulator, document) {
-                    return accumulator + ' ' + document;
+                var nodeData = includeMap.find(function (model) {
+                    return model.extensions.includes(extension);
+                });
+                var files = groupedFiles[extension].map(function (model) {
+                    return model.path;
                 });
 
-                _this2.state.root.appendChild(styleElement);
-            };
+                if (!nodeData) {
+                    raise('Files with extension of "' + extension + '" are unsupported');
+                }
 
-            Promise.all(documents.map(fetchStylesheet)).then(function (cssDocuments) {
-                insertStyleElement(cssDocuments);
-                _this2.setState({ resolving: false });
+                var containerElement = document.createElement(nodeData.tag);
+
+                // Apply all of the attributes defined in the `includeMap` to the node.
+                Object.keys(nodeData.attrs).map(function (key) {
+                    return containerElement.setAttribute(key, nodeData.attrs[key]);
+                });
+
+                // Load each file individually and then concatenate them.
+                return Promise.all(files.map(fetchInclude)).then(function (fileData) {
+                    containerElement.innerHTML = fileData.reduce(function (acc, fileDatum) {
+                        return acc + ' ' + fileDatum;
+                    }).trim();
+                    containerElement.innerHTML.length && _this2.state.root.appendChild(containerElement);
+                });
+            });
+
+            Promise.all(includeFiles).then(function () {
+                return _this2.setState({ resolving: false });
             });
         }
 
@@ -1258,36 +1503,36 @@ var ShadowDOM = function (_Component) {
 
 ShadowDOM.propTypes = {
     children: _react.PropTypes.node.isRequired,
-    cssDocuments: _react.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.array]),
+    include: _react.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.array]),
     nodeName: _react.PropTypes.string,
     boundaryMode: _react.PropTypes.oneOf(['open', 'closed'])
 };
 ShadowDOM.defaultProps = {
-    cssDocuments: [],
+    include: [],
     nodeName: 'span',
     boundaryMode: 'open'
 };
 exports.default = ShadowDOM;
 
 /***/ },
-/* 13 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 'use strict';
 
-module.exports = __webpack_require__(14);
+module.exports = __webpack_require__(19);
 
 /***/ },
-/* 14 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 'use strict';
 
 var utils = __webpack_require__(0);
-var bind = __webpack_require__(7);
-var Axios = __webpack_require__(15);
+var bind = __webpack_require__(10);
+var Axios = __webpack_require__(20);
 
 /**
  * Create an instance of Axios
@@ -1323,7 +1568,7 @@ axios.create = function create(defaultConfig) {
 axios.all = function all(promises) {
   return Promise.all(promises);
 };
-axios.spread = __webpack_require__(30);
+axios.spread = __webpack_require__(35);
 
 module.exports = axios;
 
@@ -1331,18 +1576,18 @@ module.exports = axios;
 module.exports.default = axios;
 
 /***/ },
-/* 15 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 'use strict';
 
-var defaults = __webpack_require__(21);
+var defaults = __webpack_require__(26);
 var utils = __webpack_require__(0);
-var InterceptorManager = __webpack_require__(16);
-var dispatchRequest = __webpack_require__(17);
-var isAbsoluteURL = __webpack_require__(26);
-var combineURLs = __webpack_require__(24);
+var InterceptorManager = __webpack_require__(21);
+var dispatchRequest = __webpack_require__(22);
+var isAbsoluteURL = __webpack_require__(31);
+var combineURLs = __webpack_require__(29);
 
 /**
  * Create a new instance of Axios
@@ -1422,7 +1667,7 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 module.exports = Axios;
 
 /***/ },
-/* 16 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1480,14 +1725,14 @@ InterceptorManager.prototype.forEach = function forEach(fn) {
 module.exports = InterceptorManager;
 
 /***/ },
-/* 17 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
 var utils = __webpack_require__(0);
-var transformData = __webpack_require__(20);
+var transformData = __webpack_require__(25);
 
 /**
  * Dispatch a request to the server using whichever adapter
@@ -1517,10 +1762,10 @@ module.exports = function dispatchRequest(config) {
     adapter = config.adapter;
   } else if (typeof XMLHttpRequest !== 'undefined') {
     // For browsers use XHR adapter
-    adapter = __webpack_require__(5);
+    adapter = __webpack_require__(8);
   } else if (typeof process !== 'undefined') {
     // For node use HTTP adapter
-    adapter = __webpack_require__(5);
+    adapter = __webpack_require__(8);
   }
 
   return Promise.resolve(config)
@@ -1539,10 +1784,10 @@ module.exports = function dispatchRequest(config) {
     return Promise.reject(error);
   });
 };
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(11)))
 
 /***/ },
-/* 18 */
+/* 23 */
 /***/ function(module, exports) {
 
 "use strict";
@@ -1568,13 +1813,13 @@ module.exports = function enhanceError(error, config, code, response) {
 };
 
 /***/ },
-/* 19 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 'use strict';
 
-var createError = __webpack_require__(6);
+var createError = __webpack_require__(9);
 
 /**
  * Resolve or reject a Promise based on response status.
@@ -1594,7 +1839,7 @@ module.exports = function settle(resolve, reject, response) {
 };
 
 /***/ },
-/* 20 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1620,14 +1865,14 @@ module.exports = function transformData(data, headers, fns) {
 };
 
 /***/ },
-/* 21 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 'use strict';
 
 var utils = __webpack_require__(0);
-var normalizeHeaderName = __webpack_require__(28);
+var normalizeHeaderName = __webpack_require__(33);
 
 var PROTECTION_PREFIX = /^\)\]\}',?\n/;
 var DEFAULT_CONTENT_TYPE = {
@@ -1693,7 +1938,7 @@ module.exports = {
 };
 
 /***/ },
-/* 22 */
+/* 27 */
 /***/ function(module, exports) {
 
 "use strict";
@@ -1734,7 +1979,7 @@ function btoa(input) {
 module.exports = btoa;
 
 /***/ },
-/* 23 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1801,7 +2046,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 };
 
 /***/ },
-/* 24 */
+/* 29 */
 /***/ function(module, exports) {
 
 "use strict";
@@ -1820,7 +2065,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 };
 
 /***/ },
-/* 25 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1879,7 +2124,7 @@ function nonStandardBrowserEnv() {
 }();
 
 /***/ },
-/* 26 */
+/* 31 */
 /***/ function(module, exports) {
 
 "use strict";
@@ -1901,7 +2146,7 @@ module.exports = function isAbsoluteURL(url) {
 };
 
 /***/ },
-/* 27 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1970,7 +2215,7 @@ function nonStandardBrowserEnv() {
 }();
 
 /***/ },
-/* 28 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1988,7 +2233,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 };
 
 /***/ },
-/* 29 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2033,7 +2278,7 @@ module.exports = function parseHeaders(headers) {
 };
 
 /***/ },
-/* 30 */
+/* 35 */
 /***/ function(module, exports) {
 
 "use strict";
@@ -2067,13 +2312,13 @@ module.exports = function spread(callback) {
 };
 
 /***/ },
-/* 31 */
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 'use strict';
 
-var _arity = __webpack_require__(9);
+var _arity = __webpack_require__(4);
 var _curry2 = __webpack_require__(1);
 
 /**
@@ -2104,7 +2349,7 @@ module.exports = _curry2(function bind(fn, thisObj) {
 });
 
 /***/ },
-/* 32 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2139,14 +2384,14 @@ module.exports = _curry2(function dissoc(prop, obj) {
 });
 
 /***/ },
-/* 33 */
+/* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 'use strict';
 
 var _curry2 = __webpack_require__(1);
-var _equals = __webpack_require__(40);
+var _equals = __webpack_require__(46);
 
 /**
  * Returns `true` if its arguments are equivalent, `false` otherwise. Handles
@@ -2178,19 +2423,19 @@ module.exports = _curry2(function equals(a, b) {
 });
 
 /***/ },
-/* 34 */
+/* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 'use strict';
 
 var _curry2 = __webpack_require__(1);
-var _dispatchable = __webpack_require__(39);
-var _filter = __webpack_require__(41);
-var _isObject = __webpack_require__(45);
-var _reduce = __webpack_require__(50);
-var _xfilter = __webpack_require__(55);
-var keys = __webpack_require__(4);
+var _dispatchable = __webpack_require__(13);
+var _filter = __webpack_require__(47);
+var _isObject = __webpack_require__(51);
+var _reduce = __webpack_require__(14);
+var _xfilter = __webpack_require__(58);
+var keys = __webpack_require__(7);
 
 /**
  * Takes a predicate and a "filterable", and returns a new filterable of the
@@ -2230,7 +2475,66 @@ module.exports = _curry2(_dispatchable('filter', _xfilter, function (pred, filte
 }));
 
 /***/ },
-/* 35 */
+/* 40 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+'use strict';
+
+var _checkForMethod = __webpack_require__(43);
+var _curry2 = __webpack_require__(1);
+var reduceBy = __webpack_require__(63);
+
+/**
+ * Splits a list into sub-lists stored in an object, based on the result of
+ * calling a String-returning function on each element, and grouping the
+ * results according to values returned.
+ *
+ * Dispatches to the `groupBy` method of the second argument, if present.
+ *
+ * Acts as a transducer if a transformer is given in list position.
+ *
+ * @func
+ * @memberOf R
+ * @since v0.1.0
+ * @category List
+ * @sig (a -> String) -> [a] -> {String: [a]}
+ * @param {Function} fn Function :: a -> String
+ * @param {Array} list The array to group
+ * @return {Object} An object with the output of `fn` for keys, mapped to arrays of elements
+ *         that produced that key when passed to `fn`.
+ * @see R.transduce
+ * @example
+ *
+ *      var byGrade = R.groupBy(function(student) {
+ *        var score = student.score;
+ *        return score < 65 ? 'F' :
+ *               score < 70 ? 'D' :
+ *               score < 80 ? 'C' :
+ *               score < 90 ? 'B' : 'A';
+ *      });
+ *      var students = [{name: 'Abby', score: 84},
+ *                      {name: 'Eddy', score: 58},
+ *                      // ...
+ *                      {name: 'Jack', score: 69}];
+ *      byGrade(students);
+ *      // {
+ *      //   'A': [{name: 'Dianne', score: 99}],
+ *      //   'B': [{name: 'Abby', score: 84}]
+ *      //   // ...,
+ *      //   'F': [{name: 'Eddy', score: 58}]
+ *      // }
+ */
+module.exports = _curry2(_checkForMethod('groupBy', reduceBy(function (acc, item) {
+  if (acc == null) {
+    acc = [];
+  }
+  acc.push(item);
+  return acc;
+}, null)));
+
+/***/ },
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2274,7 +2578,7 @@ module.exports = _curry2(function identical(a, b) {
 });
 
 /***/ },
-/* 36 */
+/* 42 */
 /***/ function(module, exports) {
 
 "use strict";
@@ -2290,7 +2594,38 @@ module.exports = function _arrayFromIterator(iter) {
 };
 
 /***/ },
-/* 37 */
+/* 43 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+'use strict';
+
+var _isArray = __webpack_require__(5);
+var _slice = __webpack_require__(15);
+
+/**
+ * Similar to hasMethod, this checks whether a function has a [methodname]
+ * function. If it isn't an array it will execute that function otherwise it
+ * will default to the ramda implementation.
+ *
+ * @private
+ * @param {Function} fn ramda implemtation
+ * @param {String} methodname property to check for a custom implementation
+ * @return {Object} Whatever the return value of the method is.
+ */
+module.exports = function _checkForMethod(methodname, fn) {
+  return function () {
+    var length = arguments.length;
+    if (length === 0) {
+      return fn();
+    }
+    var obj = arguments[length - 1];
+    return _isArray(obj) || typeof obj[methodname] !== 'function' ? fn.apply(this, arguments) : obj[methodname].apply(obj, _slice(arguments, 0, length - 1));
+  };
+};
+
+/***/ },
+/* 44 */
 /***/ function(module, exports) {
 
 "use strict";
@@ -2303,66 +2638,20 @@ module.exports = function _complement(f) {
 };
 
 /***/ },
-/* 38 */
+/* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 'use strict';
 
-var _indexOf = __webpack_require__(43);
+var _indexOf = __webpack_require__(49);
 
 module.exports = function _contains(a, list) {
   return _indexOf(list, a, 0) >= 0;
 };
 
 /***/ },
-/* 39 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-'use strict';
-
-var _isArray = __webpack_require__(10);
-var _isTransformer = __webpack_require__(47);
-var _slice = __webpack_require__(51);
-
-/**
- * Returns a function that dispatches with different strategies based on the
- * object in list position (last argument). If it is an array, executes [fn].
- * Otherwise, if it has a function with [methodname], it will execute that
- * function (functor case). Otherwise, if it is a transformer, uses transducer
- * [xf] to return a new transformer (transducer case). Otherwise, it will
- * default to executing [fn].
- *
- * @private
- * @param {String} methodname property to check for a custom implementation
- * @param {Function} xf transducer to initialize if object is transformer
- * @param {Function} fn default ramda implementation
- * @return {Function} A function that dispatches on object in list position
- */
-module.exports = function _dispatchable(methodname, xf, fn) {
-  return function () {
-    var length = arguments.length;
-    if (length === 0) {
-      return fn();
-    }
-    var obj = arguments[length - 1];
-    if (!_isArray(obj)) {
-      var args = _slice(arguments, 0, length - 1);
-      if (typeof obj[methodname] === 'function') {
-        return obj[methodname].apply(obj, args);
-      }
-      if (_isTransformer(obj)) {
-        var transducer = xf.apply(null, args);
-        return transducer(obj);
-      }
-    }
-    return fn.apply(this, arguments);
-  };
-};
-
-/***/ },
-/* 40 */
+/* 46 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2370,12 +2659,12 @@ module.exports = function _dispatchable(methodname, xf, fn) {
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
-var _arrayFromIterator = __webpack_require__(36);
-var _functionName = __webpack_require__(42);
+var _arrayFromIterator = __webpack_require__(42);
+var _functionName = __webpack_require__(48);
 var _has = __webpack_require__(3);
-var identical = __webpack_require__(35);
-var keys = __webpack_require__(4);
-var type = __webpack_require__(61);
+var identical = __webpack_require__(41);
+var keys = __webpack_require__(7);
+var type = __webpack_require__(66);
 
 module.exports = function _equals(a, b, stackA, stackB) {
   if (identical(a, b)) {
@@ -2473,7 +2762,7 @@ module.exports = function _equals(a, b, stackA, stackB) {
 };
 
 /***/ },
-/* 41 */
+/* 47 */
 /***/ function(module, exports) {
 
 "use strict";
@@ -2494,7 +2783,7 @@ module.exports = function _filter(fn, list) {
 };
 
 /***/ },
-/* 42 */
+/* 48 */
 /***/ function(module, exports) {
 
 "use strict";
@@ -2507,7 +2796,7 @@ module.exports = function _functionName(f) {
 };
 
 /***/ },
-/* 43 */
+/* 49 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2515,7 +2804,7 @@ module.exports = function _functionName(f) {
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
-var equals = __webpack_require__(33);
+var equals = __webpack_require__(38);
 
 module.exports = function _indexOf(list, a, idx) {
   var inf, item;
@@ -2573,7 +2862,7 @@ module.exports = function _indexOf(list, a, idx) {
 };
 
 /***/ },
-/* 44 */
+/* 50 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2591,7 +2880,7 @@ module.exports = function () {
 }();
 
 /***/ },
-/* 45 */
+/* 51 */
 /***/ function(module, exports) {
 
 "use strict";
@@ -2602,7 +2891,7 @@ module.exports = function _isObject(x) {
 };
 
 /***/ },
-/* 46 */
+/* 52 */
 /***/ function(module, exports) {
 
 "use strict";
@@ -2613,7 +2902,7 @@ module.exports = function _isString(x) {
 };
 
 /***/ },
-/* 47 */
+/* 53 */
 /***/ function(module, exports) {
 
 "use strict";
@@ -2624,7 +2913,7 @@ module.exports = function _isTransformer(obj) {
 };
 
 /***/ },
-/* 48 */
+/* 54 */
 /***/ function(module, exports) {
 
 "use strict";
@@ -2642,7 +2931,7 @@ module.exports = function _map(fn, functor) {
 };
 
 /***/ },
-/* 49 */
+/* 55 */
 /***/ function(module, exports) {
 
 "use strict";
@@ -2656,113 +2945,7 @@ module.exports = function _quote(s) {
 };
 
 /***/ },
-/* 50 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-'use strict';
-
-var _xwrap = __webpack_require__(56);
-var bind = __webpack_require__(31);
-var isArrayLike = __webpack_require__(57);
-
-module.exports = function () {
-  function _arrayReduce(xf, acc, list) {
-    var idx = 0;
-    var len = list.length;
-    while (idx < len) {
-      acc = xf['@@transducer/step'](acc, list[idx]);
-      if (acc && acc['@@transducer/reduced']) {
-        acc = acc['@@transducer/value'];
-        break;
-      }
-      idx += 1;
-    }
-    return xf['@@transducer/result'](acc);
-  }
-
-  function _iterableReduce(xf, acc, iter) {
-    var step = iter.next();
-    while (!step.done) {
-      acc = xf['@@transducer/step'](acc, step.value);
-      if (acc && acc['@@transducer/reduced']) {
-        acc = acc['@@transducer/value'];
-        break;
-      }
-      step = iter.next();
-    }
-    return xf['@@transducer/result'](acc);
-  }
-
-  function _methodReduce(xf, acc, obj) {
-    return xf['@@transducer/result'](obj.reduce(bind(xf['@@transducer/step'], xf), acc));
-  }
-
-  var symIterator = typeof Symbol !== 'undefined' ? Symbol.iterator : '@@iterator';
-  return function _reduce(fn, acc, list) {
-    if (typeof fn === 'function') {
-      fn = _xwrap(fn);
-    }
-    if (isArrayLike(list)) {
-      return _arrayReduce(fn, acc, list);
-    }
-    if (typeof list.reduce === 'function') {
-      return _methodReduce(fn, acc, list);
-    }
-    if (list[symIterator] != null) {
-      return _iterableReduce(fn, acc, list[symIterator]());
-    }
-    if (typeof list.next === 'function') {
-      return _iterableReduce(fn, acc, list);
-    }
-    throw new TypeError('reduce: list must be array or iterable');
-  };
-}();
-
-/***/ },
-/* 51 */
-/***/ function(module, exports) {
-
-"use strict";
-"use strict";
-
-/**
- * An optimized, private array `slice` implementation.
- *
- * @private
- * @param {Arguments|Array} args The array or arguments object to consider.
- * @param {Number} [from=0] The array index to slice from, inclusive.
- * @param {Number} [to=args.length] The array index to slice to, exclusive.
- * @return {Array} A new, sliced array.
- * @example
- *
- *      _slice([1, 2, 3, 4, 5], 1, 3); //=> [2, 3]
- *
- *      var firstThreeArgs = function(a, b, c, d) {
- *        return _slice(arguments, 0, 3);
- *      };
- *      firstThreeArgs(1, 2, 3, 4); //=> [1, 2, 3]
- */
-module.exports = function _slice(args, from, to) {
-  switch (arguments.length) {
-    case 1:
-      return _slice(args, 0, args.length);
-    case 2:
-      return _slice(args, from, args.length);
-    default:
-      var list = [];
-      var idx = 0;
-      var len = Math.max(0, Math.min(args.length, to) - from);
-      while (idx < len) {
-        list[idx] = args[from + idx];
-        idx += 1;
-      }
-      return list;
-  }
-};
-
-/***/ },
-/* 52 */
+/* 56 */
 /***/ function(module, exports) {
 
 "use strict";
@@ -2784,7 +2967,7 @@ module.exports = function () {
 }();
 
 /***/ },
-/* 53 */
+/* 57 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2792,12 +2975,12 @@ module.exports = function () {
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
-var _contains = __webpack_require__(38);
-var _map = __webpack_require__(48);
-var _quote = __webpack_require__(49);
-var _toISOString = __webpack_require__(52);
-var keys = __webpack_require__(4);
-var reject = __webpack_require__(59);
+var _contains = __webpack_require__(45);
+var _map = __webpack_require__(54);
+var _quote = __webpack_require__(55);
+var _toISOString = __webpack_require__(56);
+var keys = __webpack_require__(7);
+var reject = __webpack_require__(64);
 
 module.exports = function _toString(x, seen) {
   var recur = function recur(y) {
@@ -2844,30 +3027,14 @@ module.exports = function _toString(x, seen) {
 };
 
 /***/ },
-/* 54 */
-/***/ function(module, exports) {
-
-"use strict";
-'use strict';
-
-module.exports = {
-  init: function init() {
-    return this.xf['@@transducer/init']();
-  },
-  result: function result(_result) {
-    return this.xf['@@transducer/result'](_result);
-  }
-};
-
-/***/ },
-/* 55 */
+/* 58 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 'use strict';
 
 var _curry2 = __webpack_require__(1);
-var _xfBase = __webpack_require__(54);
+var _xfBase = __webpack_require__(16);
 
 module.exports = function () {
   function XFilter(f, xf) {
@@ -2886,7 +3053,53 @@ module.exports = function () {
 }();
 
 /***/ },
-/* 56 */
+/* 59 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+'use strict';
+
+var _curryN = __webpack_require__(12);
+var _has = __webpack_require__(3);
+var _xfBase = __webpack_require__(16);
+
+module.exports = function () {
+  function XReduceBy(valueFn, valueAcc, keyFn, xf) {
+    this.valueFn = valueFn;
+    this.valueAcc = valueAcc;
+    this.keyFn = keyFn;
+    this.xf = xf;
+    this.inputs = {};
+  }
+  XReduceBy.prototype['@@transducer/init'] = _xfBase.init;
+  XReduceBy.prototype['@@transducer/result'] = function (result) {
+    var key;
+    for (key in this.inputs) {
+      if (_has(key, this.inputs)) {
+        result = this.xf['@@transducer/step'](result, this.inputs[key]);
+        if (result['@@transducer/reduced']) {
+          result = result['@@transducer/value'];
+          break;
+        }
+      }
+    }
+    this.inputs = null;
+    return this.xf['@@transducer/result'](result);
+  };
+  XReduceBy.prototype['@@transducer/step'] = function (result, input) {
+    var key = this.keyFn(input);
+    this.inputs[key] = this.inputs[key] || [key, this.valueAcc];
+    this.inputs[key][1] = this.valueFn(this.inputs[key][1], input);
+    return result;
+  };
+
+  return _curryN(4, [], function _xreduceBy(valueFn, valueAcc, keyFn, xf) {
+    return new XReduceBy(valueFn, valueAcc, keyFn, xf);
+  });
+}();
+
+/***/ },
+/* 60 */
 /***/ function(module, exports) {
 
 "use strict";
@@ -2912,7 +3125,7 @@ module.exports = function () {
 }();
 
 /***/ },
-/* 57 */
+/* 61 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2921,8 +3134,8 @@ module.exports = function () {
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 var _curry1 = __webpack_require__(2);
-var _isArray = __webpack_require__(10);
-var _isString = __webpack_require__(46);
+var _isArray = __webpack_require__(5);
+var _isString = __webpack_require__(52);
 
 /**
  * Tests whether or not an object is similar to an array.
@@ -2969,16 +3182,16 @@ module.exports = _curry1(function isArrayLike(x) {
 });
 
 /***/ },
-/* 58 */
+/* 62 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 'use strict';
 
-var _arity = __webpack_require__(9);
+var _arity = __webpack_require__(4);
 var _curry1 = __webpack_require__(2);
 var _has = __webpack_require__(3);
-var toString = __webpack_require__(60);
+var toString = __webpack_require__(65);
 
 /**
  * Creates a new function that, when invoked, caches the result of calling `fn`
@@ -3018,15 +3231,80 @@ module.exports = _curry1(function memoize(fn) {
 });
 
 /***/ },
-/* 59 */
+/* 63 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 'use strict';
 
-var _complement = __webpack_require__(37);
+var _curryN = __webpack_require__(12);
+var _dispatchable = __webpack_require__(13);
+var _has = __webpack_require__(3);
+var _reduce = __webpack_require__(14);
+var _xreduceBy = __webpack_require__(59);
+
+/**
+ * Groups the elements of the list according to the result of calling
+ * the String-returning function `keyFn` on each element and reduces the elements
+ * of each group to a single value via the reducer function `valueFn`.
+ *
+ * This function is basically a more general `groupBy` function.
+ *
+ * Acts as a transducer if a transformer is given in list position.
+ *
+ * @func
+ * @memberOf R
+ * @since v0.20.0
+ * @category List
+ * @sig ((a, b) -> a) -> a -> (b -> String) -> [b] -> {String: a}
+ * @param {Function} valueFn The function that reduces the elements of each group to a single
+ *        value. Receives two values, accumulator for a particular group and the current element.
+ * @param {*} acc The (initial) accumulator value for each group.
+ * @param {Function} keyFn The function that maps the list's element into a key.
+ * @param {Array} list The array to group.
+ * @return {Object} An object with the output of `keyFn` for keys, mapped to the output of
+ *         `valueFn` for elements which produced that key when passed to `keyFn`.
+ * @see R.groupBy, R.reduce
+ * @example
+ *
+ *      var reduceToNamesBy = R.reduceBy((acc, student) => acc.concat(student.name), []);
+ *      var namesByGrade = reduceToNamesBy(function(student) {
+ *        var score = student.score;
+ *        return score < 65 ? 'F' :
+ *               score < 70 ? 'D' :
+ *               score < 80 ? 'C' :
+ *               score < 90 ? 'B' : 'A';
+ *      });
+ *      var students = [{name: 'Lucy', score: 92},
+ *                      {name: 'Drew', score: 85},
+ *                      // ...
+ *                      {name: 'Bart', score: 62}];
+ *      namesByGrade(students);
+ *      // {
+ *      //   'A': ['Lucy'],
+ *      //   'B': ['Drew']
+ *      //   // ...,
+ *      //   'F': ['Bart']
+ *      // }
+ */
+module.exports = _curryN(4, [], _dispatchable('reduceBy', _xreduceBy, function reduceBy(valueFn, valueAcc, keyFn, list) {
+  return _reduce(function (acc, elt) {
+    var key = keyFn(elt);
+    acc[key] = valueFn(_has(key, acc) ? acc[key] : valueAcc, elt);
+    return acc;
+  }, {}, list);
+}));
+
+/***/ },
+/* 64 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+'use strict';
+
+var _complement = __webpack_require__(44);
 var _curry2 = __webpack_require__(1);
-var filter = __webpack_require__(34);
+var filter = __webpack_require__(39);
 
 /**
  * The complement of `filter`.
@@ -3055,14 +3333,14 @@ module.exports = _curry2(function reject(pred, filterable) {
 });
 
 /***/ },
-/* 60 */
+/* 65 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 'use strict';
 
 var _curry1 = __webpack_require__(2);
-var _toString = __webpack_require__(53);
+var _toString = __webpack_require__(57);
 
 /**
  * Returns the string representation of the given value. `eval`'ing the output
@@ -3105,7 +3383,7 @@ module.exports = _curry1(function toString(val) {
 });
 
 /***/ },
-/* 61 */
+/* 66 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3141,22 +3419,22 @@ module.exports = _curry1(function type(val) {
 });
 
 /***/ },
-/* 62 */
+/* 67 */
 /***/ function(module, exports) {
 
 module.exports = require("react");
 
 /***/ },
-/* 63 */
+/* 68 */
 /***/ function(module, exports) {
 
 module.exports = require("react-dom");
 
 /***/ },
-/* 64 */
+/* 69 */
 /***/ function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(12);
+module.exports = __webpack_require__(17);
 
 
 /***/ }
