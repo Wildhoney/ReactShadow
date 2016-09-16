@@ -1,4 +1,4 @@
-<img src="media/logo.png" width="300" alt="ReactShadow" />
+<img src="media/logo.png" width="200" alt="ReactShadow" />
 
 ![Travis](http://img.shields.io/travis/Wildhoney/ReactShadow.svg?style=flat)
 &nbsp;
