@@ -1,10 +1,15 @@
-![Screenshot](media/screenshot.png)
+<p align="center">
+  ![Screenshot](media/logo.png)
 
-![Travis](http://img.shields.io/travis/Wildhoney/ReactShadow.svg?style=flat)
-&nbsp;
-![License MIT](http://img.shields.io/badge/license-mit-orange.svg?style=flat)
-&nbsp;
-![Experimental](http://img.shields.io/badge/experimental-%E2%9C%93-blue.svg?style=flat)
+  ![Travis](http://img.shields.io/travis/Wildhoney/ReactShadow.svg?style=flat)
+  &nbsp;
+  ![License MIT](http://img.shields.io/badge/license-mit-orange.svg?style=flat)
+  &nbsp;
+  ![Experimental](http://img.shields.io/badge/experimental-%E2%9C%93-blue.svg?style=flat)
+
+  ![Screenshot](media/screenshot.png)
+</p>
+
 * **npm**: `npm i react-shadow --save`
 * **Heroku**: [http://react-shadow.herokuapp.com/](http://react-shadow.herokuapp.com/)
 
@@ -36,7 +41,7 @@ As the CSS documents are being fetched over the network, the host element will h
 
 ### Cached Documents
 
-Where components share CSS documents, only one instance of the CSS document will be fetched due to `memoize` of the [`fetchStylesheet`](https://github.com/Wildhoney/ReactShadow/blob/react-15.0/src/react-shadow.js#L22) function.
+Where components share documents, only one instance will be fetched due to `memoize` of the [`fetchInclude`](https://github.com/Wildhoney/ReactShadow/blob/master/src/react-shadow.js#L23) function.
 
 ### Inlining Styles
 
@@ -49,10 +54,10 @@ export default props => {
 
     return (
         <ShadowDOM>
-          <div>
-              <h1>Calendar for {props.date}</h1>
-              <style>{styles}</style>
-          </div>
+            <div>
+                <h1>Calendar for {props.date}</h1>
+                <style type="text/css">{styles}</style>
+            </div>
         </ShadowDOM>
     );
 }
