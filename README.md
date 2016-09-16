@@ -1,8 +1,8 @@
 <p align="center">
     <img src="media/logo.png" alt="ReactShadow" width="300" />
-    <br />
+    <br /><br />
     <strong>npm</strong>: <code>npm i react-shadow --save</code>
-    <br />
+    <br /><br />
     <strong>Heroku</strong>: <a href="http://react-shadow.herokuapp.com/">http://react-shadow.herokuapp.com/</a>
     </ul>
     <p align="center">
