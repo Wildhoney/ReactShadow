@@ -1,7 +1,7 @@
 <p align="center">
     <img src="media/logo.png" alt="ReactShadow" width="300" />
     <br />
-    <ul align="center">
+    <ul align="center" style="list-style-type: none">
         <li><strong>npm</strong>: <code>npm i react-shadow --save</code></li>
         <li><strong>Heroku</strong>: <a href="http://react-shadow.herokuapp.com/">http://react-shadow.herokuapp.com/</a></li>
     </ul>
