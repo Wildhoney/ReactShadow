@@ -95,17 +95,20 @@ test('Should be able to exclude wrapper if only single child;', t => {
 
 });
 
-test('Should be able to include CSS documents', t => {
+test('Should be able to include external documents', t => {
 
     return new Promise(resolve => {
 
         const firstStylesheet = '* { border: 1px solid red }';
+        const firstJavaScript = 'console.log("Da comrade!")';
         const secondStylesheet = '* { background-color: orange }';
 
         t.context.mockAdapter.onGet('/first.css').reply(200, firstStylesheet);
         t.context.mockAdapter.onGet('/second.css').reply(200, secondStylesheet);
+        t.context.mockAdapter.onGet('/first.js').reply(200, firstJavaScript);
+        t.context.mockAdapter.onGet('/second.js').reply(404);
 
-        const Clock = t.context.create({ cssDocuments: ['/first.css', '/second.css'] });
+        const Clock = t.context.create({ include: ['/first.css', '/first.js', '/second.css', '/second.js'] });
         const wrapper = mount(<Clock />);
 
         const host = wrapper.find('section');
@@ -114,10 +117,19 @@ test('Should be able to include CSS documents', t => {
 
         setTimeout(() => {
 
-            const style = { text: () => host.node.querySelector('style').innerHTML };
+            const styles = Array.from(host.node.querySelectorAll('style'));
+            const style = { text: () => styles[0].innerHTML };
+            t.is(styles.length, 1);
             t.is(style.text(), `${firstStylesheet} ${secondStylesheet}`);
+
+            const scripts = Array.from(host.node.querySelectorAll('script'));
+            const script = { text: () => scripts[0].innerHTML };
+            t.is(scripts.length, 1);
+            t.is(script.text(), `${firstJavaScript}`);
+
             t.true(host.hasClass('simple-clock'));
             t.true(host.hasClass('resolved'));
+
             resolve();
 
         });
@@ -126,7 +138,7 @@ test('Should be able to include CSS documents', t => {
 
 });
 
-test('Should be able to raise exceptions from sanity checks;', t => {
+test('Should be able to raise necessary exceptions for happier devs;', t => {
 
     // Prevent React from throwing errors it would otherwise throw with the below assertions.
     console.error = () => {};
@@ -139,5 +151,10 @@ test('Should be able to raise exceptions from sanity checks;', t => {
     t.throws(() => {
         mount(<ShadowDOM><div /><div /></ShadowDOM>);
     }, 'ReactShadow: You must pass a single child rather than multiple children.');
+
+    t.throws(() => {
+        t.context.mockAdapter.onGet('/document.png').reply(200, 'data');
+        mount(<ShadowDOM include="/document.png"><div><h1>Picture</h1></div></ShadowDOM>);
+    }, 'ReactShadow: Files with extension of "png" are unsupported.');
 
 });

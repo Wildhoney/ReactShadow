@@ -80,7 +80,7 @@ export default class extends Component {
         const fheit = weather ? `${weather.main.temp * 9 / 5 + 32}${String.fromCharCode(8457)}` : '';
 
         return (
-            <ShadowDOM cssDocuments="css/country.css">
+            <ShadowDOM include={['css/country.css', 'css/default.css']}>
 
                 <div className="weather">
 

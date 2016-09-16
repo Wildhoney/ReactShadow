@@ -19,7 +19,7 @@ import ShadowDOM from 'react-shadow';
 
 export default props => {
     return (
-        <ShadowDOM cssDocuments={['css/core/calendar.css', props.theme]}>
+        <ShadowDOM include={['css/core/calendar.css', props.theme]}>
             <h1>Calendar for {props.date}</h1>
         </ShadowDOM>
     );
