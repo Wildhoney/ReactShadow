@@ -1,5 +1,7 @@
 <img src="media/logo.png" width="200" alt="ReactShadow" />
 
+> Utilise Shadow DOM in React with all the benefits of style encapsulation.
+
 ![Travis](http://img.shields.io/travis/Wildhoney/ReactShadow.svg?style=flat)
 &nbsp;
 ![License MIT](http://img.shields.io/badge/license-mit-orange.svg?style=flat)
