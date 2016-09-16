@@ -1,19 +1,14 @@
-<p align="center">
-    <img src="media/logo.png" alt="ReactShadow" width="300" />
-    <br /><br />
-    <strong>npm</strong>: <code>npm i react-shadow --save</code>
-    <br /><br />
-    <strong>Heroku</strong>: <a href="http://react-shadow.herokuapp.com/">http://react-shadow.herokuapp.com/</a>
-    </ul>
-    <p align="center">
-        <img src="http://img.shields.io/travis/Wildhoney/ReactShadow.svg?style=flat" alt="travis" />
-        &nbsp;
-        <img src="http://img.shields.io/badge/license-mit-orange.svg?style=flat" alt="license" />
-        &nbsp;
-        <img src="http://img.shields.io/badge/experimental-%E2%9C%93-blue.svg?style=flat" alt="experimental" />
-        <img src="media/screenshot.png" alt="screenshot" />
-    </p>
-</p>
+![ReactShadow](media/logo.png)
+
+![Travis](http://img.shields.io/travis/Wildhoney/ReactShadow.svg?style=flat)
+&nbsp;
+![License MIT](http://img.shields.io/badge/license-mit-orange.svg?style=flat)
+&nbsp;
+![Experimental](http://img.shields.io/badge/experimental-%E2%9C%93-blue.svg?style=flat)
+* **npm**: `npm i react-shadow --save`
+* **Heroku**: [http://react-shadow.herokuapp.com/](http://react-shadow.herokuapp.com/)
+
+![Screenshot](media/screenshot.png)
 
 ---
 
@@ -56,10 +51,10 @@ export default props => {
 
     return (
         <ShadowDOM>
-            <div>
-                <h1>Calendar for {props.date}</h1>
-                <style type="text/css">{styles}</style>
-            </div>
+          <div>
+            <h1>Calendar for {props.date}</h1>
+            <style type="text/css">{styles}</style>
+          </div>
         </ShadowDOM>
     );
 }
