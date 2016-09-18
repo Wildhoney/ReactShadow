@@ -35,7 +35,8 @@ export default class extends Component {
      * @type {Object}
      */
     static defaultProps = {
-        countries: ['Amsterdam', 'Cairo', 'London', 'Moscow', 'Paris', 'Rio de Janeiro', 'Rome', 'Sydney']
+        countries: ['Amsterdam', 'Cairo', 'London', 'Moscow', 'Paris', 'Rio de Janeiro',
+                    'Rome', 'Sydney', 'Mumbai', 'New York']
     };
 
     /**
