@@ -34,16 +34,18 @@ module.exports =
 /******/ 	// expose the module cache
 /******/ 	__webpack_require__.c = installedModules;
 
-/******/ 	// identity function for calling harmory imports with the correct context
+/******/ 	// identity function for calling harmony imports with the correct context
 /******/ 	__webpack_require__.i = function(value) { return value; };
 
-/******/ 	// define getter function for harmory exports
+/******/ 	// define getter function for harmony exports
 /******/ 	__webpack_require__.d = function(exports, name, getter) {
-/******/ 		Object.defineProperty(exports, name, {
-/******/ 			configurable: false,
-/******/ 			enumerable: true,
-/******/ 			get: getter
-/******/ 		});
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
 /******/ 	};
 
 /******/ 	// getDefaultExport function for compatibility with non-harmony modules
@@ -72,7 +74,7 @@ module.exports =
 "use strict";
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var bind = __webpack_require__(10);
 
@@ -532,7 +534,7 @@ module.exports = Array.isArray || function _isArray(val) {
 "use strict";
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 module.exports = function _isPlaceholder(a) {
        return a != null && (typeof a === 'undefined' ? 'undefined' : _typeof(a)) === 'object' && a['@@functional/placeholder'] === true;
@@ -1363,10 +1365,14 @@ var ShadowDOM = function (_Component) {
     }, {
         key: 'componentDidMount',
         value: function componentDidMount() {
+            var _props = this.props,
+                mode = _props.boundaryMode,
+                delegatesFocus = _props.delegatesFocus;
 
             // Create the shadow root and take the CSS documents from props.
+
             var node = (0, _reactDom.findDOMNode)(this);
-            var root = node.attachShadow ? node.attachShadow({ mode: this.props.boundaryMode }) : node.createShadowRoot();
+            var root = node.attachShadow ? node.attachShadow({ mode: mode, delegatesFocus: delegatesFocus }) : node.createShadowRoot();
             var include = Array.isArray(this.props.include) ? this.props.include : [this.props.include];
             var container = this.getContainer();
 
@@ -1505,12 +1511,14 @@ ShadowDOM.propTypes = {
     children: _react.PropTypes.node.isRequired,
     include: _react.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.array]),
     nodeName: _react.PropTypes.string,
-    boundaryMode: _react.PropTypes.oneOf(['open', 'closed'])
+    boundaryMode: _react.PropTypes.oneOf(['open', 'closed']),
+    delegatesFocus: _react.PropTypes.bool
 };
 ShadowDOM.defaultProps = {
     include: [],
     nodeName: 'span',
-    boundaryMode: 'open'
+    boundaryMode: 'open',
+    delegatesFocus: false
 };
 exports.default = ShadowDOM;
 
@@ -2657,7 +2665,7 @@ module.exports = function _contains(a, list) {
 "use strict";
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var _arrayFromIterator = __webpack_require__(42);
 var _functionName = __webpack_require__(48);
@@ -2802,7 +2810,7 @@ module.exports = function _functionName(f) {
 "use strict";
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var equals = __webpack_require__(38);
 
@@ -2973,7 +2981,7 @@ module.exports = function () {
 "use strict";
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var _contains = __webpack_require__(45);
 var _map = __webpack_require__(54);
@@ -3131,7 +3139,7 @@ module.exports = function () {
 "use strict";
 'use strict';
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var _curry1 = __webpack_require__(2);
 var _isArray = __webpack_require__(5);
