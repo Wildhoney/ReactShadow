@@ -59,7 +59,8 @@ export default class ShadowDOM extends Component {
         children: PropTypes.node.isRequired,
         include: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
         nodeName: PropTypes.string,
-        boundaryMode: PropTypes.oneOf(['open', 'closed'])
+        boundaryMode: PropTypes.oneOf(['open', 'closed']),
+        delegatesFocus: PropTypes.bool
     };
 
     /**
@@ -69,7 +70,8 @@ export default class ShadowDOM extends Component {
     static defaultProps = {
         include: [],
         nodeName: 'span',
-        boundaryMode: 'open'
+        boundaryMode: 'open',
+        delegatesFocus: false
     };
 
     /**
@@ -99,9 +101,11 @@ export default class ShadowDOM extends Component {
      */
     componentDidMount() {
 
+        const { boundaryMode: mode, delegatesFocus} = this.props;
+
         // Create the shadow root and take the CSS documents from props.
         const node = findDOMNode(this);
-        const root = node.attachShadow ? node.attachShadow({ mode: this.props.boundaryMode }) : node.createShadowRoot();
+        const root = node.attachShadow ? node.attachShadow({ mode, delegatesFocus }) : node.createShadowRoot();
         const include = Array.isArray(this.props.include) ? this.props.include : [this.props.include];
         const container = this.getContainer();
 
