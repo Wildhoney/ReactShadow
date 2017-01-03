@@ -101,7 +101,7 @@ export default class ShadowDOM extends Component {
      */
     componentDidMount() {
 
-        const { boundaryMode: mode, delegatesFocus} = this.props;
+        const { boundaryMode: mode, delegatesFocus } = this.props;
 
         // Create the shadow root and take the CSS documents from props.
         const node = findDOMNode(this);

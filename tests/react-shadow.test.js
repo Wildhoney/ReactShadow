@@ -52,7 +52,7 @@ test('Should be able to create the shadow boundary;', t => {
     const wrapper = mount(<Clock />);
 
     t.is(attachShadow.callCount, 1);
-    t.true(attachShadow.calledWith({ mode: 'open' }));
+    t.true(attachShadow.calledWith({ mode: 'open', delegatesFocus: false }));
 
     const host = wrapper.find('section');
     t.true(host.hasClass('simple-clock'));
@@ -71,7 +71,16 @@ test('Should be able to change the boundary mode;', t => {
     const Clock = t.context.create({ boundaryMode: 'closed' });
 
     mount(<Clock />);
-    t.true(attachShadow.calledWith({ mode: 'closed' }));
+    t.true(attachShadow.calledWith({ mode: 'closed', delegatesFocus: false }));
+
+});
+
+test('Should be able to change the focus delegation;', t => {
+
+    const Clock = t.context.create({ delegatesFocus: true });
+
+    mount(<Clock />);
+    t.true(attachShadow.calledWith({ mode: 'open', delegatesFocus: true }));
 
 });
 
