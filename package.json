@@ -6,6 +6,7 @@
   "scripts": {
     "start": "babel example/server/default.js | node",
     "build": "webpack && npm run example",
+    "watch": "webpack --config webpack.dev-config.js --watch",
     "example": "webpack --config webpack.dev-config.js",
     "test": "npm run spec && npm run lint",
     "spec": "ava",
