@@ -4,6 +4,7 @@
   "description": "Utilise Shadow DOM in React with all the benefits of style encapsulation.",
   "main": "dist/react-shadow.js",
   "scripts": {
+    "prestart": "npm run build",
     "start": "babel example/server/default.js | node",
     "build": "webpack && npm run example",
     "watch": "webpack --config webpack.dev-config.js --watch",
@@ -30,6 +31,10 @@
     "url": "https://github.com/Wildhoney/ReactShadow/issues"
   },
   "homepage": "https://github.com/Wildhoney/ReactShadow",
+  "dependencies": {
+    "react": ">=0.14.7 <=15.x",
+    "react-dom": ">=0.14.7 <=15.x"
+  },
   "devDependencies": {
     "ava": "^0.16.0",
     "axios": "^0.14.0",
@@ -53,6 +58,8 @@
     "nlp_compromise": "^6.5.0",
     "ramda": "^0.22.1",
     "react-addons-test-utils": "^15.3.1",
+    "react-redux": "~5.0.3",
+    "redux": "~3.6.0",
     "sinon": "^1.17.5",
     "webpack": "^2.1.0-beta.22",
     "xo": "^0.16.0"
@@ -110,9 +117,5 @@
         }
       ]
     }
-  },
-  "dependencies": {
-    "react": ">=0.14.7 <=15.x",
-    "react-dom": ">=0.14.7 <=15.x"
   }
 }
