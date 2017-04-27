@@ -80,4 +80,4 @@ export default props => {
 }
 ```
 
-**Note**: Using inline styles will **not** combine styles into one `style` node.
+> **Note**: Using inline styles will **not** combine styles into one `style` node.
