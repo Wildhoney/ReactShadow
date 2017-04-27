@@ -1,6 +1,6 @@
 module.exports = {
     entry: {
-        build: ['./example/js/app.js']
+        build: ['babel-polyfill', './example/js/Default.js']
     },
     output: {
         path: __dirname + '/example/js',
