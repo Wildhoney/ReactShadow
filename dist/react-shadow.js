@@ -1211,6 +1211,20 @@ var withContext = exports.withContext = function withContext(contextTypes) {
       }
 
       /**
+       * @method componentDidUpdate
+       * @return {void}
+       */
+
+    }, {
+      key: 'componentDidUpdate',
+      value: function componentDidUpdate() {
+
+        // Updates consist of simply rendering the container element into the shadow root again, as
+        // the `this.wrapContainer()` element contains the passed in component's children.
+        (0, _reactDom.render)(this.wrapContainer(), this.state.root);
+      }
+
+      /**
        * @method wrapContainer
        * @return {Object}
        */
@@ -1244,21 +1258,6 @@ var withContext = exports.withContext = function withContext(contextTypes) {
           null,
           child
         );
-      }
-
-      /**
-       * @method componentDidUpdate
-       * @return {void}
-       */
-
-    }, {
-      key: 'componentDidUpdate',
-      value: function componentDidUpdate() {
-
-        // Updates consist of simply rendering the container element into the shadow root
-        // again, as the `this.wrapContainer()` element contains the passed in component's
-        // children.
-        (0, _reactDom.render)(this.wrapContainer(), this.state.root);
       }
 
       /**
@@ -1298,8 +1297,8 @@ var withContext = exports.withContext = function withContext(contextTypes) {
 
           // Load each file individually and then concatenate them.
           return Promise.all(files.map(fetchInclude)).then(function (fileData) {
-            containerElement.innerHTML = fileData.reduce(function (acc, fileDatum) {
-              return acc + ' ' + fileDatum;
+            containerElement.innerHTML = fileData.reduce(function (xs, fileDatum) {
+              return xs + ' ' + fileDatum;
             }).trim();
             containerElement.innerHTML.length && _this4.state.root.appendChild(containerElement);
           });
@@ -1362,10 +1361,10 @@ var withContext = exports.withContext = function withContext(contextTypes) {
     return ShadowDOM;
   }(_react.Component), _class.contextTypes = contextTypes, _class.propTypes = {
     children: _propTypes2.default.node.isRequired,
-    include: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.array]),
-    nodeName: _propTypes2.default.string,
-    boundaryMode: _propTypes2.default.oneOf(['open', 'closed']),
-    delegatesFocus: _propTypes2.default.bool
+    include: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.array]).isRequired,
+    nodeName: _propTypes2.default.string.isRequired,
+    boundaryMode: _propTypes2.default.oneOf(['open', 'closed']).isRequired,
+    delegatesFocus: _propTypes2.default.bool.isRequired
   }, _class.defaultProps = {
     include: [],
     nodeName: 'span',
