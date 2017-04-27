@@ -196,9 +196,8 @@ export const withContext = contextTypes => {
          */
         componentDidUpdate() {
 
-            // Updates consist of simply rendering the container element into the shadow root
-            // again, as the `this.wrapContainer()` element contains the passed in component's
-            // children.
+            // Updates consist of simply rendering the container element into the shadow root again, as
+            // the `this.wrapContainer()` element contains the passed in component's children.
             render(this.wrapContainer(), this.state.root);
 
         }
@@ -248,7 +247,7 @@ export const withContext = contextTypes => {
 
                 // Load each file individually and then concatenate them.
                 return Promise.all(files.map(fetchInclude)).then(fileData => {
-                    containerElement.innerHTML = fileData.reduce((acc, fileDatum) => `${acc} ${fileDatum}`).trim();
+                    containerElement.innerHTML = fileData.reduce((xs, fileDatum) => `${xs} ${fileDatum}`).trim();
                     containerElement.innerHTML.length && this.state.root.appendChild(containerElement);
                 });
 
