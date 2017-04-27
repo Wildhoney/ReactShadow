@@ -2,6 +2,7 @@ import React, { PureComponent, PropTypes } from 'react';
 import nlp                                 from 'nlp_compromise';
 import { memoize }                         from 'ramda';
 import capitalise                          from 'capitalize';
+import DocumentTitle                       from 'react-document-title';
 import Countries                           from './countries';
 import { fetchData }                       from '../actions';
 import { fromSlug, filenameFor }           from '../containers/layout';
@@ -85,12 +86,14 @@ export default class extends PureComponent {
         const { country, title, label, fahrenheit } = this.find(this.props.country);
 
         return (
-            <main>
-                <img src={filenameFor(country)} alt={country} />
-                <h1>{title}</h1>
-                <h2 title={fahrenheit}>{label}</h2>
-                <Countries list={this.props.countries} />
-            </main>
+            <DocumentTitle title={`Weather for ${country}`}>
+                <main>
+                    <img src={filenameFor(country)} alt={country} />
+                    <h1>{title}</h1>
+                    <h2 title={fahrenheit}>{label}</h2>
+                    <Countries list={this.props.countries} />
+                </main>
+            </DocumentTitle>
         );
 
     }

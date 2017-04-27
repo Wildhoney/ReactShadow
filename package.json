@@ -60,6 +60,7 @@
     "nlp_compromise": "^6.5.0",
     "ramda": "^0.22.1",
     "react-addons-test-utils": "^15.3.1",
+    "react-document-title": "~2.0.3",
     "react-redux": "~5.0.3",
     "react-router": "~4.0.0",
     "react-router-dom": "~4.0.0",
