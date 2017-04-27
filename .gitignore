@@ -7,3 +7,7 @@ npm-debug.log
 
 # example
 example/js/build.js
+
+# coverage
+coverage
+.nyc_output

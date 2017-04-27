@@ -1,6 +1,9 @@
 language: node_js
 node_js: stable
 
+after_success:
+  - ./node_modules/.bin/nyc report --reporter=text-lcov | ./node_modules/.bin/coveralls
+
 before_script:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start

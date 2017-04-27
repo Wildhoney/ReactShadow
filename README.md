@@ -4,9 +4,9 @@
 
 ![Travis](http://img.shields.io/travis/Wildhoney/ReactShadow.svg?style=flat-square)
 &nbsp;
-![License MIT](http://img.shields.io/badge/license-mit-orange.svg?style=flat-square)
+![Coveralls](https://img.shields.io/coveralls/Wildhoney/ReactShadow.svg?style=flat-square)
 &nbsp;
-![Experimental](http://img.shields.io/badge/experimental-%E2%9C%93-blue.svg?style=flat-square)
+![npm](http://img.shields.io/npm/v/react-shadow.svg?style=flat-square)
 &nbsp;
 ![License MIT](https://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat-square)
 
