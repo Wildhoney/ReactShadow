@@ -1045,7 +1045,7 @@ var fetchInclude = (0, _ramda.memoize)(function (document) {
  * @return {ShadowDOM}
  */
 var withContext = exports.withContext = function withContext(contextTypes) {
-  var _class, _temp2;
+  var _class2, _temp3;
 
   /**
    * @method createContextProvider
@@ -1053,13 +1053,14 @@ var withContext = exports.withContext = function withContext(contextTypes) {
    * @return {ContextProvider}
    */
   var createContextProvider = function createContextProvider(context) {
+    var _class, _temp;
 
     /**
      * @class ContextProvider
      * @extends {Component}
      */
-    var ContextProvider = function (_Component) {
-      _inherits(ContextProvider, _Component);
+    return _temp = _class = function (_PureComponent) {
+      _inherits(ContextProvider, _PureComponent);
 
       function ContextProvider() {
         _classCallCheck(this, ContextProvider);
@@ -1115,28 +1116,22 @@ var withContext = exports.withContext = function withContext(contextTypes) {
       }]);
 
       return ContextProvider;
-    }(_react.Component);
-
-    ContextProvider.propTypes = {
+    }(_react.PureComponent), _class.propTypes = {
       children: _propTypes2.default.node.isRequired
-    };
-    ContextProvider.childContextTypes = contextTypes;
-
-
-    return ContextProvider;
+    }, _class.childContextTypes = contextTypes, _temp;
   };
 
   /**
    * @class ShadowDOM
    * @extends Component
    */
-  return _temp2 = _class = function (_Component2) {
-    _inherits(ShadowDOM, _Component2);
+  return _temp3 = _class2 = function (_Component) {
+    _inherits(ShadowDOM, _Component);
 
     function ShadowDOM() {
       var _ref;
 
-      var _temp, _this2, _ret;
+      var _temp2, _this2, _ret;
 
       _classCallCheck(this, ShadowDOM);
 
@@ -1144,7 +1139,7 @@ var withContext = exports.withContext = function withContext(contextTypes) {
         args[_key] = arguments[_key];
       }
 
-      return _ret = (_temp = (_this2 = _possibleConstructorReturn(this, (_ref = ShadowDOM.__proto__ || Object.getPrototypeOf(ShadowDOM)).call.apply(_ref, [this].concat(args))), _this2), _this2.state = { resolving: false }, _this2.ContextProvider = createContextProvider(_this2.context), _this2.WrappedComponent = _this2.props.children, _temp), _possibleConstructorReturn(_this2, _ret);
+      return _ret = (_temp2 = (_this2 = _possibleConstructorReturn(this, (_ref = ShadowDOM.__proto__ || Object.getPrototypeOf(ShadowDOM)).call.apply(_ref, [this].concat(args))), _this2), _this2.state = { resolving: false }, _this2.ContextProvider = createContextProvider(_this2.context), _this2.WrappedComponent = _this2.props.children, _temp2), _possibleConstructorReturn(_this2, _ret);
     }
 
     /**
@@ -1359,18 +1354,18 @@ var withContext = exports.withContext = function withContext(contextTypes) {
     }]);
 
     return ShadowDOM;
-  }(_react.Component), _class.contextTypes = contextTypes, _class.propTypes = {
+  }(_react.Component), _class2.contextTypes = contextTypes, _class2.propTypes = {
     children: _propTypes2.default.node.isRequired,
     include: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.array]).isRequired,
     nodeName: _propTypes2.default.string.isRequired,
     boundaryMode: _propTypes2.default.oneOf(['open', 'closed']).isRequired,
     delegatesFocus: _propTypes2.default.bool.isRequired
-  }, _class.defaultProps = {
+  }, _class2.defaultProps = {
     include: [],
     nodeName: 'span',
     boundaryMode: 'open',
     delegatesFocus: false
-  }, _temp2;
+  }, _temp3;
 };
 
 exports.default = withContext(defaultContextTypes);
