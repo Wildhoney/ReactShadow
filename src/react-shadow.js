@@ -155,6 +155,12 @@ export const withContext = contextTypes => {
         ContextProvider = createContextProvider(this.context);
 
         /**
+         * @constant WrappedComponent
+         * @type {Object}
+         */
+        WrappedComponent = this.props.children;
+
+        /**
          * @method componentDidMount
          * @return {void}
          */
