@@ -19,8 +19,13 @@ span {
     height: 75vmin;
 }
 
+main {
+    text-align: center;
+}
+
 img {
     width: 35vmin;
+    height: 35vmin;
 }
 
 h1 {
