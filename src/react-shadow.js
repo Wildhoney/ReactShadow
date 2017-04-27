@@ -191,6 +191,19 @@ export const withContext = contextTypes => {
         }
 
         /**
+         * @method componentDidUpdate
+         * @return {void}
+         */
+        componentDidUpdate() {
+
+            // Updates consist of simply rendering the container element into the shadow root
+            // again, as the `this.wrapContainer()` element contains the passed in component's
+            // children.
+            render(this.wrapContainer(), this.state.root);
+
+        }
+
+        /**
          * @method wrapContainer
          * @return {Object}
          */
@@ -209,19 +222,6 @@ export const withContext = contextTypes => {
             ContextProvider.prototype.getChildContext = () => this.context;
 
             return <ContextProvider>{child}</ContextProvider>;
-
-        }
-
-        /**
-         * @method componentDidUpdate
-         * @return {void}
-         */
-        componentDidUpdate() {
-
-            // Updates consist of simply rendering the container element into the shadow root
-            // again, as the `this.wrapContainer()` element contains the passed in component's
-            // children.
-            render(this.wrapContainer(), this.state.root);
 
         }
 
