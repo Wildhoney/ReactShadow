@@ -1,6 +1,6 @@
 {
   "name": "react-shadow",
-  "version": "1.1.2",
+  "version": "2.0.0",
   "description": "Utilise Shadow DOM in React with all the benefits of style encapsulation.",
   "main": "dist/react-shadow.js",
   "scripts": {
