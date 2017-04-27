@@ -1,4 +1,4 @@
-<img src="media/logo.png" width="200" alt="ReactShadow" />
+![ReactShadow](media/logo.png)
 
 > Utilise Shadow DOM in React with all the benefits of style encapsulation.
 
@@ -34,15 +34,30 @@ export default props => {
 
 In the above example the `h1` element will become the host element with a shadow boundary &mdash; and the two defined CSS documents will be fetched and appended.
 
-### Avoiding FOIC
+## Preventing FOIC
 
 As the CSS documents are being fetched over the network, the host element will have a `className` of `resolving` for you to avoid the dreaded [FOIC](https://en.wikipedia.org/wiki/Flash_of_unstyled_content). Once **all** of the documents have been attached the `className` will change to `resolved`.
 
-### Cached Documents
+Using the `resolved` class name you could then allow the component to appear once all styles have been applied.
 
-Where components share documents, only one instance will be fetched due to `memoize` of the [`fetchInclude`](https://github.com/Wildhoney/ReactShadow/blob/master/src/react-shadow.js#L23) function.
+```css
+.component {
+    opacity: 0;
+    transform: scale(.75);
+    transition: all .35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
 
-### Inlining Styles
+.component.resolved {
+    opacity: 1;
+    transform: scale(1);
+}
+```
+
+## Cached Documents
+
+Oftentimes components share the same documents, however only **one** instance will be fetched due to `memoize` of the [`fetchInclude`](https://github.com/Wildhoney/ReactShadow/blob/master/src/react-shadow.js#L34-L45) function.
+
+## Inline Styles
 
 Instead of defining external CSS documents to fetch, you could choose to add all of the component's styles to the component itself by simply embedding a `style` node in your component. Naturally all styles added this way will be encapsulated within the shadow boundary.
 
@@ -62,4 +77,4 @@ export default props => {
 }
 ```
 
-It's worth noting that if you combine this approach with the loading of external CSS documents, you will have 2 `style` (*or more*) nodes in your component.
+**Note**: Using inline styles will **not** combine styles into one `style` node.
