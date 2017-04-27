@@ -2,11 +2,14 @@
 
 > Utilise Shadow DOM in React with all the benefits of style encapsulation.
 
-![Travis](http://img.shields.io/travis/Wildhoney/ReactShadow.svg?style=flat)
+![Travis](http://img.shields.io/travis/Wildhoney/ReactShadow.svg?style=flat-square)
 &nbsp;
-![License MIT](http://img.shields.io/badge/license-mit-orange.svg?style=flat)
+![License MIT](http://img.shields.io/badge/license-mit-orange.svg?style=flat-square)
 &nbsp;
-![Experimental](http://img.shields.io/badge/experimental-%E2%9C%93-blue.svg?style=flat)
+![Experimental](http://img.shields.io/badge/experimental-%E2%9C%93-blue.svg?style=flat-square)
+&nbsp;
+![License MIT](https://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat-square)
+
 * **npm**: `npm i react-shadow --save`
 * **Heroku**: [http://react-shadow.herokuapp.com/](http://react-shadow.herokuapp.com/)
 
