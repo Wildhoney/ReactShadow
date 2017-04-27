@@ -102,7 +102,7 @@ export const withContext = contextTypes => {
                 return this.props.children;
             }
 
-        }
+        };
 
     };
 
