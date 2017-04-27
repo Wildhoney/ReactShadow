@@ -58,6 +58,7 @@
     "jasmine-core": "^2.2.0",
     "jsdom": "^9.5.0",
     "nlp_compromise": "^6.5.0",
+    "prop-types": "~15.5.8",
     "ramda": "^0.22.1",
     "react-addons-test-utils": "^15.3.1",
     "react-document-title": "~2.0.3",

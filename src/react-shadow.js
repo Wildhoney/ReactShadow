@@ -1,7 +1,8 @@
-import { get as fetch }                               from 'axios';
-import React, { Component, PropTypes, DOM, Children } from 'react';
-import { render, findDOMNode }                        from 'react-dom';
-import { dissoc, memoize, groupBy }                   from 'ramda';
+import { get as fetch }                    from 'axios';
+import React, { Component, DOM, Children } from 'react';
+import PropTypes                           from 'prop-types';
+import { render, findDOMNode }             from 'react-dom';
+import { dissoc, memoize, groupBy }        from 'ramda';
 
 /**
  * @constant includeMap
