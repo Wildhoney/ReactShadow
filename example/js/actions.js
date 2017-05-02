@@ -28,4 +28,5 @@ export function fetchData(country) {
         dispatch({ type: FETCH, name: country, result: camelizeKeys(data) });
 
     };
+
 }

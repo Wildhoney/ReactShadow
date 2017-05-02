@@ -6,7 +6,7 @@ import { FETCH } from './actions';
  */
 const INITIAL_STATE = {
     weather: {},
-    countries: ['Amsterdam', 'Cairo', 'London', 'Moscow', 'Paris', 'Rio de Janeiro', 'Rome', 'Sydney', 'Mumbai', 'New York']
+    countries: ['Amsterdam', 'Cairo', 'London', 'Moscow', 'Mumbai', 'New York', 'Paris', 'Rio de Janeiro', 'Rome', 'Sydney']
 };
 
 export default (state = INITIAL_STATE, action) => {

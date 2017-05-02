@@ -1,9 +1,9 @@
 import React                       from 'react';
 import { memoize, identity, once } from 'ramda';
+import { connect }                 from 'react-redux';
 import { BrowserRouter, Route }    from 'react-router-dom'
 import ShadowDOM                   from '../../../src/react-shadow';
 import Country                     from '../components/country';
-import { connect }                 from 'react-redux';
 
 /**
  * @method toSlug
@@ -31,9 +31,7 @@ export const filenameFor = memoize(x => `/images/${toSlug(x).toLowerCase()}.png`
  * @param {Array} xs
  * @return {String}
  */
-const randomFrom = once(xs => {
-    return xs[Math.floor(Math.random() * xs.length)];
-});
+const randomFrom = once(xs => xs[Math.floor(Math.random() * xs.length)]);
 
 /**
  * @param {Object} props
