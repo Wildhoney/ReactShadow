@@ -1,3 +1,4 @@
+import                                       'webcomponents.js';
 import React                            from 'react';
 import { render }                       from 'react-dom';
 import ready                            from 'document-ready-promise';

@@ -71,6 +71,7 @@
     "redux": "~3.6.0",
     "redux-thunk": "~2.2.0",
     "sinon": "^1.17.5",
+    "webcomponents.js": "~0.7.24",
     "webpack": "^2.1.0-beta.22",
     "xo": "^0.16.0"
   },
