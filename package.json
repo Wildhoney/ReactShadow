@@ -31,7 +31,7 @@
     "url": "https://github.com/Wildhoney/ReactShadow/issues"
   },
   "homepage": "https://github.com/Wildhoney/ReactShadow",
-  "dependencies": {
+  "peerDependencies": {
     "react": ">=0.14.7 <=15.x",
     "react-dom": ">=0.14.7 <=15.x"
   },
@@ -62,6 +62,8 @@
     "nyc": "~10.2.0",
     "prop-types": "~15.5.8",
     "ramda": "^0.22.1",
+    "react": ">=0.14.7 <=15.x",
+    "react-dom": ">=0.14.7 <=15.x",
     "react-addons-test-utils": "^15.3.1",
     "react-document-title": "~2.0.3",
     "react-redux": "~5.0.3",
