@@ -31,7 +31,7 @@
     "url": "https://github.com/Wildhoney/ReactShadow/issues"
   },
   "homepage": "https://github.com/Wildhoney/ReactShadow",
-  "dependencies": {
+  "peerDependencies": {
     "react": ">=0.14.7 <=15.x",
     "react-dom": ">=0.14.7 <=15.x"
   },
