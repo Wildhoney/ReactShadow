@@ -1,6 +1,7 @@
-import React, { PropTypes, PureComponent } from 'react';
-import { NavLink, withRouter }             from 'react-router-dom';
-import { toSlug }                          from '../containers/layout';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
+import { NavLink, withRouter } from 'react-router-dom';
+import { toSlug } from '../containers/layout';
 
 export default withRouter(class extends PureComponent {
 
@@ -11,15 +12,6 @@ export default withRouter(class extends PureComponent {
     static propTypes = {
         list: PropTypes.array.isRequired
     };
-
-    /**
-     * @method shouldComponentUpdate
-     * @param {Object} nextProps
-     * @return {Boolean}
-     */
-    shouldComponentUpdate(nextProps) {
-        return this.props.match.params.country !== nextProps.match.params.country;
-    }
 
     /**
      * @method render

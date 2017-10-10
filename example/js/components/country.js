@@ -1,11 +1,12 @@
-import React, { PureComponent, PropTypes } from 'react';
-import nlp                                 from 'nlp_compromise';
-import { memoize }                         from 'ramda';
-import capitalise                          from 'capitalize';
-import DocumentTitle                       from 'react-document-title';
-import Countries                           from './countries';
-import { fetchData }                       from '../actions';
-import { fromSlug, filenameFor }           from '../containers/layout';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
+import nlp from 'compromise';
+import { memoize } from 'ramda';
+import capitalise from 'capitalize';
+import DocumentTitle from 'react-document-title';
+import Countries from './countries';
+import { fetchData } from '../actions';
+import { fromSlug, filenameFor } from '../containers/layout';
 
 /**
  * @method dispatchOnce
@@ -42,20 +43,6 @@ export default class extends PureComponent {
      */
     componentWillReceiveProps(nextProps) {
         dispatchOnce(nextProps.country, this.props.dispatch);
-    }
-
-    /**
-     * @method shouldComponentUpdate
-     * @param {Object} nextProps
-     * @return {Boolean}
-     */
-    shouldComponentUpdate(nextProps) {
-
-        const weatherEqual = this.props.weather === nextProps.weather;
-        const countryEqual = this.props.country === nextProps.country;
-
-        return !weatherEqual || !countryEqual;
-
     }
 
     /**

@@ -1,9 +1,9 @@
-import React                       from 'react';
+import React from 'react';
 import { memoize, identity, once } from 'ramda';
-import { connect }                 from 'react-redux';
-import { BrowserRouter, Route }    from 'react-router-dom'
-import ShadowDOM                   from '../../../src/react-shadow';
-import Country                     from '../components/country';
+import { connect } from 'react-redux';
+import { BrowserRouter, Route } from 'react-router-dom'
+import ShadowDOM from '../../../src/react-shadow';
+import Country from '../components/country';
 
 /**
  * @method toSlug
