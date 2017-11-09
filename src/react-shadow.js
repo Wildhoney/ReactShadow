@@ -79,19 +79,20 @@ export const withContext = contextTypes => {
             static childContextTypes = contextTypes;
 
             /**
-             * @method shouldComponentUpdate
-             * @return {Boolean}
-             */
-            shouldComponentUpdate() {
-                return true;
-            }
-
-            /**
              * @method getChildContext
              * @return {Object}
              */
             getChildContext() {
                 return context;
+            }
+            
+            /**
+             * @method componentDidCatch
+             * @param {String} error
+             * @return {void}
+             */
+            componentDidCatch(error, stacktrace) {
+                throwError(error);
             }
 
             /**
@@ -123,10 +124,10 @@ export const withContext = contextTypes => {
          * @type {Object}
          */
         static propTypes = {
-            children:       PropTypes.node.isRequired,
-            include:        PropTypes.oneOfType([PropTypes.string, PropTypes.array]).isRequired,
-            nodeName:       PropTypes.string.isRequired,
-            boundaryMode:   PropTypes.oneOf(['open', 'closed']).isRequired,
+            children: PropTypes.node.isRequired,
+            include: PropTypes.oneOfType([PropTypes.string, PropTypes.array]).isRequired,
+            nodeName: PropTypes.string.isRequired,
+            boundaryMode: PropTypes.oneOf(['open', 'closed']).isRequired,
             delegatesFocus: PropTypes.bool.isRequired
         };
 
@@ -135,9 +136,9 @@ export const withContext = contextTypes => {
          * @type {Object}
          */
         static defaultProps = {
-            include:        [],
-            nodeName:       'span',
-            boundaryMode:   'open',
+            include: [],
+            nodeName: 'span',
+            boundaryMode: 'open',
             delegatesFocus: false
         };
 
@@ -168,9 +169,9 @@ export const withContext = contextTypes => {
             const { boundaryMode: mode, delegatesFocus } = this.props;
 
             // Create the shadow root and take the CSS documents from props.
-            const node      = findDOMNode(this);
-            const root      = node.attachShadow ? node.attachShadow({ mode, delegatesFocus }) : node.createShadowRoot();
-            const include   = [].concat(this.props.include);
+            const node = findDOMNode(this);
+            const root = node.attachShadow ? node.attachShadow({ mode, delegatesFocus }) : node.createShadowRoot();
+            const include = [].concat(this.props.include);
             const container = this.wrapContainer();
 
             // Render the passed in component to the shadow root, and then `setState` if there
@@ -182,7 +183,7 @@ export const withContext = contextTypes => {
                 // Otherwise we'll fetch and attach the passed in stylesheets which need to be
                 // resolved before `state.resolved` becomes `true` again.
                 this.setState({ root, resolving: true });
-                this.attachIncludes(include);
+                this.attachIncludes(include).then(() => this.setState({ resolving: false }));
 
             };
 
@@ -208,8 +209,8 @@ export const withContext = contextTypes => {
 
             // Wrap children in a container if it's an array of children, otherwise simply render the single child
             // which is a valid `ReactElement` instance.
-            const { children }    = this.props.children.props;
-            const child           = children.length ? <this.props.nodeName>{children}</this.props.nodeName> : children;
+            const { children } = this.props.children.props;
+            const child = children.length ? <this.props.nodeName>{children}</this.props.nodeName> : children;
             const ContextProvider = this.ContextProvider;
 
             /**
@@ -234,7 +235,7 @@ export const withContext = contextTypes => {
             const includeFiles = Object.keys(groupedFiles).map(extension => {
 
                 const nodeData = includeMap.find(model => model.extensions.includes(extension));
-                const files    = groupedFiles[extension].map(model => model.path);
+                const files = groupedFiles[extension].map(model => model.path);
 
                 !nodeData && throwError(`Files with extension of "${extension}" are unsupported`);
 
@@ -251,7 +252,7 @@ export const withContext = contextTypes => {
 
             });
 
-            Promise.all(includeFiles).then(() => this.setState({ resolving: false }));
+            return Promise.all(includeFiles);
 
         }
 
@@ -284,15 +285,11 @@ export const withContext = contextTypes => {
             return this.throwInvariants() && do {
 
                 // Props from the passed component, minus `children` as that's handled by `componentDidMount`.
-                const child      = Children.only(this.props.children);
+                const child = Children.only(this.props.children);
                 const childProps = dissoc('children', child.props);
-                const className  = this.state.resolving ? 'resolving' : 'resolved';
-
-                // See: https://github.com/facebook/react/issues/4933
+                const className = this.state.resolving ? 'resolving' : 'resolved';
                 const classNames  = `${childProps.className ? childProps.className : ''} ${className}`.trim();
-                const isSupported = child.type in DOM;
-                const classProp   = isSupported ? 'className' : 'class';
-                const props       = { ...dissoc('className', childProps), [classProp]: classNames };
+                const props = { ...childProps, className: classNames };
 
                 <child.type {...props} />;
 
