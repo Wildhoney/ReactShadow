@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import nlp from 'compromise';
 import { memoize } from 'ramda';
@@ -18,7 +18,7 @@ const dispatchOnce = memoize((country, dispatch) => {
     dispatch(fetchData(country));
 });
 
-export default class extends PureComponent {
+export default class extends Component {
 
     /**
      * @constant propTypes
@@ -52,13 +52,16 @@ export default class extends PureComponent {
      */
     find(country) {
 
-        const weather     = this.props.weather[country];
-        const description = () => capitalise.words(nlp.noun(weather.weather[0].description).pluralize());
+        const weather = this.props.weather[country];
+        const description = () => {
+            const transformed = nlp(weather.weather[0].description).nouns().toPlural();
+            return capitalise.words(transformed.out('text'));
+        };
 
         return {
-            country:    fromSlug(country),
-            title:      weather ? `${description()} in ${fromSlug(country)}` : `Weather in ${country}`,
-            label:      weather ? `${weather.main.temp}${String.fromCharCode(8451)}` : String.fromCharCode(8212),
+            country: fromSlug(country),
+            title: weather ? `${description()} in ${fromSlug(country)}` : `Weather in ${country}`,
+            label: weather ? `${weather.main.temp}${String.fromCharCode(8451)}` : String.fromCharCode(8212),
             fahrenheit: weather ? `${weather.main.temp * 9 / 5 + 32}${String.fromCharCode(8457)}` : ''
         };
 
