@@ -1,5 +1,5 @@
 import { get as fetch } from 'axios';
-import React, { Component, PureComponent, DOM, Children } from 'react';
+import React, { Component, PureComponent, Children } from 'react';
 import PropTypes from 'prop-types';
 import { render, findDOMNode } from 'react-dom';
 import { dissoc, memoize, groupBy } from 'ramda';
@@ -85,13 +85,13 @@ export const withContext = contextTypes => {
             getChildContext() {
                 return context;
             }
-            
+
             /**
              * @method componentDidCatch
              * @param {String} error
              * @return {void}
              */
-            componentDidCatch(error, stacktrace) {
+            componentDidCatch(error) {
                 throwError(error);
             }
 
