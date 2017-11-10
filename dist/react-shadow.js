@@ -987,8 +987,6 @@ var _ramda = __webpack_require__(33);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -1065,12 +1063,12 @@ var withContext = exports.withContext = function withContext(contextTypes) {
       }
 
       _createClass(ContextProvider, [{
-        key: 'shouldComponentUpdate',
+        key: 'getChildContext',
 
 
         /**
-         * @method shouldComponentUpdate
-         * @return {Boolean}
+         * @method getChildContext
+         * @return {Object}
          */
 
 
@@ -1078,13 +1076,14 @@ var withContext = exports.withContext = function withContext(contextTypes) {
          * @constant propTypes
          * @type {Object}
          */
-        value: function shouldComponentUpdate() {
-          return true;
+        value: function getChildContext() {
+          return context;
         }
 
         /**
-         * @method getChildContext
-         * @return {Object}
+         * @method componentDidCatch
+         * @param {String} error
+         * @return {void}
          */
 
 
@@ -1094,9 +1093,9 @@ var withContext = exports.withContext = function withContext(contextTypes) {
          */
 
       }, {
-        key: 'getChildContext',
-        value: function getChildContext() {
-          return context;
+        key: 'componentDidCatch',
+        value: function componentDidCatch(error) {
+          throwError(error);
         }
 
         /**
@@ -1183,6 +1182,8 @@ var withContext = exports.withContext = function withContext(contextTypes) {
        * @return {void}
        */
       value: function componentDidMount() {
+        var _this3 = this;
+
         var _props = this.props,
             mode = _props.boundaryMode,
             delegatesFocus = _props.delegatesFocus;
@@ -1198,7 +1199,9 @@ var withContext = exports.withContext = function withContext(contextTypes) {
         // are no CSS documents to be resolved.
         (0, _reactDom.render)(container, root);
 
-        include.length === 0 ? this.setState({ root: root }) : (this.setState({ root: root, resolving: true }), this.attachIncludes(include));
+        include.length === 0 ? this.setState({ root: root }) : (this.setState({ root: root, resolving: true }), this.attachIncludes(include).then(function () {
+          return _this3.setState({ resolving: false });
+        }));
       }
 
       /**
@@ -1223,7 +1226,7 @@ var withContext = exports.withContext = function withContext(contextTypes) {
     }, {
       key: 'wrapContainer',
       value: function wrapContainer() {
-        var _this3 = this;
+        var _this4 = this;
 
         // Wrap children in a container if it's an array of children, otherwise simply render the single child
         // which is a valid `ReactElement` instance.
@@ -1241,7 +1244,7 @@ var withContext = exports.withContext = function withContext(contextTypes) {
          * @return {Object}
          */
         ContextProvider.prototype.getChildContext = function () {
-          return _this3.context;
+          return _this4.context;
         };
 
         return _react2.default.createElement(
@@ -1260,7 +1263,7 @@ var withContext = exports.withContext = function withContext(contextTypes) {
     }, {
       key: 'attachIncludes',
       value: function attachIncludes(include) {
-        var _this4 = this;
+        var _this5 = this;
 
         // Group all of the includes by their extension.
         var groupedFiles = (0, _ramda.groupBy)(function (file) {
@@ -1291,13 +1294,11 @@ var withContext = exports.withContext = function withContext(contextTypes) {
             containerElement.innerHTML = fileData.reduce(function (xs, fileDatum) {
               return xs + ' ' + fileDatum;
             }).trim();
-            containerElement.innerHTML.length && _this4.state.root.appendChild(containerElement);
+            containerElement.innerHTML.length && _this5.state.root.appendChild(containerElement);
           });
         });
 
-        Promise.all(includeFiles).then(function () {
-          return _this4.setState({ resolving: false });
-        });
+        return Promise.all(includeFiles);
       }
 
       /**
@@ -1329,20 +1330,16 @@ var withContext = exports.withContext = function withContext(contextTypes) {
     }, {
       key: 'render',
       value: function render() {
-        var _this5 = this;
+        var _this6 = this;
 
         return this.throwInvariants() && function () {
 
           // Props from the passed component, minus `children` as that's handled by `componentDidMount`.
-          var child = _react.Children.only(_this5.props.children);
+          var child = _react.Children.only(_this6.props.children);
           var childProps = (0, _ramda.dissoc)('children', child.props);
-          var className = _this5.state.resolving ? 'resolving' : 'resolved';
-
-          // See: https://github.com/facebook/react/issues/4933
+          var className = _this6.state.resolving ? 'resolving' : 'resolved';
           var classNames = ((childProps.className ? childProps.className : '') + ' ' + className).trim();
-          var isSupported = child.type in _react.DOM;
-          var classProp = isSupported ? 'className' : 'class';
-          var props = _extends({}, (0, _ramda.dissoc)('className', childProps), _defineProperty({}, classProp, classNames));
+          var props = _extends({}, childProps, { className: classNames });
 
           return _react2.default.createElement(child.type, props);
         }();
