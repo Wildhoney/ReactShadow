@@ -36,7 +36,7 @@
     "react-dom": ">=0.14.7 <=16.x"
   },
   "devDependencies": {
-    "ava": "^0.16.0",
+    "ava": "~0.23.0",
     "axios": "^0.14.0",
     "axios-mock-adapter": "^1.6.1",
     "babel-cli": "^6.14.0",
@@ -47,22 +47,25 @@
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-0": "^6.5.0",
     "babel-register": "^6.14.0",
+    "browser-env": "~3.2.1",
     "capitalize": "^1.0.0",
     "coveralls": "~2.13.0",
+    "delay": "~2.0.0",
     "document-ready-promise": "^3.0.1",
-    "enzyme": "^2.4.1",
+    "enzyme": "~3.1.0",
+    "enzyme-adapter-react-16": "~1.0.2",
     "eslint-config-xo-react": "^0.9.0",
     "eslint-plugin-react": "^6.2.0",
     "eslint-plugin-xo": "^0.5.1",
     "express": "^4.11.2",
     "humps": "~2.0.0",
     "jasmine-core": "^2.2.0",
-    "jsdom": "^9.5.0",
+    "jsdom": "~11.3.0",
     "nyc": "~10.2.0",
     "prop-types": "~15.6.0",
     "ramda": "^0.22.1",
     "react": "~16.1.0",
-    "react-addons-test-utils": "^15.3.1",
+    "react-addons-test-utils": "~15.6.0",
     "react-document-title": "~2.0.3",
     "react-dom": "~16.1.0",
     "react-redux": "~5.0.3",
@@ -82,7 +85,10 @@
     ],
     "babel": "inherit",
     "require": [
-      "babel-register"
+      "babel-register",
+      "babel-polyfill",
+      "./tests/helpers/browser-env.js",
+      "./tests/helpers/enzyme.js"
     ]
   },
   "xo": {
