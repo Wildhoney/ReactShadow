@@ -138,7 +138,5 @@
       ]
     }
   },
-  "dependencies": {
-    "compromise": "~10.6.1"
-  }
+  "dependencies": {}
 }
