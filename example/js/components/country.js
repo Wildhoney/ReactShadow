@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import nlp from 'compromise';
 import { memoize } from 'ramda';
 import capitalise from 'capitalize';
 import DocumentTitle from 'react-document-title';
@@ -53,10 +52,7 @@ export default class extends Component {
     find(country) {
 
         const weather = this.props.weather[country];
-        const description = () => {
-            const transformed = nlp(weather.weather[0].description).nouns().toPlural();
-            return capitalise.words(transformed.out('text'));
-        };
+        const description = () => capitalise.words(weather.weather[0].description);
 
         return {
             country: fromSlug(country),
