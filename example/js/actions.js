@@ -22,7 +22,7 @@ export function fetchData(country) {
 
     return async dispatch => {
 
-        const url = `http://api.openweathermap.org/data/2.5/weather?q=${country}&appid=${API_KEY}&units=metric`;
+        const url = `https://api.openweathermap.org/data/2.5/weather?q=${country}&appid=${API_KEY}&units=metric`;
         const { data } = await get(url);
 
         dispatch({ type: FETCH, name: country, result: camelizeKeys(data) });
