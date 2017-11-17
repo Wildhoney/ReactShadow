@@ -10,7 +10,7 @@ import { dissoc, memoize, groupBy } from 'ramda';
  */
 const includeMap = [
     { extensions: ['js'],  tag: 'script', attrs: { type: 'text/javascript' } },
-    { extensions: ['css'], tag: 'style',  attrs: { type: 'text/css' } }
+    { extensions: ['css'], tag: 'style',  attrs: {} }
 ];
 
 /**
