@@ -1,4 +1,4 @@
-import { get }          from 'axios';
+import { get } from 'axios';
 import { camelizeKeys } from 'humps';
 
 /**
