@@ -1,4 +1,4 @@
-import                                       'webcomponents.js';
+import 'webcomponents.js';
 import React from 'react';
 import { render } from 'react-dom';
 import ready from 'document-ready-promise';
@@ -10,7 +10,7 @@ import Layout from './containers/layout';
 
 ready().then(() => {
 
-    const store     = createStore(reducer, applyMiddleware(thunk));
+    const store = createStore(reducer, applyMiddleware(thunk));
     const mountNode = document.querySelector('section.container');
 
     mountNode && render(<Provider store={store}><Layout /></Provider>, mountNode);
