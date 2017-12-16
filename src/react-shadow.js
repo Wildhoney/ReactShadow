@@ -1,7 +1,7 @@
 import { get as fetch } from 'axios';
 import React, { Component, PureComponent, Children } from 'react';
 import PropTypes from 'prop-types';
-import { render, findDOMNode } from 'react-dom';
+import { render, findDOMNode, unmountComponentAtNode } from 'react-dom';
 import { dissoc, memoize, groupBy } from 'ramda';
 
 /**
@@ -199,6 +199,14 @@ export const withContext = contextTypes => {
             // the `this.wrapContainer()` element contains the passed in component's children.
             render(this.wrapContainer(), this.state.root);
 
+        }
+
+		/**
+		 * @method componentWillUnmount
+		 * @return {void}
+		 */
+        componentWillUnmount() {
+            unmountComponentAtNode(this.state.root);
         }
 
         /**

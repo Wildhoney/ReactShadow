@@ -38,6 +38,21 @@ test.beforeEach(t => {
 
     };
 
+	t.context.createChildComponent = (unMountSpy) => {
+
+		class ChildComponent extends Component {
+			componentWillUnmount() {
+				unMountSpy()
+			}
+			render() {
+				return (<div>hello, world</div>);
+			}
+		}
+
+		return () => <ShadowDOM><div><ChildComponent/></div></ShadowDOM>;
+
+	};
+
 });
 
 test('Should be able to create the shadow boundary;', t => {
@@ -159,5 +174,19 @@ test('Should be able to raise necessary exceptions for happier devs;', t => {
         t.context.mockAdapter.onGet('/document.png').reply(200, 'data');
         mount(<ShadowDOM include="/document.png"><div><h1>Picture</h1></div></ShadowDOM>);
     }, 'ReactShadow: Files with extension of "png" are unsupported.');
+
+});
+
+test('Should call componentWillUnmount of child components', t => {
+
+	const unMountSpy = spy();
+
+	const Test = t.context.createChildComponent(unMountSpy);
+
+	const wrapper = mount(<Test />);
+
+	wrapper.unmount();
+
+	t.is(unMountSpy.callCount, 1);
 
 });
