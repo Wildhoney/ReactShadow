@@ -963,7 +963,7 @@ module.exports = warning;
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 exports.withContext = undefined;
 
@@ -997,14 +997,14 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
  * @constant includeMap
  * @type {Object}
  */
-var includeMap = [{ extensions: ['js'], tag: 'script', attrs: { type: 'text/javascript' } }, { extensions: ['css'], tag: 'style', attrs: { type: 'text/css' } }];
+var includeMap = [{ extensions: ['js'], tag: 'script', attrs: { type: 'text/javascript' } }, { extensions: ['css'], tag: 'style', attrs: {} }];
 
 /**
  * @constant defaultContextTypes
  * @type {Object}
  */
 var defaultContextTypes = {
-  router: _propTypes2.default.object
+    router: _propTypes2.default.object
 };
 
 /**
@@ -1014,7 +1014,7 @@ var defaultContextTypes = {
  * @return {void}
  */
 var throwError = function throwError(message) {
-  throw new Error('ReactShadow: ' + message + '.');
+    throw new Error('ReactShadow: ' + message + '.');
 };
 
 /**
@@ -1024,13 +1024,13 @@ var throwError = function throwError(message) {
  */
 var fetchInclude = (0, _ramda.memoize)(function (document) {
 
-  return new Promise(function (resolve) {
-    (0, _axios.get)(document).then(function (response) {
-      return response.data;
-    }).then(resolve).catch(function () {
-      return resolve('');
+    return new Promise(function (resolve) {
+        (0, _axios.get)(document).then(function (response) {
+            return response.data;
+        }).then(resolve).catch(function () {
+            return resolve('');
+        });
     });
-  });
 });
 
 /**
@@ -1039,36 +1039,107 @@ var fetchInclude = (0, _ramda.memoize)(function (document) {
  * @return {ShadowDOM}
  */
 var withContext = exports.withContext = function withContext(contextTypes) {
-  var _class2, _temp3;
-
-  /**
-   * @method createContextProvider
-   * @param {Object} context
-   * @return {ContextProvider}
-   */
-  var createContextProvider = function createContextProvider(context) {
-    var _class, _temp;
+    var _class2, _temp3;
 
     /**
-     * @class ContextProvider
-     * @extends {Component}
+     * @method createContextProvider
+     * @param {Object} context
+     * @return {ContextProvider}
      */
-    return _temp = _class = function (_PureComponent) {
-      _inherits(ContextProvider, _PureComponent);
-
-      function ContextProvider() {
-        _classCallCheck(this, ContextProvider);
-
-        return _possibleConstructorReturn(this, (ContextProvider.__proto__ || Object.getPrototypeOf(ContextProvider)).apply(this, arguments));
-      }
-
-      _createClass(ContextProvider, [{
-        key: 'getChildContext',
-
+    var createContextProvider = function createContextProvider(context) {
+        var _class, _temp;
 
         /**
-         * @method getChildContext
-         * @return {Object}
+         * @class ContextProvider
+         * @extends {Component}
+         */
+        return _temp = _class = function (_PureComponent) {
+            _inherits(ContextProvider, _PureComponent);
+
+            function ContextProvider() {
+                _classCallCheck(this, ContextProvider);
+
+                return _possibleConstructorReturn(this, (ContextProvider.__proto__ || Object.getPrototypeOf(ContextProvider)).apply(this, arguments));
+            }
+
+            _createClass(ContextProvider, [{
+                key: 'getChildContext',
+
+
+                /**
+                 * @method getChildContext
+                 * @return {Object}
+                 */
+
+
+                /**
+                 * @constant propTypes
+                 * @type {Object}
+                 */
+                value: function getChildContext() {
+                    return context;
+                }
+
+                /**
+                 * @method componentDidCatch
+                 * @param {String} error
+                 * @return {void}
+                 */
+
+
+                /**
+                 * @constant childContextTypes
+                 * @type {Object}
+                 */
+
+            }, {
+                key: 'componentDidCatch',
+                value: function componentDidCatch(error) {
+                    throwError(error);
+                }
+
+                /**
+                 * @method render
+                 * @return {XML}
+                 */
+
+            }, {
+                key: 'render',
+                value: function render() {
+                    return this.props.children;
+                }
+            }]);
+
+            return ContextProvider;
+        }(_react.PureComponent), _class.propTypes = {
+            children: _propTypes2.default.node.isRequired
+        }, _class.childContextTypes = contextTypes, _temp;
+    };
+
+    /**
+     * @class ShadowDOM
+     * @extends Component
+     */
+    return _temp3 = _class2 = function (_Component) {
+        _inherits(ShadowDOM, _Component);
+
+        function ShadowDOM() {
+            var _ref;
+
+            var _temp2, _this2, _ret;
+
+            _classCallCheck(this, ShadowDOM);
+
+            for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+                args[_key] = arguments[_key];
+            }
+
+            return _ret = (_temp2 = (_this2 = _possibleConstructorReturn(this, (_ref = ShadowDOM.__proto__ || Object.getPrototypeOf(ShadowDOM)).call.apply(_ref, [this].concat(args))), _this2), _this2.state = { resolving: false }, _this2.ContextProvider = createContextProvider(_this2.context), _this2.WrappedComponent = _this2.props.children, _temp2), _possibleConstructorReturn(_this2, _ret);
+        }
+
+        /**
+         * @constant contextTypes
+         * @type {Object}
          */
 
 
@@ -1076,289 +1147,229 @@ var withContext = exports.withContext = function withContext(contextTypes) {
          * @constant propTypes
          * @type {Object}
          */
-        value: function getChildContext() {
-          return context;
-        }
-
-        /**
-         * @method componentDidCatch
-         * @param {String} error
-         * @return {void}
-         */
 
 
         /**
-         * @constant childContextTypes
+         * @constant defaultProps
          * @type {Object}
          */
 
-      }, {
-        key: 'componentDidCatch',
-        value: function componentDidCatch(error) {
-          throwError(error);
-        }
 
         /**
-         * @method render
-         * @return {XML}
+         * @constant state
+         * @type {Object}
          */
 
-      }, {
-        key: 'render',
-        value: function render() {
-          return this.props.children;
-        }
-      }]);
-
-      return ContextProvider;
-    }(_react.PureComponent), _class.propTypes = {
-      children: _propTypes2.default.node.isRequired
-    }, _class.childContextTypes = contextTypes, _temp;
-  };
-
-  /**
-   * @class ShadowDOM
-   * @extends Component
-   */
-  return _temp3 = _class2 = function (_Component) {
-    _inherits(ShadowDOM, _Component);
-
-    function ShadowDOM() {
-      var _ref;
-
-      var _temp2, _this2, _ret;
-
-      _classCallCheck(this, ShadowDOM);
-
-      for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-        args[_key] = arguments[_key];
-      }
-
-      return _ret = (_temp2 = (_this2 = _possibleConstructorReturn(this, (_ref = ShadowDOM.__proto__ || Object.getPrototypeOf(ShadowDOM)).call.apply(_ref, [this].concat(args))), _this2), _this2.state = { resolving: false }, _this2.ContextProvider = createContextProvider(_this2.context), _this2.WrappedComponent = _this2.props.children, _temp2), _possibleConstructorReturn(_this2, _ret);
-    }
-
-    /**
-     * @constant contextTypes
-     * @type {Object}
-     */
-
-
-    /**
-     * @constant propTypes
-     * @type {Object}
-     */
-
-
-    /**
-     * @constant defaultProps
-     * @type {Object}
-     */
-
-
-    /**
-     * @constant state
-     * @type {Object}
-     */
-
-
-    /**
-     * @constant ContextProvider
-     * @type {ContextProvider}
-     */
-
-
-    /**
-     * @constant WrappedComponent
-     * @type {Object}
-     */
-
-
-    _createClass(ShadowDOM, [{
-      key: 'componentDidMount',
-
-
-      /**
-       * @method componentDidMount
-       * @return {void}
-       */
-      value: function componentDidMount() {
-        var _this3 = this;
-
-        var _props = this.props,
-            mode = _props.boundaryMode,
-            delegatesFocus = _props.delegatesFocus;
-
-        // Create the shadow root and take the CSS documents from props.
-
-        var node = (0, _reactDom.findDOMNode)(this);
-        var root = node.attachShadow ? node.attachShadow({ mode: mode, delegatesFocus: delegatesFocus }) : node.createShadowRoot();
-        var include = [].concat(this.props.include);
-        var container = this.wrapContainer();
-
-        // Render the passed in component to the shadow root, and then `setState` if there
-        // are no CSS documents to be resolved.
-        (0, _reactDom.render)(container, root);
-
-        include.length === 0 ? this.setState({ root: root }) : (this.setState({ root: root, resolving: true }), this.attachIncludes(include).then(function () {
-          return _this3.setState({ resolving: false });
-        }));
-      }
-
-      /**
-       * @method componentDidUpdate
-       * @return {void}
-       */
-
-    }, {
-      key: 'componentDidUpdate',
-      value: function componentDidUpdate() {
-
-        // Updates consist of simply rendering the container element into the shadow root again, as
-        // the `this.wrapContainer()` element contains the passed in component's children.
-        (0, _reactDom.render)(this.wrapContainer(), this.state.root);
-      }
-
-      /**
-       * @method wrapContainer
-       * @return {Object}
-       */
-
-    }, {
-      key: 'wrapContainer',
-      value: function wrapContainer() {
-        var _this4 = this;
-
-        // Wrap children in a container if it's an array of children, otherwise simply render the single child
-        // which is a valid `ReactElement` instance.
-        var children = this.props.children.props.children;
-
-        var child = children.length ? _react2.default.createElement(
-          this.props.nodeName,
-          null,
-          children
-        ) : children;
-        var ContextProvider = this.ContextProvider;
 
         /**
-         * @method getChildContext
-         * @return {Object}
+         * @constant ContextProvider
+         * @type {ContextProvider}
          */
-        ContextProvider.prototype.getChildContext = function () {
-          return _this4.context;
-        };
 
-        return _react2.default.createElement(
-          ContextProvider,
-          null,
-          child
-        );
-      }
 
-      /**
-       * @method attachIncludes
-       * @param include {Array}
-       * @return {void}
-       */
+        /**
+         * @constant WrappedComponent
+         * @type {Object}
+         */
 
-    }, {
-      key: 'attachIncludes',
-      value: function attachIncludes(include) {
-        var _this5 = this;
 
-        // Group all of the includes by their extension.
-        var groupedFiles = (0, _ramda.groupBy)(function (file) {
-          return file.extension;
-        })(include.map(function (path) {
-          return { path: path, extension: path.split('.').pop() };
-        }));
-        var includeFiles = Object.keys(groupedFiles).map(function (extension) {
+        _createClass(ShadowDOM, [{
+            key: 'componentDidMount',
 
-          var nodeData = includeMap.find(function (model) {
-            return model.extensions.includes(extension);
-          });
-          var files = groupedFiles[extension].map(function (model) {
-            return model.path;
-          });
 
-          !nodeData && throwError('Files with extension of "' + extension + '" are unsupported');
+            /**
+             * @method componentDidMount
+             * @return {void}
+             */
+            value: function componentDidMount() {
+                var _this3 = this;
 
-          var containerElement = document.createElement(nodeData.tag);
+                var _props = this.props,
+                    mode = _props.boundaryMode,
+                    delegatesFocus = _props.delegatesFocus;
 
-          // Apply all of the attributes defined in the `includeMap` to the node.
-          Object.keys(nodeData.attrs).map(function (key) {
-            return containerElement.setAttribute(key, nodeData.attrs[key]);
-          });
+                // Create the shadow root and take the CSS documents from props.
 
-          // Load each file individually and then concatenate them.
-          return Promise.all(files.map(fetchInclude)).then(function (fileData) {
-            containerElement.innerHTML = fileData.reduce(function (xs, fileDatum) {
-              return xs + ' ' + fileDatum;
-            }).trim();
-            containerElement.innerHTML.length && _this5.state.root.appendChild(containerElement);
-          });
-        });
+                var node = (0, _reactDom.findDOMNode)(this);
+                var root = node.attachShadow ? node.attachShadow({ mode: mode, delegatesFocus: delegatesFocus }) : node.createShadowRoot();
+                var include = [].concat(this.props.include);
+                var container = this.wrapContainer();
 
-        return Promise.all(includeFiles);
-      }
+                // Render the passed in component to the shadow root, and then `setState` if there
+                // are no CSS documents to be resolved.
+                (0, _reactDom.render)(container, root);
 
-      /**
-       * @method throwInvariants
-       * @return {Boolean|void}
-       */
+                include.length === 0 ? this.setState({ root: root }) : (this.setState({ root: root, resolving: true }), this.attachIncludes(include).then(function () {
+                    return _this3.setState({ resolving: false });
+                }));
+            }
 
-    }, {
-      key: 'throwInvariants',
-      value: function throwInvariants() {
+            /**
+             * @method componentDidUpdate
+             * @return {void}
+             */
 
-        // Ensure that the passed child isn't an array of children.
-        Array.isArray(this.props.children) && throwError('You must pass a single child rather than multiple children');
+        }, {
+            key: 'componentDidUpdate',
+            value: function componentDidUpdate() {
 
-        if (typeof this.props.children.type !== 'string') {
+                // Updates consist of simply rendering the container element into the shadow root again, as
+                // the `this.wrapContainer()` element contains the passed in component's children.
+                (0, _reactDom.render)(this.wrapContainer(), this.state.root);
+            }
 
-          // Ensure that the passed child has a valid node name.
-          throwError('Passed child must be a concrete HTML element rather than another React component');
-        }
+            /**
+             * @method componentWillUnmount
+             * @return {void}
+             */
 
-        return true;
-      }
+        }, {
+            key: 'componentWillUnmount',
+            value: function componentWillUnmount() {
+                (0, _reactDom.unmountComponentAtNode)(this.state.root);
+            }
 
-      /**
-       * @method render
-       * @return {XML}
-       */
+            /**
+             * @method wrapContainer
+             * @return {Object}
+             */
 
-    }, {
-      key: 'render',
-      value: function render() {
-        var _this6 = this;
+        }, {
+            key: 'wrapContainer',
+            value: function wrapContainer() {
+                var _this4 = this;
 
-        return this.throwInvariants() && function () {
+                // Wrap children in a container if it's an array of children, otherwise simply render the single child
+                // which is a valid `ReactElement` instance.
+                var children = this.props.children.props.children;
 
-          // Props from the passed component, minus `children` as that's handled by `componentDidMount`.
-          var child = _react.Children.only(_this6.props.children);
-          var childProps = (0, _ramda.dissoc)('children', child.props);
-          var className = _this6.state.resolving ? 'resolving' : 'resolved';
-          var classNames = ((childProps.className ? childProps.className : '') + ' ' + className).trim();
-          var props = _extends({}, childProps, { className: classNames });
+                var child = children.length ? _react2.default.createElement(
+                    this.props.nodeName,
+                    null,
+                    children
+                ) : children;
+                var ContextProvider = this.ContextProvider;
 
-          return _react2.default.createElement(child.type, props);
-        }();
-      }
-    }]);
+                /**
+                 * @method getChildContext
+                 * @return {Object}
+                 */
+                ContextProvider.prototype.getChildContext = function () {
+                    return _this4.context;
+                };
 
-    return ShadowDOM;
-  }(_react.Component), _class2.contextTypes = contextTypes, _class2.propTypes = {
-    children: _propTypes2.default.node.isRequired,
-    include: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.array]).isRequired,
-    nodeName: _propTypes2.default.string.isRequired,
-    boundaryMode: _propTypes2.default.oneOf(['open', 'closed']).isRequired,
-    delegatesFocus: _propTypes2.default.bool.isRequired
-  }, _class2.defaultProps = {
-    include: [],
-    nodeName: 'span',
-    boundaryMode: 'open',
-    delegatesFocus: false
-  }, _temp3;
+                return _react2.default.createElement(
+                    ContextProvider,
+                    null,
+                    child
+                );
+            }
+
+            /**
+             * @method attachIncludes
+             * @param include {Array}
+             * @return {void}
+             */
+
+        }, {
+            key: 'attachIncludes',
+            value: function attachIncludes(include) {
+                var _this5 = this;
+
+                // Group all of the includes by their extension.
+                var groupedFiles = (0, _ramda.groupBy)(function (file) {
+                    return file.extension;
+                })(include.map(function (path) {
+                    return { path: path, extension: path.split('.').pop() };
+                }));
+                var includeFiles = Object.keys(groupedFiles).map(function (extension) {
+
+                    var nodeData = includeMap.find(function (model) {
+                        return model.extensions.includes(extension);
+                    });
+                    var files = groupedFiles[extension].map(function (model) {
+                        return model.path;
+                    });
+
+                    !nodeData && throwError('Files with extension of "' + extension + '" are unsupported');
+
+                    var containerElement = document.createElement(nodeData.tag);
+
+                    // Apply all of the attributes defined in the `includeMap` to the node.
+                    Object.keys(nodeData.attrs).map(function (key) {
+                        return containerElement.setAttribute(key, nodeData.attrs[key]);
+                    });
+
+                    // Load each file individually and then concatenate them.
+                    return Promise.all(files.map(fetchInclude)).then(function (fileData) {
+                        containerElement.innerHTML = fileData.reduce(function (xs, fileDatum) {
+                            return xs + ' ' + fileDatum;
+                        }).trim();
+                        containerElement.innerHTML.length && _this5.state.root.appendChild(containerElement);
+                    });
+                });
+
+                return Promise.all(includeFiles);
+            }
+
+            /**
+             * @method throwInvariants
+             * @return {Boolean|void}
+             */
+
+        }, {
+            key: 'throwInvariants',
+            value: function throwInvariants() {
+
+                // Ensure that the passed child isn't an array of children.
+                Array.isArray(this.props.children) && throwError('You must pass a single child rather than multiple children');
+
+                if (typeof this.props.children.type !== 'string') {
+
+                    // Ensure that the passed child has a valid node name.
+                    throwError('Passed child must be a concrete HTML element rather than another React component');
+                }
+
+                return true;
+            }
+
+            /**
+             * @method render
+             * @return {XML}
+             */
+
+        }, {
+            key: 'render',
+            value: function render() {
+                var _this6 = this;
+
+                return this.throwInvariants() && function () {
+
+                    // Props from the passed component, minus `children` as that's handled by `componentDidMount`.
+                    var child = _react.Children.only(_this6.props.children);
+                    var childProps = (0, _ramda.dissoc)('children', child.props);
+                    var className = _this6.state.resolving ? 'resolving' : 'resolved';
+                    var classNames = ((childProps.className ? childProps.className : '') + ' ' + className).trim();
+                    var props = _extends({}, childProps, { className: classNames });
+
+                    return _react2.default.createElement(child.type, props);
+                }();
+            }
+        }]);
+
+        return ShadowDOM;
+    }(_react.Component), _class2.contextTypes = contextTypes, _class2.propTypes = {
+        children: _propTypes2.default.node.isRequired,
+        include: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.array]).isRequired,
+        nodeName: _propTypes2.default.string.isRequired,
+        boundaryMode: _propTypes2.default.oneOf(['open', 'closed']).isRequired,
+        delegatesFocus: _propTypes2.default.bool.isRequired
+    }, _class2.defaultProps = {
+        include: [],
+        nodeName: 'span',
+        boundaryMode: 'open',
+        delegatesFocus: false
+    }, _temp3;
 };
 
 exports.default = withContext(defaultContextTypes);
