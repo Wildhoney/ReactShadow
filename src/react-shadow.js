@@ -201,10 +201,10 @@ export const withContext = contextTypes => {
 
         }
 
-		/**
-		 * @method componentWillUnmount
-		 * @return {void}
-		 */
+        /**
+         * @method componentWillUnmount
+         * @return {void}
+         */
         componentWillUnmount() {
             unmountComponentAtNode(this.state.root);
         }
@@ -276,7 +276,7 @@ export const withContext = contextTypes => {
             if (typeof this.props.children.type !== 'string') {
 
                 // Ensure that the passed child has a valid node name.
-                throwError('Passed child must be a concrete HTML element rather than another React component');
+                throwError('Immediate descendant of <ShadowDOM /> must be a HTML node, rather than a React component');
 
             }
 
