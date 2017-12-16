@@ -178,15 +178,9 @@ test('Should be able to raise necessary exceptions for happier devs;', t => {
 });
 
 test('Should call componentWillUnmount of child components', t => {
-
-    const unMountSpy = spy();
-
-    const Test = t.context.createChildComponent(unMountSpy);
-
+    const unmountSpy = spy();
+    const Test = t.context.createChildComponent(unmountSpy);
     const wrapper = mount(<Test />);
-
     wrapper.unmount();
-
-    t.is(unMountSpy.callCount, 1);
-
+    t.is(unmountSpy.callCount, 1);
 });
