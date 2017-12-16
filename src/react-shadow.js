@@ -265,10 +265,10 @@ export const withContext = contextTypes => {
         }
 
         /**
-         * @method throwInvariants
+         * @method validate
          * @return {Boolean|void}
          */
-        throwInvariants() {
+        validate() {
 
             // Ensure that the passed child isn't an array of children.
             Array.isArray(this.props.children) && throwError('You must pass a single child rather than multiple children');
@@ -290,7 +290,7 @@ export const withContext = contextTypes => {
          */
         render() {
 
-            return this.throwInvariants() && do {
+            return this.validate() && do {
 
                 // Props from the passed component, minus `children` as that's handled by `componentDidMount`.
                 const child = Children.only(this.props.children);
