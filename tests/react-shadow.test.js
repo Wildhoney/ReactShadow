@@ -38,20 +38,20 @@ test.beforeEach(t => {
 
     };
 
-	t.context.createChildComponent = (unMountSpy) => {
+    t.context.createChildComponent = (unMountSpy) => {
 
-		class ChildComponent extends Component {
-			componentWillUnmount() {
-				unMountSpy()
-			}
-			render() {
-				return (<div>hello, world</div>);
-			}
-		}
+        class ChildComponent extends Component {
+            componentWillUnmount() {
+                unMountSpy()
+            }
+            render() {
+                return (<div>hello, world</div>);
+            }
+        }
 
-		return () => <ShadowDOM><div><ChildComponent/></div></ShadowDOM>;
+        return () => <ShadowDOM><div><ChildComponent/></div></ShadowDOM>;
 
-	};
+    };
 
 });
 
@@ -164,7 +164,7 @@ test('Should be able to raise necessary exceptions for happier devs;', t => {
     t.throws(() => {
         const Example = <div />;
         mount(<ShadowDOM><Example /></ShadowDOM>);
-    }, 'ReactShadow: Passed child must be a concrete HTML element rather than another React component.');
+    }, 'ReactShadow: Immediate descendant of <ShadowDOM /> must be a HTML node, rather than a React component.');
 
     t.throws(() => {
         mount(<ShadowDOM><div /><div /></ShadowDOM>);
@@ -179,14 +179,14 @@ test('Should be able to raise necessary exceptions for happier devs;', t => {
 
 test('Should call componentWillUnmount of child components', t => {
 
-	const unMountSpy = spy();
+    const unMountSpy = spy();
 
-	const Test = t.context.createChildComponent(unMountSpy);
+    const Test = t.context.createChildComponent(unMountSpy);
 
-	const wrapper = mount(<Test />);
+    const wrapper = mount(<Test />);
 
-	wrapper.unmount();
+    wrapper.unmount();
 
-	t.is(unMountSpy.callCount, 1);
+    t.is(unMountSpy.callCount, 1);
 
 });
