@@ -125,10 +125,10 @@ export const withContext = contextTypes => {
          */
         static propTypes = {
             children: PropTypes.node.isRequired,
-            include: PropTypes.oneOfType([PropTypes.string, PropTypes.array]).isRequired,
-            nodeName: PropTypes.string.isRequired,
-            boundaryMode: PropTypes.oneOf(['open', 'closed']).isRequired,
-            delegatesFocus: PropTypes.bool.isRequired
+            include: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+            nodeName: PropTypes.string,
+            boundaryMode: PropTypes.oneOf(['open', 'closed']),
+            delegatesFocus: PropTypes.bool
         };
 
         /**
