@@ -1004,7 +1004,9 @@ var includeMap = [{ extensions: ['js'], tag: 'script', attrs: { type: 'text/java
  * @type {Object}
  */
 var defaultContextTypes = {
-  router: _propTypes2.default.object
+  router: _propTypes2.default.object,
+  store: _propTypes2.default.object,
+  storeSubscription: _propTypes2.default.object
 };
 
 /**

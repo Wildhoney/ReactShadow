@@ -18,7 +18,9 @@ const includeMap = [
  * @type {Object}
  */
 const defaultContextTypes = {
-    router: PropTypes.object
+    router: PropTypes.object,
+    store: PropTypes.object,
+    storeSubscription: PropTypes.object
 };
 
 /**
