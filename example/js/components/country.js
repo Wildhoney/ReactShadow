@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { memoize } from 'ramda';
 import capitalise from 'capitalize';
@@ -17,7 +18,7 @@ const dispatchOnce = memoize((country, dispatch) => {
     dispatch(fetchData(country));
 });
 
-export default class extends Component {
+class Country extends Component {
 
     /**
      * @constant propTypes
@@ -85,3 +86,5 @@ export default class extends Component {
     }
 
 }
+
+export default connect(({weather, countries}) => ({weather, countries}))(Country);

@@ -43,8 +43,8 @@ export default connect(identity)(props => {
         <BrowserRouter>
             <ShadowDOM include="css/country.css">
                 <section className="weather">
-                    <Route exact path="/" render={() => <Country {...props} country={randomFrom(props.countries)} />} />
-                    <Route exact path="/:country.html" render={({ match }) => <Country {...props} country={match.params.country} />} />
+                    <Route exact path="/" render={() => <Country country={randomFrom(props.countries)} />} />
+                    <Route exact path="/:country.html" render={({ match }) => <Country country={match.params.country} />} />
                 </section>
             </ShadowDOM>
         </BrowserRouter>
