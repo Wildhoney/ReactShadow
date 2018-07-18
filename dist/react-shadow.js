@@ -1025,13 +1025,10 @@ var throwError = function throwError(message) {
  * @return {Promise}
  */
 var fetchInclude = (0, _ramda.memoize)(function (document) {
-
-  return new Promise(function (resolve) {
-    (0, _axios.get)(document).then(function (response) {
-      return response.data;
-    }).then(resolve).catch(function () {
-      return resolve('');
-    });
+  return (0, _axios.get)(document).then(function (response) {
+    return response.data;
+  }).catch(function () {
+    return '';
   });
 });
 
