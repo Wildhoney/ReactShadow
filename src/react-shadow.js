@@ -39,11 +39,7 @@ const throwError = message => {
  * @return {Promise}
  */
 const fetchInclude = memoize(document => {
-
-    return new Promise(resolve => {
-        fetch(document).then(response => response.data).then(resolve).catch(() => resolve(''));
-    });
-
+    return fetch(document).then(response => response.data).catch(() => '');
 });
 
 /**
