@@ -1,0 +1,9 @@
+src/
+examples/
+media/
+tests/
+node_modules/
+webpack**
+.env
+.npmrc
+*.log
