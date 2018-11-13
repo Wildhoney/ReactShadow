@@ -44,7 +44,7 @@
     "@babel/preset-env": "^7.1.5",
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.0.0",
-    "ava": "~0.23.0",
+    "ava": "^1.0.0-rc.2",
     "axios": "^0.14.0",
     "axios-mock-adapter": "^1.6.1",
     "babel-loader": "^8.0.4",
@@ -63,7 +63,7 @@
     "humps": "~2.0.0",
     "jasmine-core": "^2.2.0",
     "jsdom": "~11.3.0",
-    "nyc": "~10.2.0",
+    "nyc": "~13.1.0",
     "prop-types": "~15.6.0",
     "ramda": "^0.22.1",
     "react": "~16.1.0",
@@ -83,13 +83,9 @@
     "xo": "^0.16.0"
   },
   "ava": {
-    "files": [
-      "tests/*.test.js"
-    ],
-    "babel": "inherit",
     "require": [
-      "babel-register",
-      "babel-polyfill",
+      "@babel/register",
+      "@babel/polyfill",
       "./tests/helpers/browser-env.js",
       "./tests/helpers/enzyme.js"
     ]
