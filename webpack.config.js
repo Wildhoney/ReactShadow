@@ -1,4 +1,5 @@
 module.exports = {
+    mode: 'production',
     entry: {
         build: ['./src/react-shadow.js']
     },
@@ -16,7 +17,7 @@ module.exports = {
         }
     },
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.js$/,
                 loader: 'babel-loader',

@@ -1,4 +1,5 @@
 module.exports = {
+    mode: 'development',
     entry: {
         build: ['babel-polyfill', './example/js/default.js']
     },
@@ -8,7 +9,7 @@ module.exports = {
         libraryTarget: 'var'
     },
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.js$/,
                 loader: 'babel-loader',

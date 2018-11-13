@@ -77,7 +77,8 @@
     "redux-thunk": "~2.2.0",
     "sinon": "^1.17.5",
     "webcomponents.js": "~0.7.24",
-    "webpack": "^2.1.0-beta.22",
+    "webpack": "^4.25.1",
+    "webpack-cli": "^3.1.2",
     "xo": "^0.16.0"
   },
   "ava": {
@@ -138,6 +139,5 @@
         }
       ]
     }
-  },
-  "dependencies": {}
+  }
 }
