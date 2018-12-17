@@ -204,7 +204,9 @@ export const withContext = contextTypes => {
          * @return {void}
          */
         componentWillUnmount() {
-            unmountComponentAtNode(this.state.root);
+            if (this.state.root) {
+                unmountComponentAtNode(this.state.root);
+            }
         }
 
         /**
