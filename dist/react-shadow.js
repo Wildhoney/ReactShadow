@@ -1695,7 +1695,9 @@ var withContext = exports.withContext = function withContext(contextTypes) {
     }, {
       key: 'componentWillUnmount',
       value: function componentWillUnmount() {
-        (0, _reactDom.unmountComponentAtNode)(this.state.root);
+        if (this.state.root) {
+          (0, _reactDom.unmountComponentAtNode)(this.state.root);
+        }
       }
 
       /**
