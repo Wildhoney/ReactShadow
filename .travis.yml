@@ -1,24 +1,21 @@
 language: node_js
 node_js: stable
-
-after_success:
-  - ./node_modules/.bin/nyc report --reporter=text-lcov | ./node_modules/.bin/coveralls
-
-before_script:
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
-
 script:
-  - npm install
-  - npm test
-  - npm run build
+    - yarn
+    - yarn test
+    - yarn build
+
+after_success: yarn coverage
+
+before_install:
+  - "sysctl kernel.unprivileged_userns_clone=1"
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
 
 deploy:
   provider: heroku
-  all_branches: true
-  skip_cleanup: true
   api_key:
-    secure: SEOpFCXBRSkYb+CrVUcapmYKWY5AGjxIovVoDmZwMGF0FX75h+WrN6oUIdJyqDetEKXHzBxDMUjVeJUryiR/vqpz2veckHuPoNNCswvUeWkje/ZiEjKcQeyKFNjM3gnlXyCmordGWODFwWRCLQlHwGOqf3pW3BXdtigB0vmYwVI=
+    secure: HZD3alKO02+Nhry4VC7kUl1bDYdeA9hOzkLB4s+ToJeXWi6uft+J0er//MiEhLa4Dor1+RYC767ZsBD5vx/0+Zl3k3QXsbYJdwn6pFl7pBaBBK7zoR00FQytcgT3IXmVEPIlrDQOb5sxSAmovDmXB9MO6xhgIVtlJDe59F6k/vk=
   app: react-shadow
   on:
     repo: Wildhoney/ReactShadow
