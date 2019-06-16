@@ -55,4 +55,10 @@ ShadowRoot.propTypes = {
     styleSheets: PropTypes.arrayOf(PropTypes.string),
     children: PropTypes.node.isRequired,
 };
+
+ShadowRoot.defaultProps = {
+    mode: 'open',
+    delegatesFocus: false,
+    styleSheets: [],
+};
 ```

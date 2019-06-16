@@ -55,15 +55,14 @@ function createComponent(tag) {
     return ShadowRoot;
 }
 
-const componentRegistry = new Map();
+const components = new Map();
 
 export default new Proxy(
     {},
     {
-        get: (_, tag) => {
-            if (!componentRegistry.has(tag))
-                componentRegistry.set(tag, createComponent(tag));
-            return componentRegistry.get(tag);
+        get: function get(_, tag) {
+            if (!components.has(tag)) components.set(tag, createComponent(tag));
+            return components.get(tag);
         },
     },
 );
