@@ -1,7 +1,7 @@
 import React from 'react';
 import { memoize, identity, once } from 'ramda';
 import { connect } from 'react-redux';
-import { BrowserRouter, Route } from 'react-router-dom'
+import { BrowserRouter, Route } from 'react-router-dom';
 import ShadowDOM from '../../../src/react-shadow';
 import Country from '../components/country';
 
@@ -24,7 +24,9 @@ export const fromSlug = memoize(x => x.replace(/-/g, ' '));
  * @param {String} x
  * @return {String}
  */
-export const filenameFor = memoize(x => `/images/${toSlug(x).toLowerCase()}.png`);
+export const filenameFor = memoize(
+    x => `/images/${toSlug(x).toLowerCase()}.png`,
+);
 
 /**
  * @method randomFrom
@@ -38,16 +40,26 @@ const randomFrom = once(xs => xs[Math.floor(Math.random() * xs.length)]);
  * @return {XML}
  */
 export default connect(identity)(props => {
-
     return (
         <BrowserRouter>
             <ShadowDOM include="css/country.css">
                 <section className="weather">
-                    <Route exact path="/" render={() => <Country country={randomFrom(props.countries)} />} />
-                    <Route exact path="/:country.html" render={({ match }) => <Country country={match.params.country} />} />
+                    <Route
+                        exact
+                        path="/"
+                        render={() => (
+                            <Country country={randomFrom(props.countries)} />
+                        )}
+                    />
+                    <Route
+                        exact
+                        path="/:country.html"
+                        render={({ match }) => (
+                            <Country country={match.params.country} />
+                        )}
+                    />
                 </section>
             </ShadowDOM>
         </BrowserRouter>
     );
-
 });

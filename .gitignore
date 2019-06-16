@@ -1,13 +1,10 @@
-# ide
-.idea
-
 # npm
-node_modules
-npm-debug.log
+node_modules/
+yarn-error.log
 
-# example
+# build
+dist/
 example/js/build.js
 
 # coverage
-coverage
-.nyc_output
+.nyc_output/

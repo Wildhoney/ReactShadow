@@ -19,15 +19,11 @@ export const FETCH = Symbol('fetch');
  * @return {Object}
  */
 export function fetchData(country) {
-
     return async dispatch => {
-
-        const slug = country.replace(/\-/g, '+');
+        const slug = country.replace(/-/g, '+');
         const url = `https://api.openweathermap.org/data/2.5/weather?q=${slug}&appid=${API_KEY}&units=metric`;
         const { data } = await get(url);
 
         dispatch({ type: FETCH, name: country, result: camelizeKeys(data) });
-
     };
-
 }

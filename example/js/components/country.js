@@ -19,13 +19,12 @@ const dispatchOnce = memoize((country, dispatch) => {
 });
 
 class Country extends Component {
-
     /**
      * @constant propTypes
      * @type {Object}
      */
     static propTypes = {
-        country: PropTypes.string.isRequired
+        country: PropTypes.string.isRequired,
     };
 
     /**
@@ -51,17 +50,24 @@ class Country extends Component {
      * @return {Object}
      */
     find(country) {
-
         const weather = this.props.weather[country];
-        const description = () => capitalise.words(weather.weather[0].description);
+        const description = () =>
+            capitalise.words(weather.weather[0].description);
 
         return {
             country: fromSlug(country),
-            title: weather ? `${description()} in ${fromSlug(country)}` : `Weather in ${country}`,
-            label: weather ? `${weather.main.temp}${String.fromCharCode(8451)}` : String.fromCharCode(8212),
-            fahrenheit: weather ? `${weather.main.temp * 9 / 5 + 32}${String.fromCharCode(8457)}` : ''
+            title: weather
+                ? `${description()} in ${fromSlug(country)}`
+                : `Weather in ${country}`,
+            label: weather
+                ? `${weather.main.temp}${String.fromCharCode(8451)}`
+                : String.fromCharCode(8212),
+            fahrenheit: weather
+                ? `${(weather.main.temp * 9) / 5 + 32}${String.fromCharCode(
+                      8457,
+                  )}`
+                : '',
         };
-
     }
 
     /**
@@ -69,8 +75,9 @@ class Country extends Component {
      * @return {XML}
      */
     render() {
-
-        const { country, title, label, fahrenheit } = this.find(this.props.country);
+        const { country, title, label, fahrenheit } = this.find(
+            this.props.country,
+        );
 
         return (
             <DocumentTitle title={`Weather for ${country}`}>
@@ -82,9 +89,9 @@ class Country extends Component {
                 </main>
             </DocumentTitle>
         );
-
     }
-
 }
 
-export default connect(({weather, countries}) => ({weather, countries}))(Country);
+export default connect(({ weather, countries }) => ({ weather, countries }))(
+    Country,
+);

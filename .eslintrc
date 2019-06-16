@@ -1,0 +1,19 @@
+{
+    "parser": "babel-eslint",
+    "extends": [
+        "standard",
+        "prettier",
+        "plugin:react/recommended",
+        "prettier/standard"
+    ],
+    "plugins": ["react"],
+    "rules": {
+        "react/react-in-jsx-scope": "off",
+        "react/display-name": "off"
+    },
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    }
+}

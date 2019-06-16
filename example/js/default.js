@@ -9,11 +9,14 @@ import reducer from './reducer';
 import Layout from './containers/layout';
 
 ready().then(() => {
-
     const store = createStore(reducer, applyMiddleware(thunk));
     const mountNode = document.querySelector('section.container');
 
-    mountNode && render(<Provider store={store}><Layout /></Provider>, mountNode);
-
+    mountNode &&
+        render(
+            <Provider store={store}>
+                <Layout />
+            </Provider>,
+            mountNode,
+        );
 });
-
