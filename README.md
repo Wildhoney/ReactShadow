@@ -22,8 +22,6 @@
 
 Creating the [shadow root](https://www.w3.org/TR/shadow-dom/) is as simple as using the default export to construct a shadow root using the node name provided &ndash; for example `root.div` would create a `div` as the host element, and a shadow root as its immediate descendant &mdash; all of the child elements would then be descendants of the shadow boundary.
 
-[![Edit react-shadow](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/react-shadow-by6bo?fontsize=14)
-
 ```jsx
 import root from 'react-shadow';
 import styles from './styles.css';
@@ -38,6 +36,8 @@ export default function Quote() {
     );
 }
 ```
+
+[![Edit react-shadow](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/react-shadow-by6bo?fontsize=14)
 
 Applying styles requires either applying the styles directly to the component as a string, or importing the CSS documents as a string as part of your build process. You can then append the `style` component directly to your shadow boundary via your component's tree. In [the example](https://github.com/Wildhoney/ReactShadow/tree/master/example) we use the following Webpack configuration to import CSS documents as strings.
 
