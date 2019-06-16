@@ -11,36 +11,61 @@ ShadowContent.propTypes = {
     children: PropTypes.node.isRequired,
 };
 
-function getShadowRoot(options) {
-    function ShadowRoot({ children, ...props }) {
+function createComponent(tag) {
+    function ShadowRoot({
+        mode,
+        delegatesFocus,
+        styleSheets,
+        children,
+        ...props
+    }) {
+        const container = { tag };
         const [node, setNode] = useState(null);
         const [root, setRoot] = useState(null);
 
-        useEffect(
-            () => void (node && setRoot(node.attachShadow({ mode: 'open' }))),
-            [node],
-        );
+        useEffect(() => {
+            if (node) {
+                const root = node.attachShadow({ mode, delegatesFocus });
+                styleSheets.length > 0 &&
+                    (root.adoptedStyleSheets = styleSheets);
+                setRoot(root);
+            }
+        }, [node]);
 
         return (
-            <options.tag {...props} ref={node => setNode(node)}>
+            <container.tag {...props} ref={node => setNode(node)}>
                 {root && <ShadowContent root={root}>{children}</ShadowContent>}
-            </options.tag>
+            </container.tag>
         );
     }
 
     ShadowRoot.propTypes = {
+        mode: PropTypes.oneOf(['open', 'closed']),
+        delegatesFocus: PropTypes.bool,
+        styleSheets: PropTypes.arrayOf(PropTypes.string),
         children: PropTypes.node.isRequired,
+    };
+
+    ShadowRoot.defaultProps = {
+        mode: 'open',
+        delegatesFocus: false,
+        styleSheets: [],
     };
 
     return ShadowRoot;
 }
 
+const componentRegistry = new Map();
+
+function getShadowRoot(tag) {
+    if (!componentRegistry.has(tag))
+        componentRegistry.set(tag, createComponent(tag));
+    return componentRegistry.get(tag);
+}
+
 export default new Proxy(
     {},
     {
-        get: (_, tag) =>
-            getShadowRoot({
-                tag,
-            }),
+        get: (_, tag) => getShadowRoot(tag),
     },
 );
