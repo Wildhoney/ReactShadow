@@ -33,7 +33,7 @@ function createComponent(tag) {
         }, [node]);
 
         return (
-            <container.tag {...props} ref={node => setNode(node)}>
+            <container.tag {...props} ref={setNode}>
                 {root && <ShadowContent root={root}>{children}</ShadowContent>}
             </container.tag>
         );
@@ -57,15 +57,13 @@ function createComponent(tag) {
 
 const componentRegistry = new Map();
 
-function getShadowRoot(tag) {
-    if (!componentRegistry.has(tag))
-        componentRegistry.set(tag, createComponent(tag));
-    return componentRegistry.get(tag);
-}
-
 export default new Proxy(
     {},
     {
-        get: (_, tag) => getShadowRoot(tag),
+        get: (_, tag) => {
+            if (!componentRegistry.has(tag))
+                componentRegistry.set(tag, createComponent(tag));
+            return componentRegistry.get(tag);
+        },
     },
 );
