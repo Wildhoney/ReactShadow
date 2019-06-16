@@ -26,7 +26,7 @@ Creating the [shadow root](https://www.w3.org/TR/shadow-dom/) is as simple as us
 import root from 'react-shadow';
 import styles from './styles.css';
 
-export default function Quote {
+export default function Quote() {
     return (
         <root.div className="quote">
             <q>“There is strong shadow where there is much light.”</q>
