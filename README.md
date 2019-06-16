@@ -22,6 +22,8 @@
 
 Creating the [shadow root](https://www.w3.org/TR/shadow-dom/) is as simple as using the default export to construct a shadow root using the node name provided &ndash; for example `root.div` would create a `div` as the host element, and a shadow root as its immediate descendant &mdash; all of the child elements would then be descendants of the shadow boundary.
 
+[![Edit react-shadow](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/react-shadow-by6bo?fontsize=14)
+
 ```jsx
 import root from 'react-shadow';
 import styles from './styles.css';
@@ -29,8 +31,8 @@ import styles from './styles.css';
 export default function Quote() {
     return (
         <root.div className="quote">
-            <q>“There is strong shadow where there is much light.”</q>
-            <div class="author">― Johann Wolfgang von Goethe.</div>
+            <q>There is strong shadow where there is much light.</q>
+            <span class="author">― Johann Wolfgang von Goethe.</span>
             <style type="text/css">{styles}</style>
         </root.div>
     );
