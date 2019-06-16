@@ -1,22 +1,25 @@
-import 'webcomponents.js';
 import React from 'react';
 import { render } from 'react-dom';
 import ready from 'document-ready-promise';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
-import reducer from './reducer';
-import Layout from './containers/layout';
+import * as duck from './duck';
+import Layout from './components/Layout';
 
-ready().then(() => {
-    const store = createStore(reducer, applyMiddleware(thunk));
-    const mountNode = document.querySelector('section.container');
+async function main() {
+    await ready();
 
-    mountNode &&
+    const store = createStore(duck.reducer, applyMiddleware(thunk));
+    const node = document.querySelector('section.container');
+
+    node &&
         render(
             <Provider store={store}>
                 <Layout />
             </Provider>,
-            mountNode,
+            node,
         );
-});
+}
+
+main();

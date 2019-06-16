@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 
@@ -7,7 +7,7 @@ function ShadowContent({ root, children }) {
 }
 
 ShadowContent.propTypes = {
-    root: PropTypes.string.isRequired,
+    root: PropTypes.object.isRequired,
     children: PropTypes.node.isRequired,
 };
 
@@ -16,9 +16,10 @@ function getShadowRoot(options) {
         const [node, setNode] = useState(null);
         const [root, setRoot] = useState(null);
 
-        useEffect(() => {
-            node && setRoot(node.attachShadow({ mode: 'open' }));
-        }, [node]);
+        useEffect(
+            () => void (node && setRoot(node.attachShadow({ mode: 'open' }))),
+            [node],
+        );
 
         return (
             <options.tag {...props} ref={node => setNode(node)}>
@@ -34,12 +35,12 @@ function getShadowRoot(options) {
     return ShadowRoot;
 }
 
-const handler = {
-    get: function(_, tag) {
-        return getShadowRoot({
-            tag,
-        });
+export default new Proxy(
+    {},
+    {
+        get: (_, tag) =>
+            getShadowRoot({
+                tag,
+            }),
     },
-};
-
-export default new Proxy({}, handler);
+);
