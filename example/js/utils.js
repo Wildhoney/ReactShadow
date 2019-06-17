@@ -19,6 +19,7 @@ export const pickRandom = R.once(countries => {
 
 export const getWeather = (weather, name) => {
     const model = weather.find(weather => weather.country === name) || null;
+    const tempature = model ? Math.round(model.main.temp) : null;
 
     return {
         country: fromSlug(name),
@@ -28,10 +29,10 @@ export const getWeather = (weather, name) => {
               )}`
             : `Weather in ${name}`,
         label: model
-            ? `${model.main.temp}${String.fromCharCode(8451)}`
+            ? `${tempature}${String.fromCharCode(8451)}`
             : String.fromCharCode(8212),
         fahrenheit: model
-            ? `${(model.main.temp * 9) / 5 + 32}${String.fromCharCode(8457)}`
+            ? `${(tempature * 9) / 5 + 32}${String.fromCharCode(8457)}`
             : '',
     };
 };
