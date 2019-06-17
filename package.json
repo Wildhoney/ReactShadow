@@ -20,6 +20,9 @@
     "react": "^16.8.0",
     "react-dom": "^16.0.0"
   },
+  "dependencies": {
+    "humps": "^2.0.0"
+  },
   "devDependencies": {
     "@babel/core": "^7.4.5",
     "@babel/plugin-transform-runtime": "^7.4.4",
@@ -51,7 +54,6 @@
     "eslint-plugin-react": "^7.13.0",
     "eslint-plugin-standard": "^4.0.0",
     "express": "^4.17.1",
-    "humps": "^2.0.1",
     "nyc": "^14.1.1",
     "prop-types": "^15.7.2",
     "puppeteer": "^1.17.0",

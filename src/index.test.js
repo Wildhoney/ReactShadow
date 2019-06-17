@@ -10,6 +10,13 @@ test('It should be able to create the shadow boundary;', t => {
     t.is(wrapper.getDOMNode().shadowRoot.innerHTML, 'Hello Adam!');
 });
 
+test('It should be able to create the shadow boundary with custom elements;', t => {
+    const wrapper = mount(<root.todoApp>Hello Adam!</root.todoApp>);
+    t.truthy(wrapper.getDOMNode().shadowRoot);
+    t.is(wrapper.getDOMNode().nodeName.toLowerCase(), 'todo-app');
+    t.is(wrapper.getDOMNode().shadowRoot.innerHTML, 'Hello Adam!');
+});
+
 test('It should be able to register events in the shadow boundary;', t => {
     const spies = { onClick: sinon.spy() };
     const wrapper = mount(

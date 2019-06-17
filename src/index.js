@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
+import { decamelize } from 'humps';
 
 function ShadowContent({ root, children }) {
     return createPortal(children, root);
@@ -60,7 +61,8 @@ const components = new Map();
 export default new Proxy(
     {},
     {
-        get: function get(_, tag) {
+        get: function get(_, name) {
+            const tag = decamelize(name, { separator: '-' });
             if (!components.has(tag)) components.set(tag, createComponent(tag));
             return components.get(tag);
         },

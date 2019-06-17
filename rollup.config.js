@@ -48,6 +48,7 @@ module.exports = {
                 'node_modules/styled-components/dist/styled-components.esm.js': [
                     'createContext',
                 ],
+                'node_modules/humps/humps.js': ['decamelize'],
             },
         }),
         terser(),
