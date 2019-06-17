@@ -30,7 +30,7 @@ export default function Quote() {
     return (
         <root.div className="quote">
             <q>There is strong shadow where there is much light.</q>
-            <span class="author">― Johann Wolfgang von Goethe.</span>
+            <span className="author">― Johann Wolfgang von Goethe.</span>
             <style type="text/css">{styles}</style>
         </root.div>
     );
