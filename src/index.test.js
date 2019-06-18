@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, createRef } from 'react';
 import test from 'ava';
 import { mount } from 'enzyme';
 import sinon from 'sinon';
@@ -17,7 +17,7 @@ test('It should be able to create the shadow boundary with custom elements;', t 
     t.is(wrapper.getDOMNode().shadowRoot.innerHTML, 'Hello Adam!');
 });
 
-test('It should be able to handle refs with the element and its associated shadow boundary;', t => {
+test('It should be able to handle functional refs with the host element;', t => {
     const spies = { ref: sinon.spy() };
     mount(
         <>
@@ -26,7 +26,16 @@ test('It should be able to handle refs with the element and its associated shado
     );
     t.is(spies.ref.callCount, 1);
     t.true(spies.ref.firstCall.args[0] instanceof window.HTMLDivElement);
-    t.true(spies.ref.firstCall.args[1] instanceof window.ShadowRoot);
+});
+
+test('It should be able to handle obhect mutated refs with the host element;', t => {
+    const ref = createRef(null);
+    mount(
+        <>
+            <root.div ref={ref}>Hello Adam!</root.div>
+        </>,
+    );
+    t.true(ref.current instanceof window.HTMLDivElement);
 });
 
 test('It should be able to attach stylesheets to the shadow boundary;', t => {

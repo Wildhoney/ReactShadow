@@ -23,7 +23,10 @@ function createComponent(options) {
                     const root = node.attachShadow({ mode, delegatesFocus });
                     styleSheets.length > 0 &&
                         (root.adoptedStyleSheets = styleSheets);
-                    ref && ref(node, root);
+
+                    ref && typeof ref === 'function' && ref(node);
+                    ref && 'current' in ref && (ref.current = node);
+
                     setRoot(root);
                 }
             }, [node]);

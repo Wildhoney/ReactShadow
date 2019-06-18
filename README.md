@@ -64,3 +64,11 @@ ShadowRoot.defaultProps = {
     styleSheets: [],
 };
 ```
+
+In cases where you need the underlying element and its associated shadow boundary, you can use a standard `ref` which will be invoked with the host element &ndash; from that you can use `shadowRoot` to access its shadow root if the `mode` has been set to the default `open` value.
+
+```javascript
+const node = useRef(null);
+// ...
+<root.section ref={node} />
+```
