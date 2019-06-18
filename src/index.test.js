@@ -17,6 +17,18 @@ test('It should be able to create the shadow boundary with custom elements;', t 
     t.is(wrapper.getDOMNode().shadowRoot.innerHTML, 'Hello Adam!');
 });
 
+test('It should be able to handle refs with the element and its associated shadow boundary;', t => {
+    const spies = { ref: sinon.spy() };
+    mount(
+        <>
+            <root.div ref={spies.ref}>Hello Adam!</root.div>
+        </>,
+    );
+    t.is(spies.ref.callCount, 1);
+    t.true(spies.ref.firstCall.args[0] instanceof window.HTMLDivElement);
+    t.true(spies.ref.firstCall.args[1] instanceof window.ShadowRoot);
+});
+
 test('It should be able to attach stylesheets to the shadow boundary;', t => {
     const wrapper = mount(
         <root.todoApp styleSheets={['index.css', 'person.css']}>
