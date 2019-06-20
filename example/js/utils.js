@@ -34,5 +34,6 @@ export const getWeather = (weather, name) => {
         fahrenheit: model
             ? `${(tempature * 9) / 5 + 32}${String.fromCharCode(8457)}`
             : '',
+        timezone: model ? model.timezone : null,
     };
 };
