@@ -69,6 +69,8 @@ In cases where you need the underlying element and its associated shadow boundar
 
 ```javascript
 const node = useRef(null);
+
 // ...
+
 <root.section ref={node} />
 ```
