@@ -26,7 +26,7 @@ function Country({ weather, country, countries, fetch }) {
                             ? moment()
                                   .utc()
                                   .add(timezone, 'seconds')
-                                  .format('HH:MM:ss')
+                                  .format('hh:mm:ss')
                             : String.fromCharCode(8212)}
                     </h1>
                     <h2 title={fahrenheit}>{label}</h2>
