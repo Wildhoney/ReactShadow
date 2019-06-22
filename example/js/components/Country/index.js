@@ -30,7 +30,7 @@ function Country({ weather, country, countries, fetch }) {
                             : String.fromCharCode(8212)}
                     </h1>
                     <h2 title={fahrenheit}>{label}</h2>
-                    <Countries list={countries} />
+                    <Countries country={country} countries={countries} />
                 </main>
             </span>
         </DocumentTitle>

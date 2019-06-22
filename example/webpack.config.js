@@ -28,7 +28,7 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                loader: ['to-string-loader', 'css-loader'],
+                loader: ['to-string-loader', 'css-loader', 'postcss-loader'],
             },
         ],
     },

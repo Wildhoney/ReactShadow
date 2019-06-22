@@ -112,3 +112,26 @@ ul li a:hover {
 ul li a.active {
     color: deeppink;
 }
+
+select {
+    margin-top: 10px;
+    outline: none;
+    display: none;
+    appearance: none;
+    padding: 5px 10px;
+    background: white url('/images/arrow.svg') no-repeat right 10px center;
+    background-size: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+}
+
+@media (max-width: 450px) {
+    ul {
+        display: none;
+    }
+
+    select {
+        display: initial;
+    }
+}
