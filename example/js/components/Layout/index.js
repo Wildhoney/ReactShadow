@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import root from 'react-shadow';
 import * as utils from '../../utils';
 import Country from '../Country';
@@ -16,7 +16,11 @@ function Layout(props) {
                     exact
                     path="/"
                     render={() => (
-                        <Country country={utils.pickRandom(props.countries)} />
+                        <Redirect
+                            to={`/${utils.toSlug(
+                                utils.pickRandom(props.countries),
+                            )}.html`}
+                        />
                     )}
                 />
                 <Route
