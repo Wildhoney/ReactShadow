@@ -124,6 +124,7 @@ select {
     border: 1px solid rgba(0, 0, 0, 0.25);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 3px;
+    font-size: 16px;
 }
 
 @media (max-width: 450px) {
@@ -143,7 +144,7 @@ select {
     }
 }
 
-@media (max-width: 160px) {
+@media (max-width: 190px) {
     img,
     button {
         display: none;
