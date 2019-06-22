@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import moment from 'moment';
 import DocumentTitle from 'react-document-title';
 import * as duck from '../../duck';
 import * as utils from '../../utils';
