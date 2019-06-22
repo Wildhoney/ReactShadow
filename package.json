@@ -21,7 +21,7 @@
     "react-dom": "^16.0.0"
   },
   "dependencies": {
-    "humps": "^2.0.0"
+    "humps": "^2.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
@@ -45,7 +45,7 @@
     "document-ready-promise": "^3.0.1",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
-    "eslint": "^5.16.0",
+    "eslint": "^6.0.0",
     "eslint-config-prettier": "^5.0.0",
     "eslint-config-standard": "^12.0.0",
     "eslint-plugin-import": "^2.17.3",
@@ -57,7 +57,7 @@
     "moment": "^2.24.0",
     "nyc": "^14.1.1",
     "prop-types": "^15.7.2",
-    "puppeteer": "^1.17.0",
+    "puppeteer": "^1.18.0",
     "ramda": "^0.26.1",
     "react": "^16.8.6",
     "react-document-title": "^2.0.3",
@@ -66,10 +66,10 @@
     "react-router-dom": "^5.0.1",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
-    "rollup": "^1.15.6",
-    "rollup-plugin-babel": "^4.3.2",
+    "rollup": "^1.16.2",
+    "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-commonjs": "^10.0.0",
-    "rollup-plugin-node-resolve": "^5.0.3",
+    "rollup-plugin-node-resolve": "^5.0.4",
     "rollup-plugin-terser": "^5.0.0",
     "sinon": "^7.3.2",
     "to-string-loader": "^1.1.5",
