@@ -4,16 +4,30 @@ import { camelizeKeys } from 'humps';
 const initialState = {
     weather: [],
     countries: [
+        'Amesbury',
         'Amsterdam',
+        'Athens',
+        'Brussels',
         'Cairo',
+        'Cancun',
+        'Dubai',
+        'Hanga Roa',
+        'Istanbul',
+        'Jordan',
         'London',
         'Moscow',
         'Mumbai',
+        'Munich',
+        'New Delhi',
         'New York',
         'Paris',
+        'Patagonia',
+        'Phuket',
+        'Pisa',
         'Rio de Janeiro',
         'Rome',
         'Sydney',
+        'Venice',
     ],
 };
 
@@ -24,11 +38,11 @@ const actionTypes = {
 };
 
 export const actions = {
-    fetch: country => {
+    fetch: (country, options = { cache: true }) => {
         return async (dispatch, getState) => {
-            const hasCountry = getState().weather.find(
-                weather => weather.country === country,
-            );
+            const hasCountry =
+                options.cache &&
+                getState().weather.find(weather => weather.country === country);
 
             if (hasCountry) return null;
 
@@ -38,7 +52,7 @@ export const actions = {
 
             dispatch({
                 type: actionTypes.fetch,
-                payload: { country, ...camelizeKeys(data) },
+                payload: { country, date: Date.now(), ...camelizeKeys(data) },
             });
         };
     },
@@ -47,9 +61,12 @@ export const actions = {
 export function reducer(state = initialState, action) {
     switch (action.type) {
         case actionTypes.fetch:
+            const weather = state.weather.filter(
+                ({ country }) => country !== action.payload.country,
+            );
             return {
                 ...state,
-                weather: [...state.weather, action.payload],
+                weather: [...weather, action.payload],
             };
     }
 

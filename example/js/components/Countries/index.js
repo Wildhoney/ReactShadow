@@ -5,22 +5,25 @@ import * as utils from '../../utils';
 
 function Countries({ list }) {
     return (
-        <ul>
-            <li className="title">Weather for:</li>
-
-            {list.map(name => {
-                return (
-                    <li key={name}>
-                        <NavLink
-                            to={`/${utils.toSlug(name)}.html`}
-                            activeClassName="active"
-                        >
-                            {name}
-                        </NavLink>
-                    </li>
-                );
-            })}
-        </ul>
+        <>
+            <h3>Weather for:</h3>
+            <ul>
+                {list
+                    .sort((a, b) => a.localeCompare(b))
+                    .map(name => {
+                        return (
+                            <li key={name}>
+                                <NavLink
+                                    to={`/${utils.toSlug(name)}.html`}
+                                    activeClassName="active"
+                                >
+                                    {name}
+                                </NavLink>
+                            </li>
+                        );
+                    })}
+            </ul>
+        </>
     );
 }
 

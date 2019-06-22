@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -9,7 +9,7 @@ import * as utils from '../../utils';
 import Countries from '../Countries';
 
 function Country({ weather, country, countries, fetch }) {
-    const { title, label, fahrenheit, timezone } = utils.getWeather(
+    const { title, label, fahrenheit, timezone, date } = utils.getWeather(
         weather,
         country,
     );
@@ -18,13 +18,16 @@ function Country({ weather, country, countries, fetch }) {
     return (
         <DocumentTitle title={`Weather for ${country}`}>
             <span>
+                <button
+                    className="refresh"
+                    onClick={() => void fetch(country, { cache: false })}
+                />
                 <main>
                     <img src={utils.getFilename(country)} alt={country} />
                     <h1>
                         {title} at{' '}
                         {timezone
-                            ? moment()
-                                  .utc()
+                            ? moment(date)
                                   .add(timezone, 'seconds')
                                   .format('HH:mm:ss')
                             : String.fromCharCode(8212)}

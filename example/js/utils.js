@@ -35,5 +35,6 @@ export const getWeather = (weather, name) => {
             ? `${(tempature * 9) / 5 + 32}${String.fromCharCode(8457)}`
             : '',
         timezone: model ? model.timezone : null,
+        date: model ? model.date : null,
     };
 };

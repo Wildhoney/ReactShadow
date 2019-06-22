@@ -1,13 +1,13 @@
 :host {
     all: initial;
-    background-color: rgba(0, 0, 0, .05);
+    background-color: rgba(0, 0, 0, 0.05);
     border-radius: 5px;
     display: block;
 }
 
 section.weather {
     all: initial;
-    background-color: rgba(0, 0, 0, .05);
+    background-color: rgba(0, 0, 0, 0.05);
     border-radius: 5px;
     display: block;
 }
@@ -22,6 +22,7 @@ span {
     align-items: center;
     display: flex;
     flex-direction: column;
+    position: relative;
     width: 75vmin;
     height: 75vmin;
 }
@@ -30,13 +31,32 @@ main {
     text-align: center;
 }
 
+button.refresh {
+    border: none;
+    width: 2vmax;
+    height: 2vmax;
+    position: absolute;
+    outline: none;
+    cursor: pointer;
+    opacity: 0.25;
+    top: 20px;
+    right: 20px;
+    background: transparent url('/images/refresh.svg') no-repeat center center;
+    background-size: 2vmax;
+    transition: opacity 0.25s;
+}
+
+button.refresh:hover {
+    opacity: 0.5;
+}
+
 img {
     width: 35vmin;
     height: 35vmin;
 }
 
 h1 {
-    font-family: Times, "Times New Roman", serif;
+    font-family: Times, 'Times New Roman', serif;
     font-weight: normal;
     font-size: 2vmin;
     margin-top: 2vmin;
@@ -47,29 +67,41 @@ h2 {
     font-family: Lato, Arial, Tahoma, Helvetica, sans-serif;
     font-size: 10vmin;
     margin-top: 2vmin;
-    text-shadow: 1px 1px 0 rgba(0, 0, 0, .15);
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.15);
     height: 12vmin;
+}
+
+h3 {
+    font-family: Lato, Arial, Tahoma, Helvetica, sans-serif;
+    font-size: 2vmin;
+    color: rgba(0, 0, 0, 0.5);
 }
 
 ul {
     font-family: Lato, Arial, Tahoma, Helvetica, sans-serif;
     font-size: 1.25vmin;
     margin-top: 2vmin;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-gap: 5px 10px;
 }
 
 ul li {
     display: inline-block;
+    text-align: justify;
+    border-left: 2px solid rgba(0, 0, 0, 0.15);
+    padding-left: 5px;
 }
 
 ul li a {
-    padding: 0 .25vmin;
+    padding: 0 0.25vmin;
     color: black;
-    transition: color .5s;
+    transition: color 0.5s;
     cursor: pointer;
 }
 
 ul li.title {
-    color: rgba(0, 0, 0, .35);
+    color: rgba(0, 0, 0, 0.35);
     padding-right: 2px;
 }
 
