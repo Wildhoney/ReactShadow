@@ -1,5 +1,6 @@
 import { get } from 'axios';
 import { camelizeKeys } from 'humps';
+import moment from 'moment';
 
 const initialState = {
     weather: [],
@@ -52,7 +53,11 @@ export const actions = {
 
             dispatch({
                 type: actionTypes.fetch,
-                payload: { country, date: Date.now(), ...camelizeKeys(data) },
+                payload: {
+                    country,
+                    date: moment().utc(),
+                    ...camelizeKeys(data),
+                },
             });
         };
     },
