@@ -135,3 +135,23 @@ select {
         display: initial;
     }
 }
+
+@media (max-width: 285px) {
+    img {
+        width: 20vmin;
+        height: 20vmin;
+    }
+}
+
+@media (max-width: 160px) {
+    img,
+    button {
+        display: none;
+    }
+
+    select {
+        padding: 5px 5px;
+        background-size: 8px;
+        font-size: 11px;
+    }
+}

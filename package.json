@@ -11,7 +11,7 @@
     "build": "rollup -c && webpack --config example/webpack.config.js",
     "test": "ava --verbose && eslint '**/**.js'",
     "coverage": "nyc ava && nyc report --reporter=text-lcov | coveralls",
-    "format": "NODE_ENV=production prettier --write '**/**.{js,html,mjs}'",
+    "format": "NODE_ENV=production prettier --write '**/**.{js,html,mjs,css}'",
     "start": "node --experimental-modules example/server.mjs",
     "dev": "concurrently 'webpack --config example/webpack.config.js --watch' 'node --experimental-modules example/server.mjs'"
   },
