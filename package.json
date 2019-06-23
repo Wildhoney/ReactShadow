@@ -58,6 +58,7 @@
     "moment": "^2.24.0",
     "nyc": "^14.1.1",
     "postcss-loader": "^3.0.0",
+    "prettier": "^1.18.2",
     "prop-types": "^15.7.2",
     "puppeteer": "^1.18.0",
     "ramda": "^0.26.1",
