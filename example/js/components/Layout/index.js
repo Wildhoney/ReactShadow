@@ -11,7 +11,7 @@ function Layout(props) {
     return (
         <BrowserRouter>
             <root.section className="weather">
-                <style tyle="text/css">{styles}</style>
+                <style type="text/css">{styles}</style>
                 <Route
                     exact
                     path="/"
