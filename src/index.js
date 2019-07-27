@@ -60,17 +60,14 @@ function createComponent(options) {
 const components = new Map();
 
 export function createProxy(target = {}) {
-    return new Proxy(
-        target,
-        {
-            get: function get(_, name) {
-                const tag = decamelize(name, { separator: '-' });
-                if (!components.has(tag))
-                    components.set(tag, createComponent({ tag }));
-                return components.get(tag);
-            },
+    return new Proxy(target, {
+        get: function get(_, name) {
+            const tag = decamelize(name, { separator: '-' });
+            if (!components.has(tag))
+                components.set(tag, createComponent({ tag }));
+            return components.get(tag);
         },
-    );
+    });
 }
 
 export default createProxy();
