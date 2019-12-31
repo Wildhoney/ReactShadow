@@ -65,7 +65,7 @@ export const actions = {
 
 export function reducer(state = initialState, action) {
     switch (action.type) {
-        case actionTypes.fetch:
+        case actionTypes.fetch: {
             const weather = state.weather.filter(
                 ({ country }) => country !== action.payload.country,
             );
@@ -73,6 +73,7 @@ export function reducer(state = initialState, action) {
                 ...state,
                 weather: [...weather, action.payload],
             };
+        }
     }
 
     return state;

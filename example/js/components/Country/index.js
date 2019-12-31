@@ -12,14 +12,14 @@ function Country({ weather, country, countries, fetch }) {
         weather,
         country,
     );
-    useEffect(() => void fetch(country), [country]);
+    useEffect(() => fetch(country), [country]);
 
     return (
         <DocumentTitle title={`Weather for ${country}`}>
             <span>
                 <button
                     className="refresh"
-                    onClick={() => void fetch(country, { cache: false })}
+                    onClick={() => fetch(country, { cache: false })}
                 />
                 <main>
                     <img src={utils.getFilename(country)} alt={country} />
@@ -54,7 +54,4 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators(duck.actions, dispatch);
 }
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps,
-)(Country);
+export default connect(mapStateToProps, mapDispatchToProps)(Country);
