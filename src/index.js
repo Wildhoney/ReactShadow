@@ -28,25 +28,41 @@ ShadowContent.propTypes = {
 function createComponent(options) {
     const ShadowRoot = forwardRef(
         ({ mode, delegatesFocus, styleSheets, children, ...props }, ref) => {
-            const Wrapper = getStyleWrapper();
             const [node, setNode] = useState(null);
             const [root, setRoot] = useState(null);
 
+            const Wrapper = getStyleWrapper();
+            const key = `node_${mode}${delegatesFocus}`;
+
             useEffect(() => {
                 if (node) {
-                    const root = node.attachShadow({ mode, delegatesFocus });
-                    styleSheets.length > 0 &&
-                        (root.adoptedStyleSheets = styleSheets);
+                    try {
+                        const root = node.attachShadow({
+                            mode,
+                            delegatesFocus,
+                        });
+                        styleSheets.length > 0 &&
+                            (root.adoptedStyleSheets = styleSheets);
 
-                    ref && typeof ref === 'function' && ref(node);
-                    ref && 'current' in ref && (ref.current = node);
+                        ref && typeof ref === 'function' && ref(node);
+                        ref && 'current' in ref && (ref.current = node);
 
-                    setRoot(root);
+                        setRoot(root);
+                    } catch (error) {
+                        switch (error.name) {
+                            case 'NotSupportedError':
+                                styleSheets.length > 0 &&
+                                    (root.adoptedStyleSheets = styleSheets);
+                                break;
+                            default:
+                                throw error;
+                        }
+                    }
                 }
-            }, [node]);
+            }, [node, styleSheets]);
 
             return (
-                <options.tag ref={setNode} {...props}>
+                <options.tag key={key} ref={setNode} {...props}>
                     {root && (
                         <Wrapper target={root}>
                             <ShadowContent root={root}>
@@ -62,7 +78,9 @@ function createComponent(options) {
     ShadowRoot.propTypes = {
         mode: PropTypes.oneOf(['open', 'closed']),
         delegatesFocus: PropTypes.bool,
-        styleSheets: PropTypes.arrayOf(PropTypes.string),
+        styleSheets: PropTypes.arrayOf(
+            PropTypes.instanceOf(global.CSSStyleSheet),
+        ),
         children: PropTypes.node.isRequired,
     };
 
