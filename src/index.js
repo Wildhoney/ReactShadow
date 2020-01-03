@@ -22,8 +22,10 @@ function ShadowContent({ root, children }) {
 
 ShadowContent.propTypes = {
     root: PropTypes.object.isRequired,
-    children: PropTypes.node.isRequired,
+    children: PropTypes.node,
 };
+
+ShadowContent.defaultProps = { children: null };
 
 function createComponent(options) {
     const ShadowRoot = forwardRef(
@@ -81,13 +83,14 @@ function createComponent(options) {
         styleSheets: PropTypes.arrayOf(
             PropTypes.instanceOf(global.CSSStyleSheet),
         ),
-        children: PropTypes.node.isRequired,
+        children: PropTypes.node,
     };
 
     ShadowRoot.defaultProps = {
         mode: 'open',
         delegatesFocus: false,
         styleSheets: [],
+        children: null,
     };
 
     return ShadowRoot;
