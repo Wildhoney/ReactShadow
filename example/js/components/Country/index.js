@@ -6,13 +6,16 @@ import DocumentTitle from 'react-document-title';
 import * as duck from '../../duck';
 import * as utils from '../../utils';
 import Countries from '../Countries';
+import Image from './components/Image';
 
 function Country({ weather, country, countries, fetch }) {
     const { title, label, fahrenheit, timezone, date } = utils.getWeather(
         weather,
         country,
     );
-    useEffect(() => fetch(country), [country]);
+    useEffect(() => {
+        fetch(country);
+    }, [country]);
 
     return (
         <DocumentTitle title={`Weather for ${country}`}>
@@ -22,7 +25,7 @@ function Country({ weather, country, countries, fetch }) {
                     onClick={() => fetch(country, { cache: false })}
                 />
                 <main>
-                    <img src={utils.getFilename(country)} alt={country} />
+                    <Image src={utils.getFilename(country)} alt={country} />
                     <h1>
                         {title} at{' '}
                         {timezone

@@ -3,6 +3,19 @@ import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import { decamelize } from 'humps';
 
+function Noop({ children }) {
+    return children;
+}
+
+function getStyleWrapper() {
+    try {
+        const styled = require('styled-components');
+        return styled.StyleSheetManager;
+    } catch {
+        return Noop;
+    }
+}
+
 function ShadowContent({ root, children }) {
     return createPortal(children, root);
 }
@@ -15,6 +28,7 @@ ShadowContent.propTypes = {
 function createComponent(options) {
     const ShadowRoot = forwardRef(
         ({ mode, delegatesFocus, styleSheets, children, ...props }, ref) => {
+            const Wrapper = getStyleWrapper();
             const [node, setNode] = useState(null);
             const [root, setRoot] = useState(null);
 
@@ -34,7 +48,11 @@ function createComponent(options) {
             return (
                 <options.tag ref={setNode} {...props}>
                     {root && (
-                        <ShadowContent root={root}>{children}</ShadowContent>
+                        <Wrapper target={root}>
+                            <ShadowContent root={root}>
+                                {children}
+                            </ShadowContent>
+                        </Wrapper>
                     )}
                 </options.tag>
             );
