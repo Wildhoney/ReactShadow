@@ -10,7 +10,7 @@ after_success: yarn coverage
 deploy:
   provider: heroku
   api_key:
-    secure: HZD3alKO02+Nhry4VC7kUl1bDYdeA9hOzkLB4s+ToJeXWi6uft+J0er//MiEhLa4Dor1+RYC767ZsBD5vx/0+Zl3k3QXsbYJdwn6pFl7pBaBBK7zoR00FQytcgT3IXmVEPIlrDQOb5sxSAmovDmXB9MO6xhgIVtlJDe59F6k/vk=
+    secure: IHOnABM1cWPUyrlaMdXORUt58d/vPVgTe2uKE+VQ0dTB0AdVcTXWIwBMB6DjzkVulbdD+g51cFGP/p1pq1x009By40mWqx7Ls6UtrpWa/TDItgNwesqin/FYCh9fB7jOq0IBgoJT9gbNFfJMhku69uqpq+qFZo3K7Nx8Js6vgxk=
   app: react-shadow
   on:
     repo: Wildhoney/ReactShadow
