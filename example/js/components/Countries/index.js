@@ -8,13 +8,14 @@ function Countries({ country, countries, history }) {
         .sort((a, b) => a.localeCompare(b))
         .map(name => ({
             name,
+            slug: utils.toSlug(name),
             href: `/${utils.toSlug(name)}.html`,
         }));
 
     const handleChange = useCallback(
         ({ target }) => {
             const { href } = collection.find(
-                ({ name }) => name === target.value,
+                ({ slug }) => slug === target.value,
             );
             history.push(href);
         },
@@ -36,8 +37,8 @@ function Countries({ country, countries, history }) {
             </ul>
 
             <select value={country} onChange={handleChange}>
-                {collection.map(({ name }) => (
-                    <option key={`option_${name}`} value={name}>
+                {collection.map(({ name, slug }) => (
+                    <option key={`option_${name}`} value={slug}>
                         {name}
                     </option>
                 ))}
