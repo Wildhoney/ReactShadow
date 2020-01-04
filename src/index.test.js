@@ -39,15 +39,15 @@ test('It should be able to handle obhect mutated refs with the host element;', t
 });
 
 test('It should be able to attach stylesheets to the shadow boundary;', t => {
+    const sheets = [
+        new global.CSSStyleSheet('index.css'),
+        new global.CSSStyleSheet('person.css'),
+    ];
+
     const wrapper = mount(
-        <root.todoApp styleSheets={['index.css', 'person.css']}>
-            Hello Maria!
-        </root.todoApp>,
+        <root.todoApp styleSheets={sheets}>Hello Maria!</root.todoApp>,
     );
-    t.deepEqual(wrapper.getDOMNode().shadowRoot.adoptedStyleSheets, [
-        'index.css',
-        'person.css',
-    ]);
+    t.deepEqual(wrapper.getDOMNode().shadowRoot.adoptedStyleSheets, sheets);
 });
 
 test('It should be able to pass options to the shadow boundary creation;', t => {
