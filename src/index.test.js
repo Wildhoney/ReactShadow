@@ -136,6 +136,7 @@ test('It should be able to encapsulate styled component styles in the boundary;'
     );
     t.truthy(wrapper.getDOMNode().shadowRoot);
     t.is(wrapper.getDOMNode().nodeName.toLowerCase(), 'say-hello');
+    t.is(wrapper.find(Name).text(), 'Hello Adam!');
 
     const className = R.last(
         wrapper
@@ -148,6 +149,4 @@ test('It should be able to encapsulate styled component styles in the boundary;'
     t.true(styles.hasAttribute('data-styled'));
     t.true(styles.innerHTML.includes('rebeccapurple'));
     t.true(styles.innerHTML.includes(className));
-
-    t.is(wrapper.find(Name).text(), 'Hello Adam!');
 });
