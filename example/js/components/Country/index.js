@@ -23,7 +23,9 @@ function Country({ weather, country, countries, fetch }) {
                 <button
                     className="refresh"
                     onClick={() => fetch(country, { cache: false })}
-                />
+                >
+                    Refresh
+                </button>
                 <main>
                     <Image src={utils.getFilename(country)} alt={country} />
                     <h1>
