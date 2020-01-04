@@ -1,6 +1,8 @@
 import React, { useState, createRef } from 'react';
 import test from 'ava';
+import styled from 'styled-components';
 import { mount } from 'enzyme';
+import * as R from 'ramda';
 import sinon from 'sinon';
 import root from './';
 
@@ -120,4 +122,32 @@ test('It should be able re-render the component tree from the event handlers;', 
     node.click();
     wrapper.update();
     t.is(wrapper.find('div').text(), 'Hello Adam!');
+});
+
+test('It should be able to encapsulate styled component styles in the boundary;', t => {
+    const Name = styled.section`
+        color: rebeccapurple;
+    `;
+
+    const wrapper = mount(
+        <root.sayHello>
+            <Name>Hello Adam!</Name>
+        </root.sayHello>,
+    );
+    t.truthy(wrapper.getDOMNode().shadowRoot);
+    t.is(wrapper.getDOMNode().nodeName.toLowerCase(), 'say-hello');
+
+    const className = R.last(
+        wrapper
+            .find('section')
+            .props()
+            .className.split(' '),
+    );
+
+    const styles = wrapper.getDOMNode().shadowRoot.querySelector('style');
+    t.true(styles.hasAttribute('data-styled'));
+    t.true(styles.innerHTML.includes('rebeccapurple'));
+    t.true(styles.innerHTML.includes(className));
+
+    t.is(wrapper.find(Name).text(), 'Hello Adam!');
 });
