@@ -43,7 +43,7 @@
     "concurrently": "^5.0.2",
     "core-js": "^3.6.1",
     "coveralls": "^3.0.9",
-    "css-loader": "^3.4.0",
+    "css-loader": "^3.4.1",
     "delay": "^4.3.0",
     "document-ready-promise": "^3.0.1",
     "enzyme": "^3.11.0",
