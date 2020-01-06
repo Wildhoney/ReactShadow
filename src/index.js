@@ -27,7 +27,9 @@ ShadowContent.propTypes = {
 
 ShadowContent.defaultProps = { children: null };
 
-function createComponent(options) {
+const tags = new Map();
+
+function createTag(options) {
     const ShadowRoot = forwardRef(
         ({ mode, delegatesFocus, styleSheets, children, ...props }, ref) => {
             const [node, setNode] = useState(null);
@@ -96,15 +98,12 @@ function createComponent(options) {
     return ShadowRoot;
 }
 
-const components = new Map();
-
 export function createProxy(target = {}) {
     return new Proxy(target, {
         get: function get(_, name) {
             const tag = decamelize(name, { separator: '-' });
-            if (!components.has(tag))
-                components.set(tag, createComponent({ tag }));
-            return components.get(tag);
+            if (!tags.has(tag)) tags.set(tag, createTag({ tag }));
+            return tags.get(tag);
         },
     });
 }
