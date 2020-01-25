@@ -48,8 +48,10 @@ function createTag(options) {
                         styleSheets.length > 0 &&
                             (root.adoptedStyleSheets = styleSheets);
 
-                        ref && typeof ref === 'function' && ref(node);
-                        ref && 'current' in ref && (ref.current = node);
+                        global.setTimeout(() => {
+                            ref && typeof ref === 'function' && ref(node);
+                            ref && 'current' in ref && (ref.current = node);
+                        });
 
                         setRoot(root);
                     } catch (error) {
