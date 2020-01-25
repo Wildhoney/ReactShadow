@@ -1,4 +1,5 @@
 import React, { useState, createRef } from 'react';
+import delay from 'delay';
 import test from 'ava';
 import styled from 'styled-components';
 import { mount } from 'enzyme';
@@ -19,24 +20,26 @@ test('It should be able to create the shadow boundary with custom elements;', t 
     t.is(wrapper.getDOMNode().shadowRoot.innerHTML, 'Hello Adam!');
 });
 
-test('It should be able to handle functional refs with the host element;', t => {
+test('It should be able to handle functional refs with the host element;', async t => {
     const spies = { ref: sinon.spy() };
     mount(
         <>
             <root.div ref={spies.ref}>Hello Adam!</root.div>
         </>,
     );
+    await delay(1);
     t.is(spies.ref.callCount, 1);
     t.true(spies.ref.firstCall.args[0] instanceof window.HTMLDivElement);
 });
 
-test('It should be able to handle obhect mutated refs with the host element;', t => {
+test('It should be able to handle obhect mutated refs with the host element;', async t => {
     const ref = createRef(null);
     mount(
         <>
             <root.div ref={ref}>Hello Adam!</root.div>
         </>,
     );
+    await delay(1);
     t.true(ref.current instanceof window.HTMLDivElement);
 });
 
