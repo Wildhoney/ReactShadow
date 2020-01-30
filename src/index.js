@@ -10,6 +10,10 @@ function Noop({ children }) {
 function getStyleWrapper() {
     try {
         const styled = require('styled-components');
+        if (!('StyleSheetManager' in styled))
+            throw new Error(
+                '`StyleSheetManager` not found in `styled-components` library.',
+            );
         return styled.StyleSheetManager;
     } catch {
         return Noop;
