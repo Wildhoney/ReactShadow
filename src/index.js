@@ -1,4 +1,5 @@
 import React, { useState, useEffect, forwardRef } from 'react';
+import { useEnsuredForwardedRef } from 'react-use';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import { decamelize } from 'humps';
@@ -36,26 +37,23 @@ const tags = new Map();
 function createTag(options) {
     const ShadowRoot = forwardRef(
         ({ mode, delegatesFocus, styleSheets, children, ...props }, ref) => {
-            const [node, setNode] = useState(null);
+            const node = useEnsuredForwardedRef(ref);
             const [root, setRoot] = useState(null);
 
             const Wrapper = getStyleWrapper();
             const key = `node_${mode}${delegatesFocus}`;
 
             useEffect(() => {
-                if (node) {
+                if (node.current) {
                     try {
-                        const root = node.attachShadow({
+                        typeof ref === 'function' && ref(node.current);
+
+                        const root = node.current.attachShadow({
                             mode,
                             delegatesFocus,
                         });
                         styleSheets.length > 0 &&
                             (root.adoptedStyleSheets = styleSheets);
-
-                        global.setTimeout(() => {
-                            ref && typeof ref === 'function' && ref(node);
-                            ref && 'current' in ref && (ref.current = node);
-                        });
 
                         setRoot(root);
                     } catch (error) {
@@ -69,10 +67,10 @@ function createTag(options) {
                         }
                     }
                 }
-            }, [node, styleSheets]);
+            }, [ref, node, styleSheets]);
 
             return (
-                <options.tag key={key} ref={setNode} {...props}>
+                <options.tag key={key} ref={node} {...props}>
                     {root && (
                         <Wrapper target={root}>
                             <ShadowContent root={root}>
