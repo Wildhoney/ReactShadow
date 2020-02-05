@@ -1,5 +1,7 @@
 language: node_js
 node_js: stable
+script:language: node_js
+node_js: stable
 script:
     - yarn
     - yarn test
@@ -10,7 +12,7 @@ after_success: yarn coverage
 deploy:
   provider: heroku
   api_key:
-    secure: IHOnABM1cWPUyrlaMdXORUt58d/vPVgTe2uKE+VQ0dTB0AdVcTXWIwBMB6DjzkVulbdD+g51cFGP/p1pq1x009By40mWqx7Ls6UtrpWa/TDItgNwesqin/FYCh9fB7jOq0IBgoJT9gbNFfJMhku69uqpq+qFZo3K7Nx8Js6vgxk=
+    secure: GOQSBZfl1aTYCHsN18OngsF7sT9/P7NfplLqzp32V+i0GyCn0Zyv4qKN6oK2TPCGadD53lsOe8H4g5nlZHLiBUrKhbEjJ7UWRhtwK1uE9xRSrFsYCfuX1FPH315gDP69rqMC/JeWCkSLfcAmKDxrz1+pbI7akOP4FOjemOmaYoU=
   app: react-shadow
   on:
     repo: Wildhoney/ReactShadow
