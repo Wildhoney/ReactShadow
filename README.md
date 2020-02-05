@@ -10,9 +10,9 @@
 &nbsp;
 ![License MIT](https://img.shields.io/badge/license-MIT-lightgrey.svg?style=flat-square)
 
-* **npm**: `npm i react-shadow`
-* **yarn**: `yarn add react-shadow`
-* **Heroku**: [http://react-shadow.herokuapp.com/](http://react-shadow.herokuapp.com/)
+-   **npm**: `npm i react-shadow`
+-   **yarn**: `yarn add react-shadow`
+-   **Heroku**: [http://react-shadow.herokuapp.com/](http://react-shadow.herokuapp.com/)
 
 ![Screenshot](media/screenshot.png)
 
@@ -56,14 +56,15 @@ You may pass any props you like to the `root.*` component which will be applied 
 ShadowRoot.propTypes = {
     mode: PropTypes.oneOf(['open', 'closed']),
     delegatesFocus: PropTypes.bool,
-    styleSheets: PropTypes.arrayOf(PropTypes.string),
-    children: PropTypes.node.isRequired,
+    styleSheets: PropTypes.arrayOf(PropTypes.instanceOf(global.CSSStyleSheet)),
+    children: PropTypes.node,
 };
 
 ShadowRoot.defaultProps = {
     mode: 'open',
     delegatesFocus: false,
     styleSheets: [],
+    children: null,
 };
 ```
 
@@ -74,5 +75,5 @@ const node = useRef(null);
 
 // ...
 
-<root.section ref={node} />
+<root.section ref={node} />;
 ```
