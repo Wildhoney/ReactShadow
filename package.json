@@ -6,6 +6,9 @@
   "module": "dist/react-shadow.esm.js",
   "repository": "git@github.com:Wildhoney/ReactShadow.git",
   "author": "Adam Timberlake <adam.timberlake@gmail.com>",
+  "contributors": [
+    "Chris Trevino <darthtrevino@gmail.com>"
+  ],
   "license": "MIT",
   "scripts": {
     "build": "rollup -c && webpack --config example/webpack.config.js",

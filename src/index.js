@@ -87,7 +87,7 @@ function createTag(options) {
             return (
                 <options.tag key={key} ref={node} {...props}>
                     {root && (
-                        <ShadowRootContext.Provider root={root}>
+                        <ShadowRootContext.Provider value={root}>
                             <Wrapper target={root}>
                                 <ShadowContent root={root}>
                                     {children}

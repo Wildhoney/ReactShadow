@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { mount } from 'enzyme';
 import * as R from 'ramda';
 import sinon from 'sinon';
-import root from './';
+import root, { useShadowRoot } from './';
 
 test('It should be able to create the shadow boundary;', t => {
     const wrapper = mount(<root.div>Hello Adam!</root.div>);
@@ -102,6 +102,22 @@ test('It should be able to apply styles to the shadow boundary components;', t =
     );
     const node = wrapper.getDOMNode().shadowRoot.querySelector('style');
     t.is(node.innerHTML, '* { border: 1px solid red; }');
+});
+
+
+
+test('It should be able to access the shadow-root from client components;', t => {
+    const Inner = () => {
+        const shadowRoot = useShadowRoot()
+        console.log("mounted", shadowRoot)
+        t.true(!!shadowRoot, "expected shadowroot to be truthy")
+        return <>Hello!/</>
+    }
+    mount(
+        <root.div>
+            <Inner />
+        </root.div>,
+    );
 });
 
 test('It should be able re-render the component tree from the event handlers;', t => {
