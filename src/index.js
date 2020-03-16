@@ -16,7 +16,7 @@ const ShadowRootContext = createContext(null);
  * Allows clients to use the shadow-root
  */
 export function useShadowRoot() {
-    return useContext(ShadowRootContext)
+    return useContext(ShadowRootContext);
 }
 
 function Noop({ children }) {

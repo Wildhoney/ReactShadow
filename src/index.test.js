@@ -104,15 +104,12 @@ test('It should be able to apply styles to the shadow boundary components;', t =
     t.is(node.innerHTML, '* { border: 1px solid red; }');
 });
 
-
-
 test('It should be able to access the shadow-root from client components;', t => {
     const Inner = () => {
-        const shadowRoot = useShadowRoot()
-        console.log("mounted", shadowRoot)
-        t.true(!!shadowRoot, "expected shadowroot to be truthy")
-        return <>Hello!/</>
-    }
+        const shadowRoot = useShadowRoot();
+        t.true(Boolean(shadowRoot), 'expected shadowroot to be truthy');
+        return <>Hello/</>;
+    };
     mount(
         <root.div>
             <Inner />
