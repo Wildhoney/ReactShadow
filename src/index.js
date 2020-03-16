@@ -1,8 +1,23 @@
-import React, { useState, useEffect, forwardRef } from 'react';
+import React, {
+    useState,
+    useEffect,
+    forwardRef,
+    createContext,
+    useContext,
+} from 'react';
 import { useEnsuredForwardedRef } from 'react-use';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import { decamelize } from 'humps';
+
+const ShadowRootContext = createContext(null);
+
+/**
+ * Allows clients to use the shadow-root
+ */
+export function useShadowRoot() {
+    return useContext(ShadowRootContext)
+}
 
 function Noop({ children }) {
     return children;
@@ -72,11 +87,13 @@ function createTag(options) {
             return (
                 <options.tag key={key} ref={node} {...props}>
                     {root && (
-                        <Wrapper target={root}>
-                            <ShadowContent root={root}>
-                                {children}
-                            </ShadowContent>
-                        </Wrapper>
+                        <ShadowRootContext.Provider root={root}>
+                            <Wrapper target={root}>
+                                <ShadowContent root={root}>
+                                    {children}
+                                </ShadowContent>
+                            </Wrapper>
+                        </ShadowRootContext.Provider>
                     )}
                 </options.tag>
             );
