@@ -108,13 +108,14 @@ test('It should be able to access the shadow-root from client components;', t =>
     const Inner = () => {
         const shadowRoot = useShadowRoot();
         t.true(Boolean(shadowRoot), 'expected shadowroot to be truthy');
-        return <>Hello/</>;
+        return <>Hello Chris!</>;
     };
     mount(
         <root.div>
             <Inner />
         </root.div>,
     );
+    t.plan(1);
 });
 
 test('It should be able re-render the component tree from the event handlers;', t => {
