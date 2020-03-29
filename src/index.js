@@ -5,18 +5,14 @@ import React, {
     createContext,
     useContext,
 } from 'react';
+import { renderToString } from 'react-dom/server';
 import { useEnsuredForwardedRef } from 'react-use';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import { decamelize } from 'humps';
-import { renderToString } from 'react-dom/server';
-import { ServerStyleSheet, StyleSheetManager } from 'styled-components';
 
 const ShadowRootContext = createContext(null);
 
-/**
- * Allows clients to use the shadow-root
- */
 export function useShadowRoot() {
     return useContext(ShadowRootContext);
 }
@@ -40,11 +36,12 @@ function getStyleWrapper() {
 
 function getStyleElements(children) {
     try {
-        const sheet = new ServerStyleSheet();
+        const styled = require('styled-components');
+        const sheet = new styled.ServerStyleSheet();
         renderToString(
-            <StyleSheetManager sheet={sheet.instance}>
+            <styled.StyleSheetManager sheet={sheet.instance}>
                 <>{children}</>
-            </StyleSheetManager>,
+            </styled.StyleSheetManager>,
         );
         return sheet.getStyleElement();
     } catch {
@@ -68,14 +65,7 @@ const tags = new Map();
 function createTag(options) {
     const ShadowRoot = forwardRef(
         (
-            {
-                mode,
-                delegatesFocus,
-                styleSheets,
-                isomorphic,
-                children,
-                ...props
-            },
+            { mode, delegatesFocus, styleSheets, ssr, children, ...props },
             ref,
         ) => {
             const node = useEnsuredForwardedRef(ref);
@@ -85,7 +75,7 @@ function createTag(options) {
             const key = `node_${mode}${delegatesFocus}`;
 
             useEffect(() => {
-                if (isomorphic) {
+                if (ssr) {
                     const root = node.current.shadowRoot;
                     return setRoot(root);
                 }
@@ -118,10 +108,10 @@ function createTag(options) {
             return (
                 <>
                     <options.tag key={key} ref={node} {...props}>
-                        {(root || isomorphic) && (
+                        {(root || ssr) && (
                             <ShadowRootContext.Provider value={root}>
                                 <Wrapper target={root}>
-                                    {isomorphic ? (
+                                    {ssr ? (
                                         <template shadowroot="open">
                                             {getStyleElements(children)}
                                             {children}
@@ -146,7 +136,7 @@ function createTag(options) {
         styleSheets: PropTypes.arrayOf(
             PropTypes.instanceOf(global.CSSStyleSheet),
         ),
-        isomorphic: PropTypes.bool,
+        ssr: PropTypes.bool,
         children: PropTypes.node,
     };
 
@@ -154,7 +144,7 @@ function createTag(options) {
         mode: 'open',
         delegatesFocus: false,
         styleSheets: [],
-        isomorphic: false,
+        ssr: false,
         children: null,
     };
 
