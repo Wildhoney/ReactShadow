@@ -154,7 +154,7 @@ function createTag(options) {
         mode: 'open',
         delegatesFocus: false,
         styleSheets: [],
-        isomorphic: true,
+        isomorphic: false,
         children: null,
     };
 
