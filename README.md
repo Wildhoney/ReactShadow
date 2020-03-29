@@ -78,7 +78,7 @@ const node = useRef(null);
 <root.section ref={node} />;
 ```
 
-Recently and at long last there has been some movement in introducing a [https://tomalec.github.io/declarative-shadow-dom/](declarative shadow DOM) which `react-shadow` *tentatively* supports &ndash; as it's experimental and open to sudden spec changes &ndash; by using the `ssr` prop.
+Recently and at long last there has been some movement in introducing a [https://tomalec.github.io/declarative-shadow-dom/](declarative shadow DOM) which `react-shadow` *tentatively* supports &ndash; as it's experimental, open to sudden spec changes, and React finds it difficult to rehydrate &ndash; by using the `ssr` prop.
 
 ```jsx
 import root from 'react-shadow';
