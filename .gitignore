@@ -4,7 +4,10 @@ yarn-error.log
 
 # build
 dist/
-example/js/build.js
+
+# next
+example/.next/
+example/react-shadow.js
 
 # coverage
 .nyc_output/

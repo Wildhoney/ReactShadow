@@ -6,20 +6,20 @@ import * as R from 'ramda';
 import sinon from 'sinon';
 import root, { useShadowRoot } from './';
 
-test('It should be able to create the shadow boundary;', t => {
+test('It should be able to create the shadow boundary;', (t) => {
     const wrapper = mount(<root.div>Hello Adam!</root.div>);
     t.truthy(wrapper.getDOMNode().shadowRoot);
     t.is(wrapper.getDOMNode().shadowRoot.innerHTML, 'Hello Adam!');
 });
 
-test('It should be able to create the shadow boundary with custom elements;', t => {
+test('It should be able to create the shadow boundary with custom elements;', (t) => {
     const wrapper = mount(<root.todoApp>Hello Adam!</root.todoApp>);
     t.truthy(wrapper.getDOMNode().shadowRoot);
     t.is(wrapper.getDOMNode().nodeName.toLowerCase(), 'todo-app');
     t.is(wrapper.getDOMNode().shadowRoot.innerHTML, 'Hello Adam!');
 });
 
-test('It should be able to handle functional refs with the host element;', t => {
+test('It should be able to handle functional refs with the host element;', (t) => {
     const spies = { ref: sinon.spy() };
     mount(
         <>
@@ -30,7 +30,7 @@ test('It should be able to handle functional refs with the host element;', t => 
     t.true(spies.ref.firstCall.args[0] instanceof window.HTMLDivElement);
 });
 
-test('It should be able to handle obhect mutated refs with the host element;', t => {
+test('It should be able to handle obhect mutated refs with the host element;', (t) => {
     const ref = createRef(null);
     mount(
         <>
@@ -40,7 +40,7 @@ test('It should be able to handle obhect mutated refs with the host element;', t
     t.true(ref.current instanceof window.HTMLDivElement);
 });
 
-test('It should be able to attach stylesheets to the shadow boundary;', t => {
+test('It should be able to attach stylesheets to the shadow boundary;', (t) => {
     const sheets = [
         new global.CSSStyleSheet('index.css'),
         new global.CSSStyleSheet('person.css'),
@@ -52,7 +52,7 @@ test('It should be able to attach stylesheets to the shadow boundary;', t => {
     t.deepEqual(wrapper.getDOMNode().shadowRoot.adoptedStyleSheets, sheets);
 });
 
-test('It should be able to pass options to the shadow boundary creation;', t => {
+test('It should be able to pass options to the shadow boundary creation;', (t) => {
     sinon.spy(window.HTMLElement.prototype, 'attachShadow');
 
     mount(<root.todoApp>Hello Adam!</root.todoApp>);
@@ -80,7 +80,7 @@ test('It should be able to pass options to the shadow boundary creation;', t => 
     window.HTMLElement.prototype.attachShadow.restore();
 });
 
-test('It should be able to register events in the shadow boundary;', t => {
+test('It should be able to register events in the shadow boundary;', (t) => {
     const spies = { onClick: sinon.spy() };
     const wrapper = mount(
         <root.div>
@@ -93,7 +93,7 @@ test('It should be able to register events in the shadow boundary;', t => {
     t.true(spies.onClick.calledWith('Maria'));
 });
 
-test('It should be able to apply styles to the shadow boundary components;', t => {
+test('It should be able to apply styles to the shadow boundary components;', (t) => {
     const wrapper = mount(
         <root.div>
             Hello Adam!
@@ -104,7 +104,7 @@ test('It should be able to apply styles to the shadow boundary components;', t =
     t.is(node.innerHTML, '* { border: 1px solid red; }');
 });
 
-test('It should be able to access the shadow-root from client components;', t => {
+test('It should be able to access the shadow-root from client components;', (t) => {
     const Inner = () => {
         const shadowRoot = useShadowRoot();
         t.true(Boolean(shadowRoot), 'expected shadowroot to be truthy');
@@ -118,7 +118,7 @@ test('It should be able to access the shadow-root from client components;', t =>
     t.plan(1);
 });
 
-test('It should be able re-render the component tree from the event handlers;', t => {
+test('It should be able re-render the component tree from the event handlers;', (t) => {
     function Name() {
         const [name, setName] = useState(null);
         return (
@@ -138,7 +138,7 @@ test('It should be able re-render the component tree from the event handlers;', 
     t.is(wrapper.find('div').text(), 'Hello Adam!');
 });
 
-test('It should be able to encapsulate styled component styles in the boundary;', t => {
+test('It should be able to encapsulate styled component styles in the boundary;', (t) => {
     const Name = styled.section`
         color: rebeccapurple;
     `;
@@ -153,10 +153,7 @@ test('It should be able to encapsulate styled component styles in the boundary;'
     t.is(wrapper.find(Name).text(), 'Hello Adam!');
 
     const className = R.last(
-        wrapper
-            .find('section')
-            .props()
-            .className.split(' '),
+        wrapper.find('section').props().className.split(' '),
     );
 
     const styles = wrapper.getDOMNode().shadowRoot.querySelector('style');
