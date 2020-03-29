@@ -78,18 +78,12 @@ const node = useRef(null);
 <root.section ref={node} />;
 ```
 
-Recently and at long last there has been some movement in introducing a [declarative shadow DOM](https://tomalec.github.io/declarative-shadow-dom/) which `react-shadow` *tentatively* supports &ndash; as it's experimental, open to sudden spec changes, and React finds it difficult to rehydrate &ndash; by using the `ssr` prop.
+Recently and at long last there has been some movement in introducing a [declarative shadow DOM](https://tomalec.github.io/declarative-shadow-dom/) which `react-shadow` _tentatively_ supports &ndash; as it's experimental, open to sudden spec changes, and React finds it difficult to rehydrate &ndash; by using the `ssr` prop.
 
-```jsx
-import root from 'react-shadow';
-import styles from './styles.css';
+```javascript
+const node = useRef(null);
 
-export default function Quote() {
-    return (
-        <root.div ssr className="quote">
-            <q>There is strong shadow where there is much light.</q>
-            <span className="author">― Johann Wolfgang von Goethe.</span>
-            <style type="text/css">{styles}</style>
-        </root.div>
-    );
-}
+// ...
+
+<root.section ssr />;
+```
