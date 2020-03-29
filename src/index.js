@@ -5,7 +5,6 @@ import React, {
     createContext,
     useContext,
 } from 'react';
-import { renderToString } from 'react-dom/server';
 import { useEnsuredForwardedRef } from 'react-use';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
@@ -36,13 +35,16 @@ function getStyleWrapper() {
 
 function getStyleElements(children) {
     try {
+        const reactDom = require('react-dom/server');
         const styled = require('styled-components');
         const sheet = new styled.ServerStyleSheet();
-        renderToString(
+
+        reactDom.renderToString(
             <styled.StyleSheetManager sheet={sheet.instance}>
                 <>{children}</>
             </styled.StyleSheetManager>,
         );
+
         return sheet.getStyleElement();
     } catch {
         return Noop;
