@@ -18,7 +18,7 @@ function Country({ weather, country, countries, fetch }) {
     }, [country]);
 
     return (
-        <DocumentTitle title={`Weather for ${country}`}>
+        <DocumentTitle title={`Weather for ${country.replace('-', ' ')}`}>
             <span>
                 <button
                     className="refresh"
