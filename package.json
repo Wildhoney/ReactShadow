@@ -17,7 +17,7 @@
         "lint": "eslint '**/**.js'",
         "coverage": "nyc ava && nyc report --reporter=text-lcov | coveralls",
         "format": "NODE_ENV=production prettier --write '**/**.{js,html,mjs,css}'",
-        "start": "cp src/index.js example/react-shadow.js && next ./example -p 3000"
+        "start": "cp src/index.js example/react-shadow.js && next ./example -p ${PORT:-3000}"
     },
     "peerDependencies": {
         "prop-types": "^15.0.0",
