@@ -31,7 +31,7 @@ main {
     text-align: center;
 }
 
-button.refresh {
+a.refresh {
     border: none;
     width: 2vmax;
     height: 2vmax;
@@ -47,12 +47,12 @@ button.refresh {
     transition: opacity 0.25s, transform 0.25s;
 }
 
-button.refresh:hover,
-button.refresh:focus {
+a.refresh:hover,
+a.refresh:focus {
     opacity: 0.5;
 }
 
-button.refresh:focus {
+a.refresh:focus {
     transform: scale(1.5);
 }
 
@@ -85,6 +85,12 @@ ul {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     grid-gap: 5px 10px;
+}
+
+@media (max-width: 600px) {
+    ul {
+        grid-template-columns: repeat(5, 1fr);
+    }
 }
 
 ul li {
