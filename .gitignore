@@ -11,3 +11,7 @@ example/react-shadow.js
 
 # coverage
 .nyc_output/
+
+#now
+.now
+

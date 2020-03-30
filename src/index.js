@@ -1,54 +1,12 @@
-import React, {
-    useState,
-    useEffect,
-    forwardRef,
-    createContext,
-    useContext,
-} from 'react';
+import React, { useState, useEffect, useContext, forwardRef } from 'react';
 import { useEnsuredForwardedRef } from 'react-use';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import { decamelize } from 'humps';
-
-const ShadowRootContext = createContext(null);
+import * as utils from './utils';
 
 export function useShadowRoot() {
-    return useContext(ShadowRootContext);
-}
-
-function Noop({ children }) {
-    return children;
-}
-
-function getStyleWrapper() {
-    try {
-        const styled = require('styled-components');
-        if (!('StyleSheetManager' in styled))
-            throw new Error(
-                '`StyleSheetManager` not found in `styled-components` library.',
-            );
-        return styled.StyleSheetManager;
-    } catch {
-        return Noop;
-    }
-}
-
-function getStyleElements(children) {
-    try {
-        const reactDom = require('react-dom/server');
-        const styled = require('styled-components');
-        const sheet = new styled.ServerStyleSheet();
-
-        reactDom.renderToString(
-            <styled.StyleSheetManager sheet={sheet.instance}>
-                <>{children}</>
-            </styled.StyleSheetManager>,
-        );
-
-        return sheet.getStyleElement();
-    } catch {
-        return Noop;
-    }
+    return useContext(utils.Context);
 }
 
 function ShadowContent({ root, children }) {
@@ -73,18 +31,19 @@ function createTag(options) {
             const node = useEnsuredForwardedRef(ref);
             const [root, setRoot] = useState(null);
 
-            const Wrapper = getStyleWrapper();
+            const Wrapper = utils.getStyleWrapper();
             const key = `node_${mode}${delegatesFocus}`;
 
             useEffect(() => {
-                if (ssr) {
-                    const root = node.current.shadowRoot;
-                    return setRoot(root);
-                }
-
                 if (node.current) {
                     try {
                         typeof ref === 'function' && ref(node.current);
+
+                        if (ssr) {
+                            const root = node.current.shadowRoot;
+                            setRoot(root);
+                            return;
+                        }
 
                         const root = node.current.attachShadow({
                             mode,
@@ -92,17 +51,9 @@ function createTag(options) {
                         });
                         styleSheets.length > 0 &&
                             (root.adoptedStyleSheets = styleSheets);
-
                         setRoot(root);
                     } catch (error) {
-                        switch (error.name) {
-                            case 'NotSupportedError':
-                                styleSheets.length > 0 &&
-                                    (root.adoptedStyleSheets = styleSheets);
-                                break;
-                            default:
-                                throw error;
-                        }
+                        utils.handleError({ error, styleSheets, root });
                     }
                 }
             }, [ref, node, styleSheets]);
@@ -111,11 +62,11 @@ function createTag(options) {
                 <>
                     <options.tag key={key} ref={node} {...props}>
                         {(root || ssr) && (
-                            <ShadowRootContext.Provider value={root}>
+                            <utils.Context.Provider value={root}>
                                 <Wrapper target={root}>
                                     {ssr ? (
                                         <template shadowroot="open">
-                                            {getStyleElements(children)}
+                                            {utils.getStyleElements(children)}
                                             {children}
                                         </template>
                                     ) : (
@@ -124,7 +75,7 @@ function createTag(options) {
                                         </ShadowContent>
                                     )}
                                 </Wrapper>
-                            </ShadowRootContext.Provider>
+                            </utils.Context.Provider>
                         )}
                     </options.tag>
                 </>
