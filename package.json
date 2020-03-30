@@ -11,7 +11,7 @@
     ],
     "license": "MIT",
     "scripts": {
-        "build": "rollup -c",
+        "build": "rollup -c && next build ./example",
         "test": "yarn spec && yarn lint",
         "spec": "ava --verbose",
         "lint": "eslint '**/**.js'",
