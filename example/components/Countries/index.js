@@ -2,6 +2,7 @@ import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import * as utils from '../../utils';
 import { getCountries } from './utils';
 
 export default function Countries({ name, countries }) {
@@ -30,7 +31,7 @@ export default function Countries({ name, countries }) {
                 ))}
             </ul>
 
-            <select value={name} onChange={handleChange}>
+            <select value={utils.toSlug(name)} onChange={handleChange}>
                 {getCountries(countries).map(({ name, slug }) => (
                     <option key={`option_${name}`} value={slug}>
                         {name}
