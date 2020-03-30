@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import * as duck from '../../duck';
+import Link from 'next/link';
 import * as utils from '../../utils';
 import Countries from '../Countries';
 import Image from './components/Image';
@@ -13,12 +13,9 @@ export default function Country({ name, countries, weather }) {
 
     return (
         <span>
-            {/* <button
-                    className="refresh"
-                    onClick={() => fetch(country, { cache: false })}
-                >
-                    Refresh
-                </button> */}
+            <Link href="/[name]" as={`/${utils.toSlug(name)}`}>
+                <a className="refresh">Refresh</a>
+            </Link>
             <main>
                 <Image src={utils.getFilename(name)} alt={name} />
                 <h1>
@@ -28,7 +25,7 @@ export default function Country({ name, countries, weather }) {
                         : String.fromCharCode(8212)}
                 </h1>
                 <h2 title={fahrenheit}>{label}</h2>
-                <Countries name={name} countries={countries} />
+                <Countries name={utils.fromSlug(name)} countries={countries} />
             </main>
         </span>
     );
