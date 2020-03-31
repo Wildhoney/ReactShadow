@@ -14,8 +14,8 @@ export const getFilename = (country) => {
     return `/images/${toSlug(country).toLowerCase()}.png`;
 };
 
-export const pickCountry = (countries) =>
-    countries[Math.floor(Math.random() * countries.length)];
+export const pickPlace = (places) =>
+    places[Math.floor(Math.random() * places.length)];
 
 export const formatWeather = (name, model) => {
     const tempature = model ? Math.round(model.main.temp) : null;
@@ -28,7 +28,7 @@ export const formatWeather = (name, model) => {
         )}`,
         label: `${tempature}${String.fromCharCode(8451)}`,
         fahrenheit: `${(tempature * 9) / 5 + 32}${String.fromCharCode(8457)}`,
-        date: model ? moment(model.date) : null,
+        date: model ? moment(model.date).utc() : null,
     };
 };
 

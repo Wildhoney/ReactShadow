@@ -1,6 +1,6 @@
 import * as utils from '../../utils';
 
-export const getCountries = (countries) =>
+export const getCities = (countries) =>
     countries
         .sort((a, b) => a.localeCompare(b))
         .map((name) => ({

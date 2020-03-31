@@ -6,6 +6,6 @@ export default function Index() {
 }
 
 Index.getInitialProps = async (context) => {
-    const name = utils.pickCountry(api.countries);
-    utils.redirectPath(utils.toSlug(name), context);
+    const place = utils.pickPlace(api.places);
+    utils.redirectPath(utils.toSlug(place.city), context);
 };

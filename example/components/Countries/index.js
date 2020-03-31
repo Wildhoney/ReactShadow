@@ -3,16 +3,16 @@ import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import * as utils from '../../utils';
-import { getCountries } from './utils';
+import { getCities } from './utils';
 
-export default function Countries({ name, countries }) {
+export default function Cities({ name, cities }) {
     const router = useRouter();
 
     const handleChange = useCallback(
         (event) => {
             router.push('/[name]', `/${event.target.value}`);
         },
-        [countries],
+        [cities],
     );
 
     return (
@@ -20,7 +20,7 @@ export default function Countries({ name, countries }) {
             <h3>Weather for:</h3>
 
             <ul>
-                {getCountries(countries).map((model) => (
+                {getCities(cities).map((model) => (
                     <li key={`li_${model.name}`}>
                         <Link href="/[name]" as={model.href}>
                             <a className={model.name === name ? 'active' : ''}>
@@ -32,7 +32,7 @@ export default function Countries({ name, countries }) {
             </ul>
 
             <select value={utils.toSlug(name)} onChange={handleChange}>
-                {getCountries(countries).map(({ name, slug }) => (
+                {getCities(cities).map(({ name, slug }) => (
                     <option key={`option_${name}`} value={slug}>
                         {name}
                     </option>
@@ -42,7 +42,7 @@ export default function Countries({ name, countries }) {
     );
 }
 
-Countries.propTypes = {
+Cities.propTypes = {
     name: PropTypes.string.isRequired,
-    countries: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    cities: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
 };

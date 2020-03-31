@@ -5,7 +5,7 @@ import * as utils from '../../utils';
 import Countries from '../Countries';
 import Image from './components/Image';
 
-export default function Country({ name, countries, weather }) {
+export default function City({ name, cities, weather }) {
     const { title, label, fahrenheit, timezone, date } = utils.formatWeather(
         name,
         weather,
@@ -25,14 +25,14 @@ export default function Country({ name, countries, weather }) {
                         : String.fromCharCode(8212)}
                 </h1>
                 <h2 title={fahrenheit}>{label}</h2>
-                <Countries name={utils.fromSlug(name)} countries={countries} />
+                <Countries name={utils.fromSlug(name)} cities={cities} />
             </main>
         </span>
     );
 }
 
-Country.propTypes = {
+City.propTypes = {
     weather: PropTypes.object.isRequired,
     name: PropTypes.string.isRequired,
-    countries: PropTypes.array.isRequired,
+    cities: PropTypes.array.isRequired,
 };
