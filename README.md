@@ -52,7 +52,6 @@ Alternatively you can use [`styled-components`](https://www.styled-components.co
 
 ```javascript
 import root from 'react-shadow/styled-components';
-// or...
 import root from 'react-shadow/emotion';
 
 // ...
