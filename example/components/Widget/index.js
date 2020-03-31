@@ -1,5 +1,5 @@
 import React from 'react';
-import root from 'react-shadow';
+import root from 'react-shadow/styled-components';
 import City from '../City';
 import styles from './styles.css';
 

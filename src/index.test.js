@@ -5,6 +5,7 @@ import { mount } from 'enzyme';
 import * as R from 'ramda';
 import sinon from 'sinon';
 import rootSC from './styled-components';
+import rootE from './emotion';
 import root, { useShadowRoot } from './';
 
 test('It should be able to create the shadow boundary;', (t) => {
@@ -161,4 +162,22 @@ test('It should be able to encapsulate styled component styles in the boundary;'
     t.true(styles.hasAttribute('data-styled'));
     t.true(styles.innerHTML.includes('rebeccapurple'));
     t.true(styles.innerHTML.includes(className));
+});
+
+test('It should be able to encapsulate emotion styles in the boundary;', (t) => {
+    const Name = styled.section`
+        color: rebeccapurple;
+    `;
+
+    const wrapper = mount(
+        <rootE.sayHello>
+            <Name>Hello Adam!</Name>
+        </rootE.sayHello>,
+    );
+    t.truthy(wrapper.getDOMNode().shadowRoot);
+    t.is(wrapper.getDOMNode().nodeName.toLowerCase(), 'say-hello');
+    t.is(wrapper.find(Name).text(), 'Hello Adam!');
+
+    const styles = wrapper.getDOMNode().shadowRoot.querySelector('style');
+    t.falsy(styles);
 });

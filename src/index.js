@@ -9,12 +9,18 @@ export function useShadowRoot() {
     return useContext(utils.Context);
 }
 
-export function createProxy(target = {}, render = ({ children }) => children) {
+export function createProxy(
+    target = {},
+    id = 'core',
+    render = ({ children }) => children,
+) {
     return new Proxy(target, {
         get: function get(_, name) {
             const tag = decamelize(name, { separator: '-' });
-            if (!tags.has(tag)) tags.set(tag, create({ tag, render }));
-            return tags.get(tag);
+            const key = `${id}-${tag}`;
+
+            if (!tags.has(key)) tags.set(key, create({ tag, render }));
+            return tags.get(key);
         },
     });
 }

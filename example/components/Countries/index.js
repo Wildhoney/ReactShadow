@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import * as utils from '../../utils';
+import Header from '../Header';
 import { getCities } from './utils';
 
 export default function Cities({ name, cities }) {
@@ -17,7 +18,7 @@ export default function Cities({ name, cities }) {
 
     return (
         <>
-            <h3>Weather for:</h3>
+            <Header>Weather for:</Header>
 
             <ul>
                 {getCities(cities).map((model) => (

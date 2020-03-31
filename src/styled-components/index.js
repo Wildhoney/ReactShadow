@@ -15,18 +15,22 @@ export function getStyleSheets(children) {
     return sheet.getStyleElement();
 }
 
-export default createProxy({}, ({ root, ssr, children }) => {
-    if (ssr)
-        return (
-            <>
-                {getStyleSheets(children)}
-                {children}
-            </>
-        );
+export default createProxy(
+    {},
+    'styled-components',
+    ({ root, ssr, children }) => {
+        if (ssr)
+            return (
+                <>
+                    {getStyleSheets(children)}
+                    {children}
+                </>
+            );
 
-    return (
-        <StyleSheetManager target={root}>
-            <>{children}</>
-        </StyleSheetManager>
-    );
-});
+        return (
+            <StyleSheetManager target={root}>
+                <>{children}</>
+            </StyleSheetManager>
+        );
+    },
+);
