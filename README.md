@@ -48,7 +48,7 @@ Applying styles requires either applying the styles directly to the component as
 }
 ```
 
-Alternatively you can use [`styled-components`](https://www.styled-components.com/) normally, as each time a shadow boundary is created, a new `StyleSheetManager` context is also created which will encapsulate all related styles in their corresponding shadow root.
+Alternatively you can use [`styled-components`](https://www.styled-components.com/) normally, as each time a shadow boundary is created, a new `StyleSheetManager` context is also created which will encapsulate all related styles in their corresponding shadow root &mdash; to use this `import react-shadow/styled-components` instead of `import react-shadow`, likewise if you'd like to use [`emotion`](https://emotion.sh/docs/styled) you can `import react-shadow/emotion`.
 
 You may pass any props you like to the `root.*` component which will be applied directly to the host element, including event handlers and class names. There are also a handful of options that are used for the `attachShadow` invocation.
 
