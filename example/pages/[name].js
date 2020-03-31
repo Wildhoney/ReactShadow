@@ -12,9 +12,11 @@ City.getInitialProps = async ({ query }) => {
         ({ city }) => utils.toSlug(city) === query.name,
     );
 
-    return {
-        name: place.city,
-        cities: api.places.map(({ city }) => city),
-        weather: await api.fetch(`${place.city}, ${place.country}`),
-    };
+    return place
+        ? {
+              name: place.city,
+              cities: api.places.map(({ city }) => city),
+              weather: await api.fetch(`${place.city}, ${place.country}`),
+          }
+        : { name: query.name };
 };

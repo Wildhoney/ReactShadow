@@ -5,9 +5,9 @@ import * as e from './styles';
 
 export default function Header({ children }) {
     return (
-        <root.div>
+        <root.header>
             <e.H3>{children}</e.H3>
-        </root.div>
+        </root.header>
     );
 }
 
