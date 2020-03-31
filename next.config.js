@@ -1,6 +1,6 @@
 const path = require('path');
 
-const aliases = [{ module: 'react-shadow', path: 'src/index.js' }];
+const aliases = [{ module: 'react-shadow', path: 'src/' }];
 
 module.exports = {
     target: 'serverless',
