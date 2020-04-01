@@ -4,17 +4,18 @@ import babel from 'rollup-plugin-babel';
 import { terser } from 'rollup-plugin-terser';
 
 module.exports = {
-    input: 'src/index.js',
-    external: ['react', 'react-dom', 'prop-types', 'styled-components'],
+    input: `src/${process.env.input}.js`,
+    external: [
+        'react',
+        'react-dom',
+        'prop-types',
+        'styled-components',
+        '@emotion/core',
+        '@emotion/cache',
+    ],
     output: [
         {
-            file: 'dist/react-shadow.cjs.js',
-            format: 'cjs',
-            sourcemap: true,
-            exports: 'named',
-        },
-        {
-            file: 'dist/react-shadow.esm.js',
+            file: `dist/${process.env.output}.js`,
             format: 'esm',
             sourcemap: true,
             exports: 'named',
