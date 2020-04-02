@@ -23,7 +23,7 @@
         "start": "next ./example -p ${PORT:-3000}",
         "deploy": "now",
         "prepublishOnly": "mv dist/* ./",
-        "postpublish": "mv {react-shadow,emotion,styled-components}{.js,.js.map} ./dist"
+        "postpublish": "mv {react-shadow,emotion,styled-components}{.js,.js.map,.cjs.js,.cjs.js.map} ./dist"
     },
     "peerDependencies": {
         "prop-types": "^15.0.0",
