@@ -15,13 +15,13 @@ module.exports = {
     ],
     output: [
         {
-            file: `dist/${process.env.output}.js`,
+            file: `dist/${process.env.output}.esm.js`,
             format: 'esm',
             sourcemap: true,
             exports: 'named',
         },
         {
-            file: `dist/${process.env.output}.cjs.js`,
+            file: `dist/${process.env.output}.js`,
             format: 'cjs',
             sourcemap: true,
             exports: 'named',

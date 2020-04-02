@@ -2,8 +2,8 @@
     "name": "react-shadow",
     "version": "18.0.1",
     "description": "Utilise Shadow DOM in React with all the benefits of style encapsulation.",
-    "main": "react-shadow.cjs.js",
-    "module": "react-shadow.js",
+    "main": "react-shadow.js",
+    "module": "react-shadow.esm.js",
     "repository": "git@github.com:Wildhoney/ReactShadow.git",
     "author": "Adam Timberlake <adam.timberlake@gmail.com>",
     "contributors": [
@@ -23,7 +23,7 @@
         "start": "next ./example -p ${PORT:-3000}",
         "deploy": "now",
         "prepublishOnly": "mv dist/* ./",
-        "postpublish": "mv {react-shadow,emotion,styled-components}{.js,.js.map,.cjs.js,.cjs.js.map} ./dist"
+        "postpublish": "mv {react-shadow,emotion,styled-components}{.js,.js.map,.esm.js,.esm.js.map} ./dist"
     },
     "peerDependencies": {
         "prop-types": "^15.0.0",
