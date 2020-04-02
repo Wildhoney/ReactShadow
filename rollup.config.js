@@ -20,6 +20,12 @@ module.exports = {
             sourcemap: true,
             exports: 'named',
         },
+        {
+            file: `dist/${process.env.output}.cjs.js`,
+            format: 'cjs',
+            sourcemap: true,
+            exports: 'named',
+        },
     ],
     plugins: [
         resolve(),

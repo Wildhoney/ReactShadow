@@ -2,7 +2,7 @@
     "name": "react-shadow",
     "version": "18.0.0",
     "description": "Utilise Shadow DOM in React with all the benefits of style encapsulation.",
-    "main": "react-shadow.js",
+    "main": "react-shadow.cjs.js",
     "module": "react-shadow.js",
     "repository": "git@github.com:Wildhoney/ReactShadow.git",
     "author": "Adam Timberlake <adam.timberlake@gmail.com>",
