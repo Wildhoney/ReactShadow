@@ -12,6 +12,7 @@ module.exports = {
         'styled-components',
         '@emotion/core',
         '@emotion/cache',
+        'emotion-server',
     ],
     output: [
         {
@@ -56,6 +57,7 @@ module.exports = {
                     'createContext',
                 ],
                 'node_modules/humps/humps.js': ['decamelize'],
+                'node_modules/react-dom/server.js': ['renderToString'],
             },
         }),
         terser(),
