@@ -1,6 +1,6 @@
 import React from 'react';
+import { renderToString } from 'react-dom/server';
 import { StyleSheetManager, ServerStyleSheet } from 'styled-components';
-import { renderToString } from 'react-dom';
 import { createProxy } from '../';
 
 export function getStyleSheets(children) {
@@ -8,7 +8,7 @@ export function getStyleSheets(children) {
 
     renderToString(
         <StyleSheetManager sheet={sheet.instance}>
-            {children}
+            <>{children}</>
         </StyleSheetManager>,
     );
 
