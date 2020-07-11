@@ -19,8 +19,8 @@ export default createProxy({}, 'material-ui', ({ children }) => {
 
             return (
                 <StylesProvider jss={jss}>
-                    <div ref={this.handleRef} />
                     {this.state.node && <>{children}</>}
+                    <style ref={this.handleRef} />
                 </StylesProvider>
             );
         }
