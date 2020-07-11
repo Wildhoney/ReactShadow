@@ -13,6 +13,8 @@ module.exports = {
         '@emotion/core',
         '@emotion/cache',
         'emotion-server',
+        '@material-ui/styles',
+        'jss',
     ],
     output: [
         {
