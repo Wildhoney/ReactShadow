@@ -5,7 +5,7 @@ import createCache from '@emotion/cache';
 import { renderStylesToString } from 'emotion-server';
 import { createProxy } from '../';
 
-const cache = new Map();
+const cache = new WeakMap();
 
 export function getStyles(children) {
     return renderStylesToString(renderToString(<>{children}</>));
