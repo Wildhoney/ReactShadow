@@ -52,6 +52,7 @@ module.exports = {
                     'isElement',
                     'isValidElementType',
                     'ForwardRef',
+                    'Memo',
                 ],
                 'node_modules/styled-components/dist/styled-components.esm.js': [
                     'createContext',
