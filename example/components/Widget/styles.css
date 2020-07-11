@@ -31,31 +31,6 @@ main {
     text-align: center;
 }
 
-a.refresh {
-    border: none;
-    width: 2vmax;
-    height: 2vmax;
-    text-indent: -10000px;
-    position: absolute;
-    outline: none;
-    cursor: pointer;
-    opacity: 0.25;
-    top: 20px;
-    right: 20px;
-    background: transparent url('/images/refresh.svg') no-repeat center center;
-    background-size: 2vmax;
-    transition: opacity 0.25s, transform 0.25s;
-}
-
-a.refresh:hover,
-a.refresh:focus {
-    opacity: 0.5;
-}
-
-a.refresh:focus {
-    transform: scale(1.5);
-}
-
 h1 {
     font-family: Times, 'Times New Roman', serif;
     font-weight: normal;
