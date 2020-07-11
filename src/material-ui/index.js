@@ -5,10 +5,9 @@ import { createProxy } from '../';
 
 export default createProxy({}, 'material-ui', ({ children }) => {
     class ReactShadow extends React.Component {
-        state = { node: null };
-
         constructor() {
             super();
+            this.state = { node: null };
             this.handleRef = (node) => this.setState({ node });
         }
 

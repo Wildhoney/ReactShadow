@@ -12,10 +12,11 @@
     ],
     "license": "MIT",
     "scripts": {
-        "build": "yarn run build-core && yarn run build-emotion && yarn run build-styled-components && next build ./example",
+        "build": "yarn run build-core && yarn run build-emotion && yarn run build-styled-components && yarn run build-material-ui && next build ./example",
         "build-core": "rollup -c --environment input:index,output:react-shadow",
         "build-emotion": "rollup -c --environment input:emotion/index,output:emotion",
         "build-styled-components": "rollup -c --environment input:styled-components/index,output:styled-components",
+        "build-material-ui": "rollup -c --environment input:material-ui/index,output:material-ui",
         "test": "yarn spec && yarn lint",
         "spec": "ava --verbose",
         "lint": "eslint '**/**.js'",
@@ -24,7 +25,7 @@
         "start": "next ./example -p ${PORT:-3000}",
         "deploy": "now",
         "prepublishOnly": "mv dist/* ./",
-        "postpublish": "mv {react-shadow,emotion,styled-components}{.js,.js.map,.esm.js,.esm.js.map} ./dist"
+        "postpublish": "mv {react-shadow,emotion,styled-components,material-ui}{.js,.js.map,.esm.js,.esm.js.map} ./dist"
     },
     "peerDependencies": {
         "prop-types": "^15.0.0",
