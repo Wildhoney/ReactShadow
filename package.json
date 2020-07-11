@@ -45,6 +45,7 @@
         "@babel/runtime": "^7.9.2",
         "@emotion/core": "^10.0.28",
         "@emotion/styled": "^10.0.27",
+        "@material-ui/core": "^4.11.0",
         "ava": "^3.8.1",
         "axios": "^0.19.2",
         "babel-eslint": "^10.1.0",
