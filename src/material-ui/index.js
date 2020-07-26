@@ -3,8 +3,8 @@ import { jssPreset, StylesProvider } from '@material-ui/styles';
 import { create } from 'jss';
 import { createProxy } from '../';
 
-export default createProxy({}, 'material-ui', ({ children }) => {
-    class ReactShadow extends React.Component {
+export default createProxy({}, 'material-ui', ({ root, children }) => {
+    class Main extends React.Component {
         constructor() {
             super();
             this.state = { node: null };
@@ -20,11 +20,11 @@ export default createProxy({}, 'material-ui', ({ children }) => {
             return (
                 <StylesProvider jss={jss}>
                     {this.state.node && <>{children}</>}
-                    <style ref={this.handleRef} />
+                    <div ref={this.handleRef} />
                 </StylesProvider>
             );
         }
     }
 
-    return <ReactShadow />;
+    return <Main />;
 });
