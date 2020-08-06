@@ -70,7 +70,7 @@
         "eslint-plugin-react": "^7.19.0",
         "eslint-plugin-standard": "^4.0.1",
         "moment": "^2.24.0",
-        "next": "^9.3.5",
+        "next": "^9.3.7",
         "nyc": "^15.0.1",
         "prettier": "^2.0.5",
         "prop-types": "^15.7.2",
