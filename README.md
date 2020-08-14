@@ -12,7 +12,7 @@
 
 -   **npm**: `npm i react-shadow`
 -   **yarn**: `yarn add react-shadow`
--   **Heroku**: [https://react-shadow-2.herokuapp.com](https://react-shadow-2.herokuapp.com)
+-   **Heroku**: [https://react-shadow.herokuapp.com/](https://react-shadow.herokuapp.com) ([https://react-shadow-2.herokuapp.com](alternative))
 
 ![Screenshot](media/screenshot.png)
 
