@@ -98,7 +98,7 @@ select {
     -webkit-appearance: none;
     appearance: none;
     padding: 5px 10px;
-    background: white url('/images/arrow.svg') no-repeat right 10px center;
+    background: white url('/public/images/arrow.svg') no-repeat right 10px center;
     background-size: 10px;
     border: 1px solid rgba(0, 0, 0, 0.25);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);

@@ -6,8 +6,13 @@ module.exports = {
     target: 'serverless',
     webpack: (config, options) => {
         config.module.rules.push({
+            test: /\.svg$/,
+            loader: 'svg-inline-loader',
+        });
+
+        config.module.rules.push({
             test: /\.css$/,
-            loader: ['to-string-loader', 'css-loader'],
+            loader: ['css-loader'],
         });
 
         config.module.rules.push({
