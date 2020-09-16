@@ -21,7 +21,7 @@
         "spec": "ava --verbose",
         "lint": "eslint '**/**.js'",
         "coverage": "nyc ava && nyc report --reporter=text-lcov | coveralls",
-        "format": "NODE_ENV=production prettier --write '**/**.{js,html,mjs,css}'",
+        "format": "NODE_ENV=production prettier --write '**/**.{js,html,mjs,css,ts}'",
         "start": "next ./example -p ${PORT:-3000}",
         "deploy": "now",
         "prepublishOnly": "mv dist/* ./",
