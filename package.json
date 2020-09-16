@@ -27,6 +27,12 @@
         "prepublishOnly": "mv dist/* ./",
         "postpublish": "mv {react-shadow,emotion,styled-components,material-ui}{.js,.js.map,.esm.js,.esm.js.map} ./dist"
     },
+    "husky": {
+        "hooks": {
+            "pre-commit": "yarn format && yarn test",
+            "pre-push": "yarn format && yarn test"
+        }
+    },
     "peerDependencies": {
         "prop-types": "^15.0.0",
         "react": "^16.8.0",
@@ -70,6 +76,7 @@
         "eslint-plugin-promise": "^4.2.1",
         "eslint-plugin-react": "^7.20.6",
         "eslint-plugin-standard": "^4.0.1",
+        "husky": "^4.3.0",
         "moment": "^2.27.0",
         "next": "^9.5.2",
         "nyc": "^15.1.0",
