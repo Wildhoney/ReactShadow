@@ -1,8 +1,8 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import { CacheProvider } from '@emotion/core';
+import { CacheProvider } from '@emotion/react';
 import createCache from '@emotion/cache';
-import { renderStylesToString } from 'emotion-server';
+import { renderStylesToString } from '@emotion/server';
 import { createProxy } from '../';
 
 const cache = new WeakMap();
@@ -15,7 +15,10 @@ export default createProxy({}, 'emotion', ({ ssr, root, children }) => {
     const options =
         cache.get(root) ||
         (() => {
-            const options = createCache({ container: root });
+            const options = createCache({
+                container: root,
+                key: 'react-shadow',
+            });
             cache.set(root, options);
             return options;
         })();
