@@ -15,6 +15,7 @@
         "build": "yarn run build-core && yarn run build-emotion && yarn run build-styled-components && yarn run build-material-ui && next build ./example",
         "build-core": "rollup -c --environment input:index,output:react-shadow",
         "build-emotion": "rollup -c --environment input:emotion/index,output:emotion",
+        "build-emotion-ssr": "rollup -c --environment input:emotion-ssr/index,output:emotion-ssr",
         "build-styled-components": "rollup -c --environment input:styled-components/index,output:styled-components",
         "build-material-ui": "rollup -c --environment input:material-ui/index,output:material-ui",
         "test": "yarn spec && yarn lint",
@@ -25,7 +26,7 @@
         "start": "next ./example -p ${PORT:-3000}",
         "deploy": "now",
         "prepublishOnly": "mv dist/* ./",
-        "postpublish": "mv {react-shadow,emotion,styled-components,material-ui}{.js,.js.map,.esm.js,.esm.js.map} ./dist"
+        "postpublish": "mv {react-shadow,emotion,emotion-ssr,styled-components,material-ui}{.js,.js.map,.esm.js,.esm.js.map} ./dist"
     },
     "husky": {
         "hooks": {

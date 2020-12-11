@@ -6,6 +6,7 @@ import * as R from 'ramda';
 import sinon from 'sinon';
 import rootSC from './styled-components';
 import rootE from './emotion';
+import rootESSR from './emotion-ssr';
 import root, { useShadowRoot } from './';
 
 test('It should be able to create the shadow boundary;', (t) => {
@@ -173,6 +174,24 @@ test('It should be able to encapsulate emotion styles in the boundary;', (t) => 
         <rootE.sayHello>
             <Name>Hello Adam!</Name>
         </rootE.sayHello>,
+    );
+    t.truthy(wrapper.getDOMNode().shadowRoot);
+    t.is(wrapper.getDOMNode().nodeName.toLowerCase(), 'say-hello');
+    t.is(wrapper.find(Name).text(), 'Hello Adam!');
+
+    const styles = wrapper.getDOMNode().shadowRoot.querySelector('style');
+    t.falsy(styles);
+});
+
+test('SSR: It should be able to encapsulate emotion styles in the boundary;', (t) => {
+    const Name = styled.section`
+        color: rebeccapurple;
+    `;
+
+    const wrapper = mount(
+        <rootESSR.sayHello>
+            <Name>Hello Adam!</Name>
+        </rootESSR.sayHello>,
     );
     t.truthy(wrapper.getDOMNode().shadowRoot);
     t.is(wrapper.getDOMNode().nodeName.toLowerCase(), 'say-hello');
