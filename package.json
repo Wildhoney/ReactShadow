@@ -14,7 +14,7 @@
     "scripts": {
         "build": "yarn run build-core && yarn run build-emotion && yarn run build-styled-components && yarn run build-material-ui && next build ./example",
         "build-core": "rollup -c --environment input:index,output:react-shadow",
-        "build-emotion": "rollup -c --environment input:emotion/index,output:emotion && build-emotion-ssr",
+        "build-emotion": "rollup -c --environment input:emotion/index,output:emotion && yarn build-emotion-ssr",
         "build-emotion-ssr": "rollup -c --environment input:emotion-ssr/index,output:emotion-ssr",
         "build-styled-components": "rollup -c --environment input:styled-components/index,output:styled-components",
         "build-material-ui": "rollup -c --environment input:material-ui/index,output:material-ui",
