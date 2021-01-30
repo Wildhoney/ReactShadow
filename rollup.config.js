@@ -8,6 +8,7 @@ module.exports = {
     external: [
         'react',
         'react-dom',
+        'react-dom/server',
         'prop-types',
         'styled-components',
         '@emotion/react',
