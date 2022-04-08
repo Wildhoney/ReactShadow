@@ -65,7 +65,9 @@ You may pass any props you like to the `root.*` component which will be applied 
 ShadowRoot.propTypes = {
     mode: PropTypes.oneOf(['open', 'closed']),
     delegatesFocus: PropTypes.bool,
-    styleSheets: PropTypes.arrayOf(PropTypes.instanceOf(global.CSSStyleSheet)),
+    styleSheets: PropTypes.arrayOf(
+        PropTypes.instanceOf(globalThis.CSSStyleSheet),
+    ),
     children: PropTypes.node,
 };
 

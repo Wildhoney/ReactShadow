@@ -83,7 +83,7 @@ export default function create(options) {
         mode: PropTypes.oneOf(['open', 'closed']),
         delegatesFocus: PropTypes.bool,
         styleSheets: PropTypes.arrayOf(
-            PropTypes.instanceOf(global.CSSStyleSheet),
+            PropTypes.instanceOf(globalThis.CSSStyleSheet),
         ),
         ssr: PropTypes.bool,
         children: PropTypes.node,
