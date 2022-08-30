@@ -1,17 +1,5 @@
-# npm
+.git/
+.cache/
 node_modules/
-yarn-error.log
-
-# build
-dist/
-
-# next
-example/.next/
-example/react-shadow.js
-
-# coverage
-.nyc_output/
-
-#now
-.now
-
+_old/
+public/build/
