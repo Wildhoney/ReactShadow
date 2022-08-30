@@ -1,14 +1,14 @@
-import { ReactElement, ReactNode, ReactPortal, useEffect, useMemo, useRef, useState } from 'react';
+import React, { FC, ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { UseShadowArgs, UseShadowReturn } from './types';
 
-export function useShadow({ delegatesFocus, styleSheets, children }: UseShadowArgs): UseShadowReturn {
+export function useShadow({ delegatesFocus, styleSheets, ...props }: UseShadowArgs): UseShadowReturn {
     const containerRef = useRef<HTMLElement>(null);
     const [shadowRoot, setShadowRoot] = useState<null | ShadowRoot>(null);
-
-    function Children(): ReactPortal | ReactNode {
-        return shadowRoot ? createPortal(children, shadowRoot) : children;
-    }
+    const Children = useMemo(
+        (): FC => () => <>{shadowRoot ? createPortal(props.children, shadowRoot) : props.children}</>,
+        [shadowRoot, props.children]
+    );
 
     useEffect((): void => {
         setShadowRoot((): null | ShadowRoot => {

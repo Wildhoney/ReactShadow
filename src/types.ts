@@ -1,20 +1,22 @@
-import { ReactNode, ReactPortal, RefObject } from 'react';
+import { FC, ReactNode, RefObject } from 'react';
 
-export type Props = {
+export type ComponentProps = {
     Container: any;
     delegatesFocus?: boolean;
     styleSheets?: CSSStyleSheet[];
     fallback?: ReactNode;
-    withSSR: boolean;
+    withSSR?: boolean;
     children: ReactNode;
 };
 
-export type UseShadowArgs = Required<Pick<Props, 'delegatesFocus' | 'styleSheets' | 'withSSR' | 'children'>>;
+export type ProxyProps = Omit<ComponentProps, 'Container'> & { children: ReactNode };
+
+export type UseShadowArgs = Required<Pick<ComponentProps, 'delegatesFocus' | 'styleSheets' | 'withSSR' | 'children'>>;
 
 export type UseShadowReturn = {
     ref: RefObject<HTMLElement>;
     shadowRoot: null | ShadowRoot;
-    Children: ReactPortal | ReactNode;
+    Children: FC;
 };
 
 declare global {

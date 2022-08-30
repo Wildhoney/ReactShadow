@@ -7,11 +7,11 @@ export default function Home(): ReactElement {
     return (
         <div>
             Hey{' '}
-            <root.section delegatesFocus>
+            <root.countValue delegatesFocus>
                 <button onClick={(): void => setCount(count - 1)}>-</button>
                 <h1>{count}</h1>
                 <button onClick={(): void => setCount(count + 1)}>+</button>
-            </root.section>
+            </root.countValue>
         </div>
     );
 }
