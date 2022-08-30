@@ -136,6 +136,9 @@ __export(routes_exports, {
 });
 var import_react4 = require("react");
 
+// src/index.tsx
+var import_humps = require("humps");
+
 // src/utils.ts
 var import_react3 = require("react"), import_react_dom = require("react-dom");
 function useShadow({ delegatesFocus, styleSheets, children }) {
@@ -180,6 +183,22 @@ function ReactShadow({
     columnNumber: 9
   }, this);
 }
+var tags = /* @__PURE__ */ new Map(), src_default = new Proxy({}, {
+  get(_, name) {
+    let tagName = (0, import_humps.decamelize)(name, { separator: "-" });
+    return !tags.has(name) && tags.set(
+      name,
+      (props) => /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(ReactShadow, {
+        Container: tagName,
+        ...props
+      }, void 0, !1, {
+        fileName: "src/index.tsx",
+        lineNumber: 34,
+        columnNumber: 68
+      }, this)
+    ), tags.get(name);
+  }
+});
 
 // app/routes/index.tsx
 var import_jsx_dev_runtime = require("react/jsx-dev-runtime");
@@ -189,7 +208,7 @@ function Home() {
     children: [
       "Hey",
       " ",
-      /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(ReactShadow, {
+      /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(src_default.section, {
         delegatesFocus: !0,
         children: [
           /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)("button", {
@@ -230,7 +249,7 @@ function Home() {
 }
 
 // server-assets-manifest:@remix-run/dev/assets-manifest
-var assets_manifest_default = { version: "283550d2", entry: { module: "/build/entry.client-T2TLZAGK.js", imports: ["/build/_shared/chunk-IMF64WG6.js", "/build/_shared/chunk-S64AOWX5.js", "/build/_shared/chunk-IE366Y5W.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-YLZKFWWP.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/index": { id: "routes/index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/index-JSKYLPMA.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, url: "/build/manifest-283550D2.js" };
+var assets_manifest_default = { version: "345368a6", entry: { module: "/build/entry.client-T2TLZAGK.js", imports: ["/build/_shared/chunk-IMF64WG6.js", "/build/_shared/chunk-S64AOWX5.js", "/build/_shared/chunk-IE366Y5W.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-YLZKFWWP.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/index": { id: "routes/index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/index-4ROZOKCA.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, url: "/build/manifest-345368A6.js" };
 
 // server-entry-module:@remix-run/dev/server-build
 var assetsBuildDirectory = "public/build", publicPath = "/build/", entry = { module: entry_server_exports }, routes = {

@@ -1,5 +1,5 @@
 import React, { ReactElement, useState } from 'react';
-import Root from '../../src';
+import root from '../../src';
 
 export default function Home(): ReactElement {
     const [count, setCount] = useState(0);
@@ -7,11 +7,11 @@ export default function Home(): ReactElement {
     return (
         <div>
             Hey{' '}
-            <Root delegatesFocus>
+            <root.section delegatesFocus>
                 <button onClick={(): void => setCount(count - 1)}>-</button>
                 <h1>{count}</h1>
                 <button onClick={(): void => setCount(count + 1)}>+</button>
-            </Root>
+            </root.section>
         </div>
     );
 }

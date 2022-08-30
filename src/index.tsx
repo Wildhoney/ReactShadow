@@ -3,7 +3,7 @@ import { decamelize } from 'humps';
 import { Props } from './types';
 import { useShadow } from './utils';
 
-export default function ReactShadow({
+function ReactShadow({
     Container = 'div',
     withSSR = false,
     delegatesFocus = false,
@@ -24,16 +24,16 @@ export default function ReactShadow({
 
 const tags = new Map<string, typeof ReactShadow>();
 
-// export default new Proxy({} as Record<string, string>, {
-//     get(_, name: string) {
-//         const tagName = decamelize(name, { separator: '-' });
+export default new Proxy({} as Record<string, string>, {
+    get(_, name: string) {
+        const tagName = decamelize(name, { separator: '-' });
 
-//         !tags.has(name) &&
-//             tags.set(
-//                 name,
-//                 (props: Omit<Props, 'Container'>): ReactElement => <ReactShadow Container={tagName} {...props} />
-//             );
+        !tags.has(name) &&
+            tags.set(
+                name,
+                (props: Omit<Props, 'Container'>): ReactElement => <ReactShadow Container={tagName} {...props} />
+            );
 
-//         return tags.get(name);
-//     },
-// });
+        return tags.get(name);
+    },
+});
