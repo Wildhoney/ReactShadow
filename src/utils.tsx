@@ -1,13 +1,15 @@
-import React, { FC, ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { FC, useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { UseShadowArgs, UseShadowReturn } from './types';
+import { UseShadowArgs, UseShadowReturn, ChildrenProps } from './types';
 
 export function useShadow({ delegatesFocus, styleSheets, ...props }: UseShadowArgs): UseShadowReturn {
     const containerRef = useRef<HTMLElement>(null);
     const [shadowRoot, setShadowRoot] = useState<null | ShadowRoot>(null);
     const Children = useMemo(
-        (): FC => () => <>{shadowRoot ? createPortal(props.children, shadowRoot) : props.children}</>,
-        [shadowRoot, props.children]
+        (): FC<ChildrenProps> =>
+            ({ children }) =>
+                <>{shadowRoot ? createPortal(children, shadowRoot) : props.children}</>,
+        [shadowRoot]
     );
 
     useEffect((): void => {

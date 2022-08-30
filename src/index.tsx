@@ -17,7 +17,7 @@ function ReactShadow({
 
     return (
         <Container ref={shadow.ref}>
-            <shadow.Children />
+            <shadow.Children>{children}</shadow.Children>
         </Container>
     );
 }

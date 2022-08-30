@@ -235,24 +235,25 @@ function useShadow({ delegatesFocus, styleSheets, ...props }) {
     let containerRef = (0, import_react3.useRef)(null),
         [shadowRoot, setShadowRoot] = (0, import_react3.useState)(null),
         Children = (0, import_react3.useMemo)(
-            () => () =>
-                /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(
-                    import_jsx_dev_runtime.Fragment,
-                    {
-                        children: shadowRoot
-                            ? (0, import_react_dom.createPortal)(props.children, shadowRoot)
-                            : props.children,
-                    },
-                    void 0,
-                    !1,
-                    {
-                        fileName: 'src/utils.tsx',
-                        lineNumber: 9,
-                        columnNumber: 25,
-                    },
-                    this
-                ),
-            [shadowRoot, props.children]
+            () =>
+                ({ children }) =>
+                    /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(
+                        import_jsx_dev_runtime.Fragment,
+                        {
+                            children: shadowRoot
+                                ? (0, import_react_dom.createPortal)(children, shadowRoot)
+                                : props.children,
+                        },
+                        void 0,
+                        !1,
+                        {
+                            fileName: 'src/utils.tsx',
+                            lineNumber: 9,
+                            columnNumber: 50,
+                        },
+                        this
+                    ),
+            [shadowRoot]
         );
     return (
         (0, import_react3.useEffect)(() => {
@@ -289,7 +290,9 @@ function ReactShadow({ Container, withSSR = !1, delegatesFocus = !1, styleSheets
                 ref: shadow.ref,
                 children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(
                     shadow.Children,
-                    {},
+                    {
+                        children,
+                    },
                     void 0,
                     !1,
                     {
@@ -330,8 +333,8 @@ var tags = /* @__PURE__ */ new Map(),
                                 !1,
                                 {
                                     fileName: 'src/index.tsx',
-                                    lineNumber: 34,
-                                    columnNumber: 54,
+                                    lineNumber: 32,
+                                    columnNumber: 65,
                                 },
                                 this
                             )
@@ -427,7 +430,7 @@ function Home() {
 
 // server-assets-manifest:@remix-run/dev/assets-manifest
 var assets_manifest_default = {
-    version: 'ad721a39',
+    version: '3f131826',
     entry: {
         module: '/build/entry.client-T2TLZAGK.js',
         imports: [
@@ -456,7 +459,7 @@ var assets_manifest_default = {
             path: void 0,
             index: !0,
             caseSensitive: void 0,
-            module: '/build/routes/index-HQDWYEQB.js',
+            module: '/build/routes/index-5KUCUO2Z.js',
             imports: void 0,
             hasAction: !1,
             hasLoader: !1,
@@ -464,7 +467,7 @@ var assets_manifest_default = {
             hasErrorBoundary: !1,
         },
     },
-    url: '/build/manifest-AD721A39.js',
+    url: '/build/manifest-3F131826.js',
 };
 
 // server-entry-module:@remix-run/dev/server-build
