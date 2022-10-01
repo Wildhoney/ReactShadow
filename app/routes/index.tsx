@@ -1,7 +1,7 @@
 import root from '../../src';
 // import City from "../components/City"
 
-import React, { ReactElement } from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 // import styles from './styles.css';
 
 export default function Home(): ReactElement {
