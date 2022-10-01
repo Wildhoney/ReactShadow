@@ -1,6 +1,6 @@
-import React, { FC, ReactElement } from 'react';
+import React, { ReactElement } from 'react';
 import { decamelize } from 'humps';
-import { RootProps, ProxyProps } from './types';
+import { RootProps, Element } from './types';
 import { useShadow } from './utils';
 
 function ReactShadow({
@@ -22,16 +22,19 @@ function ReactShadow({
 
 const tags = new Map<string, typeof ReactShadow>();
 
-export default new Proxy({} as Record<string, FC<ProxyProps<'div'>>>, {
-    get(_, name: string) {
-        const tagName = decamelize(name, { separator: '-' });
+export default new Proxy<Record<string, Element>>(
+    {},
+    {
+        get(_, name: string) {
+            const tagName = decamelize(name, { separator: '-' });
 
-        if (!tags.has(name)) {
-            tags.set(name, (props: ProxyProps<'div'>): ReactElement => {
-                return <ReactShadow Container={tagName} {...props} />;
-            });
-        }
+            if (!tags.has(name)) {
+                tags.set(name, (props): ReactElement => {
+                    return <ReactShadow {...props} Container={tagName} />;
+                });
+            }
 
-        return tags.get(name);
-    },
-});
+            return tags.get(name);
+        },
+    }
+);

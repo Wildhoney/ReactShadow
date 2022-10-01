@@ -6,7 +6,7 @@ import React, { ReactElement } from 'react';
 
 export default function Home(): ReactElement {
     return (
-        <root.section className="weather">
+        <root.section<'section'> className="weather">
             {/* <style type="text/css">{styles.toString()}</style> */}
             {/* <City /> */}
             Hii

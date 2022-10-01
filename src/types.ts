@@ -8,8 +8,9 @@ export type RootProps = {
     children: ReactNode;
 };
 
-export type ProxyProps<T extends keyof JSX.IntrinsicElements> = Omit<RootProps, 'Container'> &
-    ComponentProps<T> & { children: ReactNode };
+export type ProxyProps<T extends keyof JSX.IntrinsicElements> = Omit<RootProps, 'Container'> & {
+    children: ReactNode;
+} & ComponentProps<T>;
 
 export type ChildrenProps = { children: ReactNode };
 
@@ -20,6 +21,8 @@ export type UseShadowReturn = {
     shadowRoot: null | ShadowRoot;
     Children: FC<ChildrenProps>;
 };
+
+export type Element = <T extends keyof JSX.IntrinsicElements>(prop: ProxyProps<T>) => JSX.Element;
 
 declare global {
     interface ShadowRoot {
