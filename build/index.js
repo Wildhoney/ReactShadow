@@ -222,7 +222,6 @@ var routes_exports = {};
 __export(routes_exports, {
     default: () => Home,
 });
-var import_react4 = require('react');
 
 // src/index.tsx
 var import_humps = require('humps');
@@ -248,8 +247,8 @@ function useShadow({ delegatesFocus, styleSheets, ...props }) {
                         !1,
                         {
                             fileName: 'src/utils.tsx',
-                            lineNumber: 9,
-                            columnNumber: 50,
+                            lineNumber: 11,
+                            columnNumber: 17,
                         },
                         this
                     ),
@@ -280,38 +279,36 @@ function useShadow({ delegatesFocus, styleSheets, ...props }) {
 
 // src/index.tsx
 var import_jsx_dev_runtime = require('react/jsx-dev-runtime');
-function ReactShadow({ Container, withSSR = !1, delegatesFocus = !1, styleSheets = [], fallback, children }) {
+function ReactShadow({ Container, withSSR = !1, delegatesFocus = !1, styleSheets = [], fallback, children, ...props }) {
     let shadow = useShadow({ delegatesFocus, styleSheets, withSSR, children });
-    return (
-        console.log('render...'),
-        /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(
-            Container,
-            {
-                ref: shadow.ref,
-                children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(
-                    shadow.Children,
-                    {
-                        children,
-                    },
-                    void 0,
-                    !1,
-                    {
-                        fileName: 'src/index.tsx',
-                        lineNumber: 20,
-                        columnNumber: 13,
-                    },
-                    this
-                ),
-            },
-            void 0,
-            !1,
-            {
-                fileName: 'src/index.tsx',
-                lineNumber: 19,
-                columnNumber: 9,
-            },
-            this
-        )
+    return /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(
+        Container,
+        {
+            ref: shadow.ref,
+            ...props,
+            children: /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(
+                shadow.Children,
+                {
+                    children,
+                },
+                void 0,
+                !1,
+                {
+                    fileName: 'src/index.tsx',
+                    lineNumber: 19,
+                    columnNumber: 13,
+                },
+                this
+            ),
+        },
+        void 0,
+        !1,
+        {
+            fileName: 'src/index.tsx',
+            lineNumber: 18,
+            columnNumber: 9,
+        },
+        this
     );
 }
 var tags = /* @__PURE__ */ new Map(),
@@ -321,7 +318,7 @@ var tags = /* @__PURE__ */ new Map(),
             get(_, name) {
                 let tagName = (0, import_humps.decamelize)(name, { separator: '-' });
                 return (
-                    !tags.has(name) &&
+                    tags.has(name) ||
                         tags.set(name, (props) =>
                             /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(
                                 ReactShadow,
@@ -334,7 +331,7 @@ var tags = /* @__PURE__ */ new Map(),
                                 {
                                     fileName: 'src/index.tsx',
                                     lineNumber: 32,
-                                    columnNumber: 65,
+                                    columnNumber: 24,
                                 },
                                 this
                             )
@@ -348,77 +345,14 @@ var tags = /* @__PURE__ */ new Map(),
 // app/routes/index.tsx
 var import_jsx_dev_runtime = require('react/jsx-dev-runtime');
 function Home() {
-    let [count, setCount] = (0, import_react4.useState)(0);
     return /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(
-        'div',
+        src_default.section,
         {
-            children: [
-                'Hey',
-                ' ',
-                /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(
-                    src_default.countValue,
-                    {
-                        delegatesFocus: !0,
-                        children: [
-                            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(
-                                'button',
-                                {
-                                    onClick: () => setCount(count - 1),
-                                    children: '-',
-                                },
-                                void 0,
-                                !1,
-                                {
-                                    fileName: 'app/routes/index.tsx',
-                                    lineNumber: 11,
-                                    columnNumber: 17,
-                                },
-                                this
-                            ),
-                            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(
-                                'h1',
-                                {
-                                    children: count,
-                                },
-                                void 0,
-                                !1,
-                                {
-                                    fileName: 'app/routes/index.tsx',
-                                    lineNumber: 12,
-                                    columnNumber: 17,
-                                },
-                                this
-                            ),
-                            /* @__PURE__ */ (0, import_jsx_dev_runtime.jsxDEV)(
-                                'button',
-                                {
-                                    onClick: () => setCount(count + 1),
-                                    children: '+',
-                                },
-                                void 0,
-                                !1,
-                                {
-                                    fileName: 'app/routes/index.tsx',
-                                    lineNumber: 13,
-                                    columnNumber: 17,
-                                },
-                                this
-                            ),
-                        ],
-                    },
-                    void 0,
-                    !0,
-                    {
-                        fileName: 'app/routes/index.tsx',
-                        lineNumber: 10,
-                        columnNumber: 13,
-                    },
-                    this
-                ),
-            ],
+            className: 'weather',
+            children: 'Hii',
         },
         void 0,
-        !0,
+        !1,
         {
             fileName: 'app/routes/index.tsx',
             lineNumber: 8,
@@ -430,7 +364,7 @@ function Home() {
 
 // server-assets-manifest:@remix-run/dev/assets-manifest
 var assets_manifest_default = {
-    version: '3f131826',
+    version: 'c55cd18b',
     entry: {
         module: '/build/entry.client-T2TLZAGK.js',
         imports: [
@@ -459,7 +393,7 @@ var assets_manifest_default = {
             path: void 0,
             index: !0,
             caseSensitive: void 0,
-            module: '/build/routes/index-5KUCUO2Z.js',
+            module: '/build/routes/index-OGF6GQTU.js',
             imports: void 0,
             hasAction: !1,
             hasLoader: !1,
@@ -467,7 +401,7 @@ var assets_manifest_default = {
             hasErrorBoundary: !1,
         },
     },
-    url: '/build/manifest-3F131826.js',
+    url: '/build/manifest-C55CD18B.js',
 };
 
 // server-entry-module:@remix-run/dev/server-build

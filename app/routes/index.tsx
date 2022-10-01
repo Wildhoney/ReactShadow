@@ -1,17 +1,15 @@
-import React, { ReactElement, useState } from 'react';
 import root from '../../src';
+// import City from "../components/City"
+
+import React, { ReactElement } from 'react';
+// import styles from './styles.css';
 
 export default function Home(): ReactElement {
-    const [count, setCount] = useState(0);
-
     return (
-        <div>
-            Hey{' '}
-            <root.countValue delegatesFocus>
-                <button onClick={(): void => setCount(count - 1)}>-</button>
-                <h1>{count}</h1>
-                <button onClick={(): void => setCount(count + 1)}>+</button>
-            </root.countValue>
-        </div>
+        <root.section className="weather">
+            {/* <style type="text/css">{styles.toString()}</style> */}
+            {/* <City /> */}
+            Hii
+        </root.section>
     );
 }

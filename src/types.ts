@@ -1,19 +1,19 @@
-import { FC, ReactNode, RefObject } from 'react';
+import { FC, ReactNode, RefObject, ComponentProps } from 'react';
 
-export type ComponentProps = {
+export type RootProps = {
     Container: any;
     delegatesFocus?: boolean;
     styleSheets?: CSSStyleSheet[];
     fallback?: ReactNode;
-    withSSR?: boolean;
     children: ReactNode;
 };
 
-export type ProxyProps = Omit<ComponentProps, 'Container'> & { children: ReactNode };
+export type ProxyProps<T extends keyof JSX.IntrinsicElements> = Omit<RootProps, 'Container'> &
+    ComponentProps<T> & { children: ReactNode };
 
 export type ChildrenProps = { children: ReactNode };
 
-export type UseShadowArgs = Required<Pick<ComponentProps, 'delegatesFocus' | 'styleSheets' | 'withSSR' | 'children'>>;
+export type UseShadowArgs = Required<Pick<RootProps, 'delegatesFocus' | 'styleSheets' | 'children'>>;
 
 export type UseShadowReturn = {
     ref: RefObject<HTMLElement>;

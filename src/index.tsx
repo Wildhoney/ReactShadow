@@ -1,22 +1,20 @@
-import React, { FC, ReactElement, ReactNode } from 'react';
+import React, { FC, ReactElement } from 'react';
 import { decamelize } from 'humps';
-import { ComponentProps, ProxyProps } from './types';
+import { RootProps, ProxyProps } from './types';
 import { useShadow } from './utils';
 
 function ReactShadow({
     Container,
-    withSSR = false,
     delegatesFocus = false,
     styleSheets = [],
     fallback,
     children,
-}: ComponentProps): ReactElement {
-    const shadow = useShadow({ delegatesFocus, styleSheets, withSSR, children });
-
-    console.log('render...');
+    ...props
+}: RootProps): ReactElement {
+    const shadow = useShadow({ delegatesFocus, styleSheets, children });
 
     return (
-        <Container ref={shadow.ref}>
+        <Container ref={shadow.ref} {...props}>
             <shadow.Children>{children}</shadow.Children>
         </Container>
     );
@@ -24,12 +22,15 @@ function ReactShadow({
 
 const tags = new Map<string, typeof ReactShadow>();
 
-export default new Proxy({} as Record<string, FC<ProxyProps>>, {
+export default new Proxy({} as Record<string, FC<ProxyProps<'div'>>>, {
     get(_, name: string) {
         const tagName = decamelize(name, { separator: '-' });
 
-        !tags.has(name) &&
-            tags.set(name, (props: ProxyProps): ReactElement => <ReactShadow Container={tagName} {...props} />);
+        if (!tags.has(name)) {
+            tags.set(name, (props: ProxyProps<'div'>): ReactElement => {
+                return <ReactShadow Container={tagName} {...props} />;
+            });
+        }
 
         return tags.get(name);
     },
