@@ -1,5 +1,4 @@
 import React, { ReactElement, useCallback } from 'react';
-import PropTypes from 'prop-types';
 // import { useRouter } from 'next/router';
 // import Link from 'next/link';
 import * as utils from '../../utils';
@@ -20,23 +19,23 @@ export default function Cities({ name, cities }: Props): ReactElement {
 
     return (
         <>
-            {/* <Header>Weather for:</Header> */}
+            <Header>Weather for:</Header>
 
-            <ul>
+            {/* <ul>
                 {cities.map((city) => (
                     <li key={city}>
                         <a href={`/${city}`}>{city}</a>
                     </li>
                 ))}
-            </ul>
+            </ul> */}
 
-            {/* <select value={utils.toSlug(name)} onChange={handleChange}>
-                {(cities).map(city => (
+            <select value={utils.toSlug(name)} onChange={handleChange}>
+                {cities.map((city) => (
                     <option key={`option_${name}`} value={city}>
                         {city}
                     </option>
                 ))}
-            </select> */}
+            </select>
         </>
     );
 }

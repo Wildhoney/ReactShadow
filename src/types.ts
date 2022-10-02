@@ -19,6 +19,8 @@ export type ChildrenProps = { children: ReactNode };
 
 export type WrapperProps = { root: ShadowRoot; children: ReactNode };
 
+export type NoopProps = { children: ReactNode };
+
 export type UseShadowArgs = Required<Pick<RootProps, 'Container' | 'delegatesFocus' | 'styleSheets' | 'children'>>;
 
 export type UseShadowReturn = {

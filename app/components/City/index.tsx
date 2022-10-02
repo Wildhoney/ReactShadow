@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import * as utils from '../../utils';
-// import Countries from '../Countries';
+import Countries from '../Countries';
 import Image from './components/Image';
 // import Refresh from './components/Refresh';
 import { Props } from './types';
@@ -24,7 +24,7 @@ export default function City({ data }: Props): ReactElement {
 
                 <h2 title={fahrenheit}>{label}</h2>
 
-                {/* <Countries name={utils.fromSlug(data.name)} cities={data.cities} /> */}
+                <Countries name={utils.fromSlug(data.name)} cities={data.cities} />
             </main>
         </span>
     );

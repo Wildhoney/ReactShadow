@@ -1,6 +1,10 @@
-import React, { FC, useEffect, useMemo, useRef, useState } from 'react';
+import React, { FC, Fragment, ReactNode, useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { UseShadowArgs, UseShadowReturn, ChildrenProps } from './types';
+import { UseShadowArgs, UseShadowReturn, ChildrenProps, NoopProps } from './types';
+
+function Noop({ children }: NoopProps): ReactNode {
+    return children;
+}
 
 export function useShadow({ Container, delegatesFocus, styleSheets, ...props }: UseShadowArgs): UseShadowReturn {
     const containerRef = useRef<HTMLElement>(null);
@@ -8,12 +12,15 @@ export function useShadow({ Container, delegatesFocus, styleSheets, ...props }: 
 
     const Children = useMemo(
         (): FC<ChildrenProps> =>
-            ({ children }) =>
-                (
-                    <Container root={shadowRoot}>
+            ({ children }) => {
+                const Wrapper = !shadowRoot ? Noop : Container;
+
+                return (
+                    <Wrapper root={shadowRoot}>
                         {shadowRoot ? createPortal(children, shadowRoot) : props.children}
-                    </Container>
-                ),
+                    </Wrapper>
+                );
+            },
         [shadowRoot]
     );
 
