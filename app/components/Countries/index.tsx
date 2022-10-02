@@ -5,17 +5,17 @@ import PropTypes from 'prop-types';
 import * as utils from '../../utils';
 import Header from '../Header';
 // import { getPlaces } from './utils';
-import {Props} from "./types"
+import { Props } from './types';
 import { useRoutes } from 'react-router';
 
-export default function Cities({ name, cities }:Props): ReactElement {
-    useRoutes
+export default function Cities({ name, cities }: Props): ReactElement {
+    useRoutes;
 
     const handleChange = useCallback(
         (event) => {
             // router.push('/[name]', `/${event.target.value}`);
         },
-        [cities],
+        [cities]
     );
 
     return (
@@ -25,14 +25,10 @@ export default function Cities({ name, cities }:Props): ReactElement {
             <ul>
                 {cities.map((city) => (
                     <li key={city}>
-                            <a href={`/${city}`}>
-                                {city}
-                            </a>
+                        <a href={`/${city}`}>{city}</a>
                     </li>
                 ))}
             </ul>
-
-
 
             {/* <select value={utils.toSlug(name)} onChange={handleChange}>
                 {(cities).map(city => (

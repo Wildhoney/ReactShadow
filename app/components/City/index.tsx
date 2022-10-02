@@ -1,9 +1,9 @@
 import React, { ReactElement } from 'react';
 import * as utils from '../../utils';
-import Countries from '../Countries';
-// import Image from './components/Image';
+// import Countries from '../Countries';
+import Image from './components/Image';
 // import Refresh from './components/Refresh';
-import {Props} from "./types"
+import { Props } from './types';
 
 export default function City({ data }: Props): ReactElement {
     const { title, label, fahrenheit, weather, date } = utils.formatWeather(data);
@@ -13,7 +13,7 @@ export default function City({ data }: Props): ReactElement {
             {/* <Refresh name={name} /> */}
 
             <main>
-                {/* <Image src={utils.getFilename(name)} alt={name} /> */}
+                <Image src={utils.getFilename(data.name)} alt={data.name} />
 
                 <h1>
                     {title} at{' '}

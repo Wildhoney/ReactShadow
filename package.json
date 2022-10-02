@@ -2,7 +2,8 @@
     "dependencies": {
         "decamelize": "6.0.0",
         "humps": "2.0.1",
-        "react": "18.2.0"
+        "react": "18.2.0",
+        "styled-components": "5.3.6"
     },
     "devDependencies": {
         "@remix-run/dev": "1.7.0",

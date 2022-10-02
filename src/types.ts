@@ -1,6 +1,7 @@
 import React, { FC, ReactNode, RefObject } from 'react';
 
 export type RootProps = {
+    elementName: any;
     Container: any;
     delegatesFocus?: boolean;
     styleSheets?: CSSStyleSheet[];
@@ -10,13 +11,15 @@ export type RootProps = {
 
 type ComponentProps<T> = T extends keyof JSX.IntrinsicElements ? React.ComponentProps<T> : T & { children: ReactNode };
 
-export type ProxyProps<T> = Omit<RootProps, 'Container'> & {
+export type ProxyProps<T> = Omit<RootProps, 'Container' | 'elementName'> & {
     children: ReactNode;
 } & ComponentProps<T>;
 
 export type ChildrenProps = { children: ReactNode };
 
-export type UseShadowArgs = Required<Pick<RootProps, 'delegatesFocus' | 'styleSheets' | 'children'>>;
+export type WrapperProps = { root: ShadowRoot; children: ReactNode };
+
+export type UseShadowArgs = Required<Pick<RootProps, 'Container' | 'delegatesFocus' | 'styleSheets' | 'children'>>;
 
 export type UseShadowReturn = {
     ref: RefObject<HTMLElement>;

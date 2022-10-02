@@ -1,5 +1,5 @@
-import { Data } from "../../utils/types"
+import { Data } from '../../utils/types';
 
 export type Props = {
-    data:Data
-}
+    data: Data;
+};
