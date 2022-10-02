@@ -10,8 +10,13 @@
         "@remix-run/react": "1.7.0",
         "@remix-run/serve": "1.7.0",
         "@testing-library/react": "13.3.0",
+        "@types/axios": "0.14.0",
+        "@types/capitalize": "2.0.0",
         "@types/humps": "2.0.2",
+        "axios": "0.27.2",
+        "capitalize": "2.0.4",
         "jest": "29.0.0",
+        "moment": "2.29.4",
         "prettier": "2.7.1",
         "react-dom": "18.2.0"
     },

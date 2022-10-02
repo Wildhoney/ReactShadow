@@ -1,0 +1,130 @@
+/* :host {
+    all: initial;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 5px;
+    display: block;
+}
+
+section.weather {
+    all: initial;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 5px;
+    display: block;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+span {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 75vmin;
+    height: 75vmin;
+}
+
+main {
+    text-align: center;
+}
+
+h1 {
+    font-family: Times, 'Times New Roman', serif;
+    font-weight: normal;
+    font-size: 2vmin;
+    margin-top: 2vmin;
+    font-style: italic;
+}
+
+h2 {
+    font-family: Lato, Arial, Tahoma, Helvetica, sans-serif;
+    font-size: 10vmin;
+    margin-top: 2vmin;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.15);
+    height: 12vmin;
+}
+
+ul {
+    font-family: Lato, Arial, Tahoma, Helvetica, sans-serif;
+    font-size: 1.25vmin;
+    margin-top: 2vmin;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-gap: 5px 10px;
+}
+
+@media (max-width: 600px) {
+    ul {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+ul li {
+    display: inline-block;
+    text-align: justify;
+    border-left: 2px solid rgba(0, 0, 0, 0.15);
+    padding-left: 5px;
+}
+
+ul li a {
+    padding: 0 0.25vmin;
+    color: black;
+    transition: color 0.5s;
+    cursor: pointer;
+}
+
+ul li.title {
+    color: rgba(0, 0, 0, 0.35);
+    padding-right: 2px;
+}
+
+ul li a:hover {
+    color: black;
+}
+
+ul li a.active {
+    color: deeppink;
+}
+
+select {
+    margin-top: 10px;
+    outline: none;
+    display: none;
+    -o-appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    padding: 5px 10px;
+    background: white url('/public/images/arrow.svg') no-repeat right 10px
+        center;
+    background-size: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+    font-size: 16px;
+}
+
+@media (max-width: 450px) {
+    ul {
+        display: none;
+    }
+
+    select {
+        display: initial;
+    }
+}
+
+@media (max-width: 190px) {
+    button {
+        display: none;
+    }
+
+    select {
+        padding: 5px 5px;
+        background-size: 8px;
+        font-size: 11px;
+    }
+} */

@@ -1,15 +1,8 @@
-import root from '../../src';
-// import City from "../components/City"
 
-import React, { ReactElement, ReactNode } from 'react';
-// import styles from './styles.css';
+import { redirect } from '@remix-run/node';
+import * as utils from '../utils';
 
-export default function Home(): ReactElement {
-    return (
-        <root.section<'section'> className="weather">
-            {/* <style type="text/css">{styles.toString()}</style> */}
-            {/* <City /> */}
-            Hii
-        </root.section>
-    );
-}
+  export function loader() {
+    const place = utils.pickPlace(utils.api.places);
+    return redirect(`/${place.city}`);
+  }
