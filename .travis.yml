@@ -1,7 +1,7 @@
 language: node_js
 node_js: stable
 script:language: node_js
-node_js: stable
+node_js: 17
 script:
     - yarn
     - yarn test
