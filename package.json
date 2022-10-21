@@ -28,12 +28,6 @@
         "prepublishOnly": "mv dist/* ./",
         "postpublish": "mv {react-shadow,emotion,emotion-ssr,styled-components,material-ui}{.js,.js.map,.esm.js,.esm.js.map} ./dist"
     },
-    "husky": {
-        "hooks": {
-            "pre-commit": "yarn format && yarn test",
-            "pre-push": "yarn format && yarn test"
-        }
-    },
     "peerDependencies": {
         "prop-types": "^15.0.0",
         "react": "^16.8.0 || ^17.0.0 || ^18.0.0",
@@ -41,7 +35,7 @@
     },
     "dependencies": {
         "humps": "^2.0.1",
-        "react-use": "^15.3.3"
+        "react-use": "^17.0.0"
     },
     "devDependencies": {
         "@babel/core": "^7.11.1",
