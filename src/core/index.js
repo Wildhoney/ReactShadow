@@ -4,6 +4,14 @@ import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import * as utils from '../utils';
 
+function Template({ children, ...attrs }) {
+    return (
+        <template
+            {...attrs}
+            dangerouslySetInnerHTML={{ __html: children }}
+        />
+    );
+}
 function ShadowContent({ root, children }) {
     return createPortal(children, root);
 }
@@ -55,13 +63,13 @@ export default function create(options) {
                         {(root || ssr) && (
                             <utils.Context.Provider value={root}>
                                 {ssr ? (
-                                    <template shadowroot="open">
+                                    <Template shadowroot="open">
                                         {options.render({
                                             root,
                                             ssr,
                                             children,
                                         })}
-                                    </template>
+                                    </Template>
                                 ) : (
                                     <ShadowContent root={root}>
                                         {options.render({
