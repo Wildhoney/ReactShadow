@@ -12,6 +12,7 @@ function Template({ children, ...attrs }) {
         />
     );
 }
+
 function ShadowContent({ root, children }) {
     return createPortal(children, root);
 }
