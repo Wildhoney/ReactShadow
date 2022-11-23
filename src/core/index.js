@@ -1,10 +1,15 @@
 import React, { useState, useEffect, forwardRef } from 'react';
 import { useEnsuredForwardedRef } from 'react-use';
 import { createPortal } from 'react-dom';
+import { renderToString } from 'react-dom/server';
 import PropTypes from 'prop-types';
 import * as utils from '../utils';
 
 function Template({ children, ...attrs }) {
+    if (typeof children !== 'string') {
+        children = renderToString(children)
+    }
+
     return (
         <template
             {...attrs}
@@ -12,6 +17,15 @@ function Template({ children, ...attrs }) {
         />
     );
 }
+
+Template.propTypes = {
+    children: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.node
+    ])
+};
+
+Template.defaultProps = { children: '' };
 
 function ShadowContent({ root, children }) {
     return createPortal(children, root);
