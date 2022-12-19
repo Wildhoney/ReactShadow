@@ -1,4 +1,4 @@
-import React, { useState, useEffect, forwardRef } from 'react';
+import React, { useState, useLayoutEffect, forwardRef } from 'react';
 import { useEnsuredForwardedRef } from 'react-use';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
@@ -25,7 +25,7 @@ export default function create(options) {
             const [root, setRoot] = useState(null);
             const key = `node_${mode}${delegatesFocus}`;
 
-            useEffect(() => {
+            useLayoutEffect(() => {
                 if (node.current) {
                     try {
                         typeof ref === 'function' && ref(node.current);
