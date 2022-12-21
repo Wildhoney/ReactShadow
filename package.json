@@ -1,6 +1,6 @@
 {
     "name": "react-shadow",
-    "version": "19.0.3",
+    "version": "19.1.0",
     "description": "Utilise Shadow DOM in React with all the benefits of style encapsulation.",
     "main": "react-shadow.js",
     "module": "react-shadow.esm.js",
