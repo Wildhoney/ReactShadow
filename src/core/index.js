@@ -1,5 +1,5 @@
 import React, { useState, useLayoutEffect, forwardRef } from 'react';
-import { useEnsuredForwardedRef } from 'react-use';
+import { useEnsuredForwardedRef } from '../hooks';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import * as utils from '../utils';
