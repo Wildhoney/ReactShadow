@@ -7,22 +7,16 @@ import * as utils from '../utils';
 
 function Template({ children, ...attrs }) {
     if (typeof children !== 'string') {
-        children = renderToString(children)
+        children = renderToString(children);
     }
 
     return (
-        <template
-            {...attrs}
-            dangerouslySetInnerHTML={{ __html: children }}
-        />
+        <template {...attrs} dangerouslySetInnerHTML={{ __html: children }} />
     );
 }
 
 Template.propTypes = {
-    children: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.node
-    ])
+    children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 };
 
 Template.defaultProps = { children: '' };
