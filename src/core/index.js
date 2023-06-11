@@ -1,8 +1,31 @@
 import React, { useState, useLayoutEffect, forwardRef } from 'react';
 import { useEnsuredForwardedRef } from 'react-use';
 import { createPortal } from 'react-dom';
+import { renderToString } from 'react-dom/server';
 import PropTypes from 'prop-types';
 import * as utils from '../utils';
+
+function Template({ children, ...attrs }) {
+    if (typeof children !== 'string') {
+        children = renderToString(children)
+    }
+
+    return (
+        <template
+            {...attrs}
+            dangerouslySetInnerHTML={{ __html: children }}
+        />
+    );
+}
+
+Template.propTypes = {
+    children: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.node
+    ])
+};
+
+Template.defaultProps = { children: '' };
 
 function ShadowContent({ root, children }) {
     return createPortal(children, root);
@@ -55,13 +78,13 @@ export default function create(options) {
                         {(root || ssr) && (
                             <utils.Context.Provider value={root}>
                                 {ssr ? (
-                                    <template shadowroot="open">
+                                    <Template shadowroot="open">
                                         {options.render({
                                             root,
                                             ssr,
                                             children,
                                         })}
-                                    </template>
+                                    </Template>
                                 ) : (
                                     <ShadowContent root={root}>
                                         {options.render({
