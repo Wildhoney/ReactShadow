@@ -15,7 +15,24 @@ declare module 'react-shadow' {
         >;
     };
 
+    type CreateProxyFn = (
+        target: unknown,
+        id: string,
+        render: ({
+            children,
+        }: {
+            children: React.ReactNode;
+            ssr: boolean;
+            root: ShadowRoot;
+        }) => React.ReactNode,
+    ) => Root;
+
+    const createProxy: CreateProxyFn;
     const ReactShadowRoot: Root;
+    const useShadowRoot: () => ShadowRoot;
 
     export default ReactShadowRoot;
+
+    export { createProxy, useShadowRoot };
+    export type { Root };
 }
