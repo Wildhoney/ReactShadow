@@ -72,7 +72,7 @@ export default function create(options) {
                         {(root || ssr) && (
                             <utils.Context.Provider value={root}>
                                 {ssr ? (
-                                    <Template shadowroot="open">
+                                    <Template shadowroot={mode} shadowrootmode={mode}>
                                         {options.render({
                                             root,
                                             ssr,
