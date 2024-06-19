@@ -5,7 +5,7 @@ import { renderToString } from 'react-dom/server';
 import PropTypes from 'prop-types';
 import * as utils from '../utils';
 
-function Template({ children, ...attrs }) {
+function Template({ children = '', ...attrs }) {
     if (typeof children !== 'string') {
         children = renderToString(children);
     }
@@ -19,9 +19,7 @@ Template.propTypes = {
     children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 };
 
-Template.defaultProps = { children: '' };
-
-function ShadowContent({ root, children }) {
+function ShadowContent({ root, children = null }) {
     return createPortal(children, root);
 }
 
@@ -30,12 +28,10 @@ ShadowContent.propTypes = {
     children: PropTypes.node,
 };
 
-ShadowContent.defaultProps = { children: null };
-
 export default function create(options) {
     const ShadowRoot = forwardRef(
         (
-            { mode, delegatesFocus, styleSheets, ssr, children, ...props },
+            { mode = 'open', delegatesFocus = false, styleSheets  = [], ssr = false, children, ...props },
             ref,
         ) => {
             const node = useEnsuredForwardedRef(ref);
@@ -104,14 +100,6 @@ export default function create(options) {
         ),
         ssr: PropTypes.bool,
         children: PropTypes.node,
-    };
-
-    ShadowRoot.defaultProps = {
-        mode: 'open',
-        delegatesFocus: false,
-        styleSheets: [],
-        ssr: false,
-        children: null,
     };
 
     return ShadowRoot;
