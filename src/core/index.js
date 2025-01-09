@@ -31,7 +31,14 @@ ShadowContent.propTypes = {
 export default function create(options) {
     const ShadowRoot = forwardRef(
         (
-            { mode = 'open', delegatesFocus = false, styleSheets  = [], ssr = false, children, ...props },
+            {
+                mode = 'open',
+                delegatesFocus = false,
+                styleSheets = [],
+                ssr = false,
+                children,
+                ...props
+            },
             ref,
         ) => {
             const node = useEnsuredForwardedRef(ref);
@@ -68,7 +75,10 @@ export default function create(options) {
                         {(root || ssr) && (
                             <utils.Context.Provider value={root}>
                                 {ssr ? (
-                                    <Template shadowroot={mode} shadowrootmode={mode}>
+                                    <Template
+                                        shadowroot={mode}
+                                        shadowrootmode={mode}
+                                    >
                                         {options.render({
                                             root,
                                             ssr,
